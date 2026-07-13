@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Semantic — light & dark" subtitle="Aliases resolve per theme; blue used sparingly" -->
+<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="../styles.css">
+<style>
+body { display:flex; gap:12px; padding:14px; }
+.pane { flex:1; border-radius:10px; padding:14px 16px; border:1px solid var(--border-default); }
+.row { display:flex; align-items:center; gap:8px; margin-top:6px; font-family:var(--font-mono); font-size:10px; }
+.dot { width:14px; height:14px; border-radius:4px; flex:none; }
+</style></head><body>
+<div class="pane" style="background:#FFFFFF;">
+  <div style="font-family:var(--font-display); font-weight:600; font-size:13px; color:#0F172A;">Light</div>
+  <div class="row" style="color:#64748B;"><span class="dot" style="background:#2563EB;"></span>--accent #2563EB</div>
+  <div class="row" style="color:#64748B;"><span class="dot" style="background:#EFF6FF; border:1px solid #DBEAFE;"></span>--accent-soft #EFF6FF</div>
+  <div class="row" style="color:#64748B;"><span class="dot" style="background:#0F172A;"></span>--text-heading #0F172A</div>
+  <div class="row" style="color:#64748B;"><span class="dot" style="background:#475569;"></span>--text-body #475569</div>
+</div>
+<div class="pane" style="background:#0B1120; border-color:#1E293B;">
+  <div style="font-family:var(--font-display); font-weight:600; font-size:13px; color:#F8FAFC;">Dark</div>
+  <div class="row" style="color:#94A3B8;"><span class="dot" style="background:#3B82F6;"></span>--accent #3B82F6</div>
+  <div class="row" style="color:#94A3B8;"><span class="dot" style="background:rgba(37,99,235,.14); border:1px solid rgba(96,165,250,.25);"></span>--accent-soft</div>
+  <div class="row" style="color:#94A3B8;"><span class="dot" style="background:#F8FAFC;"></span>--text-heading #F8FAFC</div>
+  <div class="row" style="color:#94A3B8;"><span class="dot" style="background:#94A3B8;"></span>--text-body #94A3B8</div>
+</div>
+</body></html>

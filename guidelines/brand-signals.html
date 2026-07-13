@@ -1,0 +1,15 @@
+<!-- @dsCard group="Brand" viewport="700x170" name="Motion & signals" subtitle="Scroll progress, open-to-work, grain — the signature details" -->
+<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="../styles.css">
+<style>body { padding:24px; display:flex; flex-direction:column; gap:14px; position:relative; }
+.bar { position:absolute; top:0; left:0; height:3px; width:62%; background:var(--accent); border-radius:0 2px 2px 0; }
+@keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(16,185,129,.5);} 60% { box-shadow:0 0 0 6px rgba(16,185,129,0);} }
+.dot { width:8px; height:8px; border-radius:99px; background:var(--status-open); animation:pulse 2s infinite; }</style></head><body>
+<div class="bar"></div>
+<div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted);">scroll progress — 3px, --accent, fixed top</div>
+<div style="display:inline-flex; align-items:center; gap:8px; border:1px solid var(--accent-soft-border); background:var(--accent-soft); border-radius:var(--radius-full); padding:6px 14px; width:fit-content;">
+  <span class="dot"></span>
+  <span style="font-size:var(--text-sm); color:var(--text-accent); font-weight:500;">Open to opportunities</span>
+</div>
+<div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted);">motion: fade + 12px rise · ease-out expo · 150–450ms · respect reduced-motion</div>
+</body></html>

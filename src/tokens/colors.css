@@ -1,0 +1,100 @@
+/* arayhan — color tokens. Light is default; dark via [data-theme="dark"] or system pref. */
+
+:root {
+  /* — brand blue (professional blue, #2563EB core) — */
+  --blue-50: #EFF6FF;
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+  --blue-300: #93C5FD;
+  --blue-400: #60A5FA;
+  --blue-500: #3B82F6;
+  --blue-600: #2563EB;
+  --blue-700: #1D4ED8;
+  --blue-800: #1E40AF;
+
+  /* — neutrals (slate) — */
+  --slate-0: #FFFFFF;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+  --slate-950: #0B1120;
+
+  /* — semantic status — */
+  --green-500: #10B981;
+  --amber-500: #F59E0B;
+  --red-500: #EF4444;
+
+  /* ————— semantic aliases (LIGHT) ————— */
+  --bg-page: var(--slate-0);
+  --bg-subtle: var(--slate-50);
+  --bg-muted: var(--slate-100);
+  --surface-card: var(--slate-0);
+  --surface-raised: var(--slate-0);
+  --surface-accent: var(--blue-50);
+
+  --text-heading: var(--slate-900);
+  --text-body: var(--slate-600);
+  --text-muted: var(--slate-400);
+  --text-inverse: var(--slate-0);
+  --text-accent: var(--blue-600);
+  --text-on-accent: #FFFFFF;
+
+  --accent: var(--blue-600);
+  --accent-hover: var(--blue-700);
+  --accent-soft: var(--blue-50);
+  --accent-soft-border: var(--blue-100);
+
+  /* primary interactive = monochrome inversion; blue is reserved for rare accents */
+  --interactive-primary: var(--slate-900);
+  --interactive-primary-hover: var(--slate-700);
+  --text-on-primary: var(--slate-0);
+
+  --border-default: var(--slate-200);
+  --border-strong: var(--slate-300);
+  --border-accent: var(--blue-600);
+
+  --status-open: var(--green-500);
+
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  --scrim: rgba(15, 23, 42, 0.45);
+}
+
+/* ————— semantic aliases (DARK) ————— */
+[data-theme="dark"] {
+  --bg-page: var(--slate-950);
+  --bg-subtle: var(--slate-900);
+  --bg-muted: var(--slate-800);
+  --surface-card: var(--slate-900);
+  --surface-raised: var(--slate-800);
+  --surface-accent: rgba(37, 99, 235, 0.12);
+
+  --text-heading: var(--slate-50);
+  --text-body: var(--slate-400);
+  --text-muted: var(--slate-500);
+  --text-inverse: var(--slate-900);
+  --text-accent: var(--blue-400);
+  --text-on-accent: #FFFFFF;
+
+  --accent: var(--blue-500);
+  --accent-hover: var(--blue-400);
+  --accent-soft: rgba(37, 99, 235, 0.14);
+  --accent-soft-border: rgba(96, 165, 250, 0.25);
+
+  --interactive-primary: var(--slate-50);
+  --interactive-primary-hover: var(--slate-200);
+  --text-on-primary: var(--slate-900);
+
+  --border-default: var(--slate-800);
+  --border-strong: var(--slate-700);
+  --border-accent: var(--blue-400);
+
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  --scrim: rgba(0, 0, 0, 0.6);
+}
