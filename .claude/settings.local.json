@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(printf \"node_modules/\\\\ndist/\\\\nstorybook-static/\\\\n*.log\\\\n.DS_Store\\\\n\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'docs: design spec for arayhan design system source reconstruction *)"
+    ]
+  }
+}
