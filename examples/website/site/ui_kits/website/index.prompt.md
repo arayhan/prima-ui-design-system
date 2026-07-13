@@ -1,0 +1,1 @@
+how about to make the hompage like a slide/presentation? so when scrolling there's like a scroll effect, then have an illustration with animation using framer or lottie files. also add illustration or my profile image at the hero section. and there's like a 1 row gallery with many photos (have marquee or hover effect) 
