@@ -8,7 +8,8 @@ export default defineConfig({
   clean: true,
   external: ['react', 'react-dom', 'react/jsx-runtime'],
   onSuccess: async () => {
-    cpSync('src/styles.css', 'dist/styles.css');
+    // Keep granular token files available for consumers via the ./tokens/* export.
+    // styles.css is emitted separately by scripts/bundle-css.mjs (flattened).
     cpSync('src/tokens', 'dist/tokens', { recursive: true });
   },
 });

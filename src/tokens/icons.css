@@ -1,0 +1,6 @@
+/* arayhan — icon font: Phosphor (duotone + regular), loaded from CDN.
+   The SocialLinks / IconButton glyphs use `ph-duotone ph-*` classes, so this
+   must ride in the styles.css @import closure or those icons render empty in
+   any consuming design. */
+@import url('https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css');
+@import url('https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css');

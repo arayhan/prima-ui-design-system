@@ -15,7 +15,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node scripts/bundle-css.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
@@ -28,6 +28,7 @@
     "@storybook/react-vite": "^8.6.14",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "esbuild": "^0.24.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "storybook": "^8.6.14",
