@@ -21,6 +21,15 @@ export type { MarqueeProps } from './components/core/Marquee';
 export { SocialLinks } from './components/core/SocialLinks';
 export type { SocialLinksProps, SocialLink, SocialName } from './components/core/SocialLinks';
 
+export { Alert } from './components/advanced/Alert';
+export type { AlertProps, AlertVariant } from './components/advanced/Alert';
+export { ToastProvider, useToast } from './components/advanced/Toast';
+export type { ToastOptions } from './components/advanced/Toast';
+export { Dropdown } from './components/advanced/Dropdown';
+export type { DropdownProps, DropdownItem } from './components/advanced/Dropdown';
+export { MultiSelect } from './components/advanced/MultiSelect';
+export type { MultiSelectProps } from './components/advanced/MultiSelect';
+
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
 export { FeatureGrid } from './components/blocks/FeatureGrid';
