@@ -20,3 +20,14 @@ export { Marquee } from './components/core/Marquee';
 export type { MarqueeProps } from './components/core/Marquee';
 export { SocialLinks } from './components/core/SocialLinks';
 export type { SocialLinksProps, SocialLink, SocialName } from './components/core/SocialLinks';
+
+export { Hero } from './components/blocks/Hero';
+export type { HeroProps, HeroAction } from './components/blocks/Hero';
+export { FeatureGrid } from './components/blocks/FeatureGrid';
+export type { FeatureGridProps, FeatureItem } from './components/blocks/FeatureGrid';
+export { StatStrip } from './components/blocks/StatStrip';
+export type { StatStripProps, Stat } from './components/blocks/StatStrip';
+export { CTASection } from './components/blocks/CTASection';
+export type { CTASectionProps, CTAAction } from './components/blocks/CTASection';
+export { Footer } from './components/blocks/Footer';
+export type { FooterProps, FooterColumn, FooterLink } from './components/blocks/Footer';
