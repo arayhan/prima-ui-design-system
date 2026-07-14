@@ -21,6 +21,8 @@ pnpm install
 | `pnpm build` | Build the library to `dist/` (ESM + `.d.ts` + flattened CSS) |
 | `pnpm build-storybook` | Static Storybook |
 | `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm docs:dev` | Documentation site dev server (Vite, http://localhost:5173) |
+| `pnpm docs:build` | Static documentation site to `docs-site/dist/` |
 
 ## Usage
 
@@ -45,8 +47,9 @@ Import `styles.css` once at your app root — it `@import`s all design tokens pl
 
 ## Components (exported API)
 
-Eleven components, each a React function component styled with inline `style={{}}` objects that
-read `var(--*)` tokens — **no CSS classes, no CSS-in-JS**. All heading/label styling comes from
+Forty-eight components — eleven core atoms, twenty-seven advanced controls, and ten composed
+blocks — each a React function component styled with inline `style={{}}` objects that read
+`var(--*)` tokens — **no CSS classes, no CSS-in-JS**. All heading/label styling comes from
 tokens; the only real class names are Phosphor's `ph ph-*` icon classes.
 
 | Component | Purpose |
@@ -62,6 +65,61 @@ tokens; the only real class names are Phosphor's `ph ph-*` icon classes.
 | `TimelineItem` | Vertical timeline row — mono year column, 2px connector, cobalt node. |
 | `Marquee` | Mono uppercase scrolling strip (ice or ink), one per page. |
 | `SocialLinks` | Bordered square icon links; border + glyph go cobalt on hover. |
+
+### Advanced — form controls
+
+| Component | Purpose |
+|---|---|
+| `Checkbox` / `RadioGroup` | 18px cobalt-filled square / circle-with-dot; label, disabled, error. |
+| `ButtonGroup` | Segmented control — joined mono segments, active fills cobalt. |
+| `PasswordInput` | Input's field language + eye toggle. |
+| `MultiSelect` | Field-language trigger filling with removable cobalt chips + floating checklist. |
+| `Combobox` | Searchable single select — type to filter, arrows + Enter to pick. |
+| `Calendar` / `DatePicker` | Month grid with cobalt selection / field trigger opening it in a popover. |
+
+### Advanced — overlays
+
+| Component | Purpose |
+|---|---|
+| `Dropdown` | Secondary-button trigger + floating menu; Escape/outside-click/arrow-key handling. |
+| `Dialog` | Portal modal — centered panel over the scrim, scroll lock, Escape/scrim close. |
+| `Drawer` | Portal side panel (left/right) with pinned actions footer. |
+| `ToastProvider` / `useToast` | Ink-surface toasts, bottom-right stack, semantic rule, auto-dismiss. |
+
+### Advanced — display & data
+
+| Component | Purpose |
+|---|---|
+| `Alert` | White surface with a 3px semantic left rule — info/success/warning/error, dismissible. |
+| `Avatar` | Full-radius circle, initials fallback, semantic status dot. |
+| `Thumbnail` | Hairline media frame; image zooms gently on hover; mono caption. |
+| `Bubble` | Chat bubbles — received white/left, sent cobalt/right. |
+| `Accordion` | Numbered hairline rows; plus rotates to close; animated height. |
+| `Carousel` | Scroll-snap track with prev/next controls and a mono counter. |
+| `DataTable` | Mono headers over a 2px ink rule; opt-in column sorting; ice hover. |
+| `LineChart` / `BarChart` / `Sparkline` | Cobalt data on hairline grids, mono labels. SVG, zero deps. |
+| `AnalyticsCard` | Metric card — mono label, display value, semantic delta, sparkline. |
+| `EmptyState` / `ErrorState` | Nothing-here panel / cobalt 404-500 treatment (inline or full page). |
+| `CodeSnippet` | Ink code panel with mono toolbar + copy (monochrome, zero deps). |
+| `RichText` | Prose styling for long-form content — headings, quotes, lists, code. |
+
+### Blocks (composed sections)
+
+| Block | Purpose |
+|---|---|
+| `Hero` | Page opener — `//` eyebrow, mega caps title, lede, Button pair, optional media slot. |
+| `FeatureGrid` | Grid of Cards with mono running numbers + cobalt Phosphor icons. |
+| `StatStrip` | Horizontal stats separated by hairline rules (ice or ink). |
+| `CTASection` | Contact/CTA on the ink storytelling surface — headline, CTA, email, SocialLinks. |
+| `Footer` | 3px closing rule, wordmark, mono nav columns, SocialLinks, colophon line. |
+| `BlogList` | Hairline article rows — mono date, caps title with hover arrow, chips, read-time. |
+| `MagneticButton` | Button that eases toward the pointer and springs back (micro-interaction). |
+| `TiltCard` | Card that tilts in 3D toward the pointer with a faint cobalt glow. |
+| `CountUp` | Clash Display figure that counts up when scrolled into view. |
+| `RevealOnScroll` | Rise-and-fade reveal wrapper on the system easing (IO + CSS only). |
+
+All interaction blocks are pure React + CSS (no animation dependency), pointer-fine gated
+where relevant, and inert under `prefers-reduced-motion`.
 
 Every component exports a matching `<Name>Props` interface.
 
@@ -83,11 +141,14 @@ Token source of truth: `src/tokens/*.css`, reachable through `src/styles.css`.
 
 ```
 src/
-  components/core/   11 components (typed .tsx) + _field.tsx helper
+  components/core/     11 atomic components (typed .tsx) + _field.tsx helper
+  components/advanced/ 27 controls: forms, overlays, display & data (incl. charts)
+  components/blocks/   10 composed blocks + micro-interaction primitives
   tokens/            colors, typography, fonts, spacing/radii/borders/motion, base, icons (.css)
   styles.css         @imports all tokens
   index.ts           public API barrel
 stories/             *.stories.tsx
+docs-site/           documentation website (Vite + React + GSAP + three.js)
 docs/superpowers/    design spec + implementation plan
 ```
 
