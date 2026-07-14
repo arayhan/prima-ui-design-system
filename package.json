@@ -19,7 +19,9 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "docs:dev": "pnpm --filter docs-site dev",
+    "docs:build": "pnpm --filter docs-site build"
   },
   "peerDependencies": { "react": ">=18", "react-dom": ">=18" },
   "devDependencies": {
