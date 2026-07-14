@@ -1,14 +1,11 @@
 import React from 'react';
 import { FieldLabel, FieldHelper, fieldBoxStyle, fieldWrap } from './_field';
 
-export interface InputProps {
+export interface TextareaProps {
   label?: string;
-  /** Helper text below the field */
   helper?: string;
-  /** Error text below the field (replaces helper, turns the border red) */
   error?: string;
   placeholder?: string;
-  type?: string;
   value?: string;
   onChange?: (e: any) => void;
   id?: string;
@@ -16,17 +13,19 @@ export interface InputProps {
   [key: string]: unknown;
 }
 
-/** Prima text input. White field, 1.5px border, mono label above, cobalt focus ring. */
-export function Input({ label, helper, error, id, style, ...rest }: InputProps) {
+/** Prima textarea. Same field language as Input, min-height 120px, vertical resize. */
+export function Textarea({ label, helper, error, id, style, ...rest }: TextareaProps) {
   const [focus, setFocus] = React.useState(false);
-  const inputId = id || (label ? 'in-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
+  const inputId = id || (label ? 'ta-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
   const invalid = !!error;
   return (
     <div style={fieldWrap}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
-      <input
+      <textarea
         id={inputId}
-        style={fieldBoxStyle(focus, invalid, { height: 48, padding: '0 16px', ...style })}
+        style={fieldBoxStyle(focus, invalid, {
+          minHeight: 120, padding: '14px 16px', resize: 'vertical', lineHeight: 'var(--leading-body)', ...style,
+        })}
         onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} {...rest}
       />
       {(error || helper) && <FieldHelper error={invalid}>{error || helper}</FieldHelper>}

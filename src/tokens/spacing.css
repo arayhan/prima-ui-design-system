@@ -1,42 +1,37 @@
-/* arayhan — spacing, radii, shadows, motion */
+/* Prima — spacing, radii, borders, motion. 8pt scale, medium radii,
+   neo-brutalism-lite border widths, spatial-UI easing. */
 :root {
-  /* spacing (4px base) */
+  /* spacing (8pt scale, tokens 1–9) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
-  --space-7: 48px;
+  --space-7: 48px;  /* section padding — mobile */
   --space-8: 64px;
-  --space-9: 96px;
-  --space-10: 128px;
+  --space-9: 96px;  /* section padding — desktop */
 
   /* layout */
-  --container-max: 1080px;
+  --container-max: 1200px;
   --container-pad: 24px;
   --section-gap: var(--space-9);
 
-  /* radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 999px;
+  /* radii — medium and consistent; never 0px, never >16px */
+  --radius-sm: 8px;   /* buttons, inputs, chips */
+  --radius-md: 12px;  /* cards */
+  --radius-lg: 16px;  /* large media, modals */
+  --radius-full: 999px; /* dots, avatars, pills */
 
-  /* shadows: removed — spatial UI depth comes from translucency, borders, and 3D tilt */
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
+  /* borders — neo-brutalism lite: visible structure */
+  --border-width: 1.5px;          /* default */
+  --border-width-emphasis: 2px;   /* interactive / emphasized */
+  --border-width-rule: 3px;       /* section-opening rules */
 
   /* motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
-  --duration-fast: 150ms; /* @kind other */
-  --duration-base: 250ms; /* @kind other */
-  --duration-slow: 450ms; /* @kind other */
-}
-
-[data-theme="dark"] {
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
+  --ease-spatial: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);       /* @kind other */
+  --duration-fast: 150ms;   /* @kind other */
+  --duration-base: 250ms;   /* @kind other */
+  --duration-reveal: 800ms; /* @kind other — hero line reveals */
 }

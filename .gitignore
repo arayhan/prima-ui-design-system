@@ -16,3 +16,4 @@ ds-bundle/
 .design-sync/*.log
 .design-sync/upload-manifest.json
 .design-sync/chunk*.json
+.design-sync/deletePaths.json

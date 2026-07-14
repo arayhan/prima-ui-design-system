@@ -1,7 +1,7 @@
 {
   "name": "arayhan-design-system",
   "version": "0.1.0",
-  "description": "Design system for arayhan — personal website / portfolio of Rayhan.",
+  "description": "Arayhan Design System — Prima: engineered minimalism (cobalt on ice, Clash Display caps) for Ahmed Rayhan.",
   "type": "module",
   "license": "MIT",
   "sideEffects": ["*.css"],

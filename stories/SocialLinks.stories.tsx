@@ -6,4 +6,4 @@ export default meta;
 type Story = StoryObj<typeof SocialLinks>;
 
 export const Default: Story = { render: () => <SocialLinks /> };
-export const Small: Story = { render: () => <SocialLinks size={34} /> };
+export const Small: Story = { render: () => <SocialLinks size={36} /> };

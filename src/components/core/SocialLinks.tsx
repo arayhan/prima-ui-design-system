@@ -1,25 +1,16 @@
 import React from 'react';
-import { IconButton } from './IconButton';
 
-// Icons: Phosphor duotone (https://phosphoricons.com). Consuming pages must include:
-// <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
-const ICON_CLASS = {
-  github: 'ph-duotone ph-github-logo',
-  linkedin: 'ph-duotone ph-linkedin-logo',
-  instagram: 'ph-duotone ph-instagram-logo',
-  medium: 'ph-duotone ph-medium-logo',
+// Icons: Phosphor regular (thin 1.5px strokes). Consuming pages must load the
+// Phosphor regular stylesheet — it ships in the design system's styles.css closure.
+const ICON_CLASS: Record<string, string> = {
+  github: 'ph ph-github-logo',
+  linkedin: 'ph ph-linkedin-logo',
+  instagram: 'ph ph-instagram-logo',
+  medium: 'ph ph-medium-logo',
+  x: 'ph ph-x-logo',
 };
 
 export type SocialName = keyof typeof ICON_CLASS;
-
-export interface SocialIconProps {
-  name: SocialName;
-  size?: number;
-}
-
-export function SocialIcon({ name, size = 18 }: SocialIconProps) {
-  return <i className={ICON_CLASS[name]} aria-hidden="true" style={{ fontSize: size, lineHeight: 1 }}></i>;
-}
 
 export interface SocialLink {
   name: SocialName;
@@ -28,8 +19,28 @@ export interface SocialLink {
 }
 
 export interface SocialLinksProps {
+  /** Square size in px, default 44 */
   size?: number;
   links?: SocialLink[];
+}
+
+function SocialSquare({ link, size }: { link: SocialLink; size: number }) {
+  const [hover, setHover] = React.useState(false);
+  return (
+    <a
+      href={link.href} aria-label={link.label} title={link.label} target="_blank" rel="noreferrer"
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        width: size, height: size, borderRadius: 'var(--radius-sm)',
+        border: `var(--border-width) solid ${hover ? 'var(--primary)' : 'var(--border)'}`,
+        background: 'var(--surface)', color: hover ? 'var(--primary)' : 'var(--on-surface)',
+        transition: 'color var(--duration-fast) var(--ease-spatial), border-color var(--duration-fast) var(--ease-spatial)',
+      }}
+    >
+      <i className={ICON_CLASS[link.name]} aria-hidden="true" style={{ fontSize: Math.round(size * 0.5), lineHeight: 1 }} />
+    </a>
+  );
 }
 
 const LINKS: SocialLink[] = [
@@ -39,14 +50,11 @@ const LINKS: SocialLink[] = [
   { name: 'medium', label: 'Medium', href: 'https://medium.com/@arayhan' },
 ];
 
-export function SocialLinks({ size = 40, links = LINKS }: SocialLinksProps) {
+/** Prima social links — a row of bordered square icon links; border and glyph go cobalt on hover. */
+export function SocialLinks({ size = 44, links = LINKS }: SocialLinksProps) {
   return (
-    <div style={{ display: 'flex', gap: 10 }}>
-      {links.map((l) => (
-        <IconButton key={l.name} label={l.label} href={l.href} size={size} target="_blank" rel="noreferrer">
-          <SocialIcon name={l.name} size={Math.round(size * 0.45)} />
-        </IconButton>
-      ))}
+    <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+      {links.map((l) => <SocialSquare key={l.name} link={l} size={size} />)}
     </div>
   );
 }

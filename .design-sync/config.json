@@ -8,7 +8,10 @@
   "buildCmd": "pnpm build",
   "readmeHeader": ".design-sync/conventions.md",
   "overrides": {
+    "Button": { "cardMode": "column" },
     "Input": { "cardMode": "column" },
-    "ScrollProgress": { "cardMode": "single", "primaryStory": "Default" }
+    "Select": { "cardMode": "column" },
+    "Textarea": { "cardMode": "column" },
+    "SectionHeader": { "cardMode": "column" }
   }
 }

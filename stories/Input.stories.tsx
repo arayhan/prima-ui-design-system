@@ -5,15 +5,13 @@ const meta: Meta<typeof Input> = { title: 'Core/Input', component: Input };
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const Email: Story = { args: { label: 'Email', type: 'email', placeholder: 'you@company.com' } };
-export const WithHint: Story = { args: { label: 'Company', placeholder: 'Acme Inc.', hint: 'Optional' } };
-export const Textarea: Story = { args: { label: 'Message', textarea: true, placeholder: 'What are you building?' } };
-export const ContactForm: Story = {
+export const Default: Story = { args: { label: 'Email', type: 'email', placeholder: 'you@company.com' } };
+export const WithHelper: Story = { args: { label: 'Company', placeholder: 'Acme Inc.', helper: 'Optional' } };
+export const WithError: Story = { args: { label: 'Email', value: 'not-an-email', error: 'Enter a valid email address.' } };
+export const Field: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 360 }}>
-      <Input label="Name" placeholder="Your name" />
-      <Input label="Email" type="email" placeholder="you@company.com" />
-      <Input label="Message" textarea placeholder="What are you building?" />
+    <div style={{ width: 360 }}>
+      <Input label="Full name" placeholder="Ada Lovelace" />
     </div>
   ),
 };
