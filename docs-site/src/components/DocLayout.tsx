@@ -1,28 +1,10 @@
 import React from 'react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export interface DocGroup {
   /** Mono group heading — e.g. "CORE" */
   title?: string;
   items: { id: string; label: string }[];
-}
-
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = React.useState(
-    () => typeof window !== 'undefined' && window.matchMedia(query).matches,
-  );
-  React.useEffect(() => {
-    const mq = window.matchMedia(query);
-    const onChange = () => setMatches(mq.matches);
-    onChange();
-    mq.addEventListener('change', onChange);
-    // Fallback for environments where matchMedia change events are unreliable.
-    window.addEventListener('resize', onChange);
-    return () => {
-      mq.removeEventListener('change', onChange);
-      window.removeEventListener('resize', onChange);
-    };
-  }, [query]);
-  return matches;
 }
 
 function SidebarLink({ id, label, active }: { id: string; label: string; active: boolean }) {
@@ -55,10 +37,12 @@ function SidebarLink({ id, label, active }: { id: string; label: string; active:
 
 /**
  * Docs layout — content column plus a sticky "on this page" sidebar on the
- * right (hidden under 1024px). The active item tracks scroll position.
+ * right (≥1024px). Below that, the same nav collapses into a disclosure panel
+ * above the content instead of disappearing. The active item tracks scroll position.
  */
 export function DocLayout({ groups, children }: { groups: DocGroup[]; children: React.ReactNode }) {
   const wide = useMediaQuery('(min-width: 1024px)');
+  const [open, setOpen] = React.useState(false);
   const ids = React.useMemo(() => groups.flatMap((g) => g.items.map((i) => i.id)), [groups]);
   const [active, setActive] = React.useState<string>(ids[0] ?? '');
 
@@ -87,8 +71,50 @@ export function DocLayout({ groups, children }: { groups: DocGroup[]; children: 
     };
   }, [ids]);
 
+  const nav = groups.map((group, gi) => (
+    <div key={group.title ?? gi} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      {group.title && (
+        <span style={{
+          fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', fontWeight: 500,
+          letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--primary)',
+          paddingBottom: 'var(--space-1)',
+        } as React.CSSProperties}>// {group.title}</span>
+      )}
+      <div style={{ borderLeft: 'var(--border-width) solid var(--border)' }}>
+        {group.items.map((item) => (
+          <SidebarLink key={item.id} id={item.id} label={item.label} active={active === item.id} />
+        ))}
+      </div>
+    </div>
+  ));
+
   return (
-    <div style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'flex-start' }}>
+    <div style={{ display: wide ? 'flex' : 'block', gap: 'var(--space-8)', alignItems: 'flex-start' }}>
+      {!wide && (
+        <div style={{
+          marginBottom: 'var(--space-6)',
+          border: 'var(--border-width) solid var(--border)', borderRadius: 'var(--radius-md)',
+        }}>
+          <button
+            type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open}
+            style={{
+              display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between',
+              padding: 'var(--space-4)', background: 'none', border: 'none', cursor: 'pointer',
+              fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', fontWeight: 500,
+              letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--on-surface)',
+            } as React.CSSProperties}
+          >
+            On this page
+            <i className={open ? 'ph ph-caret-up' : 'ph ph-caret-down'} aria-hidden="true" style={{ fontSize: 16 }} />
+          </button>
+          {open && (
+            <div style={{
+              padding: '0 var(--space-4) var(--space-4)',
+              display: 'flex', flexDirection: 'column', gap: 'var(--space-5)',
+            }}>{nav}</div>
+          )}
+        </div>
+      )}
       <div style={{ flex: '1 1 0', minWidth: 0 }}>{children}</div>
       {wide && (
         <aside
@@ -99,22 +125,7 @@ export function DocLayout({ groups, children }: { groups: DocGroup[]; children: 
             display: 'flex', flexDirection: 'column', gap: 'var(--space-5)',
           }}
         >
-          {groups.map((group, gi) => (
-            <div key={group.title ?? gi} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              {group.title && (
-                <span style={{
-                  fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', fontWeight: 500,
-                  letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--primary)',
-                  paddingBottom: 'var(--space-1)',
-                } as React.CSSProperties}>// {group.title}</span>
-              )}
-              <div style={{ borderLeft: 'var(--border-width) solid var(--border)' }}>
-                {group.items.map((item) => (
-                  <SidebarLink key={item.id} id={item.id} label={item.label} active={active === item.id} />
-                ))}
-              </div>
-            </div>
-          ))}
+          {nav}
         </aside>
       )}
     </div>
