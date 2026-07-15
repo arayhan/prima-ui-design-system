@@ -4,6 +4,9 @@ import { Section } from '../components/Section';
 import { HeroSection } from '../sections/HeroSection';
 import { ManifestoSection } from '../sections/ManifestoSection';
 import { useScrollReveal } from '../motion/hooks';
+import { IsometricFallback } from '../three/IsometricFallback';
+
+const IsometricScene = React.lazy(() => import('../three/IsometricScene'));
 
 const INDEX = [
   { n: '001', title: 'Foundations', href: '#/foundations', desc: 'Colors, type scale, spacing, structure, and motion — every token, live and copyable.' },
@@ -40,6 +43,23 @@ export function HomePage() {
     <div ref={ref}>
       <HeroSection />
       <Marquee items={['ENGINEERED MINIMALISM', 'COBALT ON ICE', 'VISIBLE STRUCTURE', 'ONE ACCENT']} speed={26} />
+      <Section id="system">
+        <div style={{
+          display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', gap: 'var(--space-8)',
+        }}>
+          <div data-reveal style={{ flex: '1 1 380px', minWidth: 0, position: 'relative', height: 320, borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
+            <React.Suspense fallback={<IsometricFallback />}>
+              <IsometricScene />
+            </React.Suspense>
+          </div>
+          <div data-reveal style={{ flex: '1 1 420px', minWidth: 0 }}>
+            <SectionHeader
+              eyebrow="SYSTEM" number="001.5" title="Seen from every angle"
+              description="Every block is a stackable unit — the same idea rendered here as an isometric cluster of cobalt wireframe boxes, built with three.js and eased in with GSAP."
+            />
+          </div>
+        </div>
+      </Section>
       <ManifestoSection />
       <Section id="index">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
