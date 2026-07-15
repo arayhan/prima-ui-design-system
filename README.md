@@ -1,11 +1,11 @@
-# Arayhan Design System
+# Prima UI
 
-**Prima** — the personal design system of Ahmed Rayhan (rayhan.dev). React + TypeScript
+**Prima** — the personal design system of A. Rayhan Primadedas (rayhan.dev). React + TypeScript
 component library built around *engineered minimalism*: an ice-blue base, exactly one electric
 cobalt accent, bold **Clash Display** all-caps display type, mono `//` labels, and color-block
 storytelling. Reconstructed with a `tsup` build and Storybook.
 
-> The npm package is `arayhan-design-system`; the design language is **Prima**.
+> The npm package is `prima-ui`; the design language is **Prima**.
 
 ## Install
 
@@ -27,8 +27,8 @@ pnpm install
 ## Usage
 
 ```tsx
-import { Button, Card, Chip, SectionHeader } from 'arayhan-design-system';
-import 'arayhan-design-system/styles.css';
+import { Button, Card, Chip, SectionHeader } from 'prima-ui';
+import 'prima-ui/styles.css';
 
 export function Example() {
   return (
@@ -47,10 +47,11 @@ Import `styles.css` once at your app root — it `@import`s all design tokens pl
 
 ## Components (exported API)
 
-Forty-eight components — eleven core atoms, twenty-seven advanced controls, and ten composed
-blocks — each a React function component styled with inline `style={{}}` objects that read
-`var(--*)` tokens — **no CSS classes, no CSS-in-JS**. All heading/label styling comes from
-tokens; the only real class names are Phosphor's `ph ph-*` icon classes.
+Fifty-nine components — eleven core atoms, twenty-eight advanced controls, and twenty composed
+blocks (eleven page sections + nine micro-interaction primitives) — each a React function
+component styled with inline `style={{}}` objects that read `var(--*)` tokens — **no CSS
+classes, no CSS-in-JS**. All heading/label styling comes from tokens; the only real class names
+are Phosphor's `ph ph-*` icon classes.
 
 | Component | Purpose |
 |---|---|
@@ -76,6 +77,7 @@ tokens; the only real class names are Phosphor's `ph ph-*` icon classes.
 | `MultiSelect` | Field-language trigger filling with removable cobalt chips + floating checklist. |
 | `Combobox` | Searchable single select — type to filter, arrows + Enter to pick. |
 | `Calendar` / `DatePicker` | Month grid with cobalt selection / field trigger opening it in a popover. |
+| `RichTextEditor` | WYSIWYG field — full toolbar (bold/headings/lists/align/link/image/table…) on `execCommand`, zero editor dependency. Ships a `stripHtmlToText()` util. |
 
 ### Advanced — overlays
 
@@ -107,19 +109,30 @@ tokens; the only real class names are Phosphor's `ph ph-*` icon classes.
 
 | Block | Purpose |
 |---|---|
+| `Navbar` | Page's opening rule — wordmark, mono nav links, optional cobalt CTA. |
 | `Hero` | Page opener — `//` eyebrow, mega caps title, lede, Button pair, optional media slot. |
 | `FeatureGrid` | Grid of Cards with mono running numbers + cobalt Phosphor icons. |
+| `Testimonials` | Quote Cards with a cobalt quotation mark, Avatar, and mono name/role. |
 | `StatStrip` | Horizontal stats separated by hairline rules (ice or ink). |
+| `PricingTable` | Plan cards; the highlighted plan swaps to the ink storytelling surface. |
+| `FAQSection` | SectionHeader opener over the existing Accordion for Q&A blocks. |
 | `CTASection` | Contact/CTA on the ink storytelling surface — headline, CTA, email, SocialLinks. |
-| `Footer` | 3px closing rule, wordmark, mono nav columns, SocialLinks, colophon line. |
 | `BlogList` | Hairline article rows — mono date, caps title with hover arrow, chips, read-time. |
+| `BlogDetail` | Full article view that `BlogList` rows link to — meta row, title, lede, body slot. |
+| `Footer` | 3px closing rule, wordmark, mono nav columns, SocialLinks, colophon line. |
 | `MagneticButton` | Button that eases toward the pointer and springs back (micro-interaction). |
 | `TiltCard` | Card that tilts in 3D toward the pointer with a faint cobalt glow. |
 | `CountUp` | Clash Display figure that counts up when scrolled into view. |
 | `RevealOnScroll` | Rise-and-fade reveal wrapper on the system easing (IO + CSS only). |
+| `MagicBorder` | Cobalt conic-gradient ring that rotates behind a clipped surface. |
+| `Spotlight` | Cursor-follow cobalt radial glow inside a hairline card. |
+| `Ripple` | Click-triggered expanding ripple, wraps a Button. |
+| `TextScramble` | Mono characters scramble into the real text on scroll-into-view or hover. |
+| `ScrollProgress` | Cobalt top bar tracking page (or a given container's) scroll position. |
 
 All interaction blocks are pure React + CSS (no animation dependency), pointer-fine gated
-where relevant, and inert under `prefers-reduced-motion`.
+where relevant, and inert under `prefers-reduced-motion` (`ScrollProgress` still tracks position
+under reduced motion — it's an indicator, not decoration).
 
 Every component exports a matching `<Name>Props` interface.
 
@@ -142,13 +155,14 @@ Token source of truth: `src/tokens/*.css`, reachable through `src/styles.css`.
 ```
 src/
   components/core/     11 atomic components (typed .tsx) + _field.tsx helper
-  components/advanced/ 27 controls: forms, overlays, display & data (incl. charts)
-  components/blocks/   10 composed blocks + micro-interaction primitives
+  components/advanced/ 28 controls: forms, overlays, display & data (incl. charts)
+  components/blocks/   11 composed blocks + 9 micro-interaction primitives
   tokens/            colors, typography, fonts, spacing/radii/borders/motion, base, icons (.css)
   styles.css         @imports all tokens
   index.ts           public API barrel
 stories/             *.stories.tsx
-docs-site/           documentation website (Vite + React + GSAP + three.js)
+docs-site/           documentation website (Vite + React + GSAP + three.js — including an
+                     isometric three.js/GSAP scene on the homepage and in the Hero block demo)
 docs/superpowers/    design spec + implementation plan
 ```
 
