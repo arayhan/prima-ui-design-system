@@ -1,5 +1,35 @@
-import { CountUp, MagneticButton, RevealOnScroll, TiltCard } from 'prima-ui';
+import React from 'react';
+import {
+  Button, CountUp, MagicBorder, MagneticButton, RevealOnScroll, Ripple,
+  ScrollProgress, Spotlight, TextScramble, TiltCard,
+} from 'prima-ui';
 import type { DocMeta } from './forms-meta';
+
+function ScrollProgressDemo() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  return (
+    <div style={{ width: '100%', maxWidth: 480 }}>
+      <div style={{ position: 'relative' }}>
+        <ScrollProgress container={containerRef as React.RefObject<HTMLElement>} />
+        <div
+          ref={containerRef}
+          style={{
+            height: 160, overflowY: 'auto', marginTop: 3,
+            border: 'var(--border-width) solid var(--border)', borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)',
+          }}
+        >
+          {['One', 'Two', 'Three', 'Four', 'Five'].map((n) => (
+            <p key={n} style={{
+              fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)',
+              lineHeight: 'var(--leading-body)', margin: 0,
+            }}>Paragraph {n} — scroll this box to fill the bar above it.</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export const INTERACTIONS: DocMeta[] = [
   {
@@ -106,6 +136,128 @@ export const INTERACTIONS: DocMeta[] = [
         ))}
       </div>
     ),
+    block: true,
+  },
+  {
+    id: 'magic-border',
+    name: 'MagicBorder',
+    description: 'A cobalt conic-gradient ring that continuously rotates behind a clipped surface — wrap any card or panel to give it a "live" edge. Pure CSS keyframes; freezes under reduced motion.',
+    snippet: `import { MagicBorder } from 'prima-ui';
+
+<MagicBorder>
+  <div style={{ padding: 24 }}>Always-on accent</div>
+</MagicBorder>`,
+    props: [
+      { name: 'children', type: 'ReactNode', description: 'Wrapped content.' },
+      { name: 'thickness', type: 'number', default: '2', description: 'Ring thickness in px.' },
+      { name: 'speed', type: 'number', default: '3.5', description: 'Seconds per revolution.' },
+      { name: 'radius', type: 'string', default: "'var(--radius-md)'", description: 'Corner radius.' },
+    ],
+    render: () => (
+      <div style={{ width: 280, maxWidth: '100%' }}>
+        <MagicBorder>
+          <div style={{ padding: 'var(--space-6)' }}>
+            <span style={{
+              fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
+              letterSpacing: 'var(--tracking-label)', color: 'var(--primary)',
+            }}>// ALWAYS ON</span>
+            <h3 style={{
+              fontFamily: 'var(--font-display)', fontSize: 'var(--text-h3)', textTransform: 'uppercase',
+              margin: 'var(--space-3) 0 0',
+            }}>Magic border</h3>
+          </div>
+        </MagicBorder>
+      </div>
+    ),
+  },
+  {
+    id: 'spotlight',
+    name: 'Spotlight',
+    description: 'A cobalt radial glow that follows the pointer inside a hairline card. Pointer-fine devices only.',
+    snippet: `import { Spotlight } from 'prima-ui';
+
+<Spotlight size={260}>
+  <h3>Move your cursor</h3>
+  <p>The glow tracks the pointer.</p>
+</Spotlight>`,
+    props: [
+      { name: 'children', type: 'ReactNode', description: 'Card content.' },
+      { name: 'size', type: 'number', default: '260', description: 'Spotlight diameter in px.' },
+    ],
+    render: () => (
+      <div style={{ width: 320, maxWidth: '100%' }}>
+        <Spotlight>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
+            letterSpacing: 'var(--tracking-label)', color: 'var(--primary)',
+          }}>// 002</span>
+          <h3 style={{
+            fontFamily: 'var(--font-display)', fontSize: 'var(--text-h3)', textTransform: 'uppercase',
+            margin: 'var(--space-3) 0 var(--space-2)',
+          }}>Move your cursor</h3>
+          <p style={{
+            fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)',
+            lineHeight: 'var(--leading-body)', margin: 0,
+          }}>The glow tracks the pointer across the card.</p>
+        </Spotlight>
+      </div>
+    ),
+  },
+  {
+    id: 'ripple',
+    name: 'Ripple',
+    description: 'Wraps a click target with an expanding, fading ripple from the pointer-down point. A no-op wrapper under reduced motion.',
+    snippet: `import { Ripple, Button } from 'prima-ui';
+
+<Ripple>
+  <Button variant="secondary">Click me</Button>
+</Ripple>`,
+    props: [
+      { name: 'children', type: 'ReactElement', description: 'A single clickable element, typically Button.' },
+      { name: 'color', type: 'string', default: "'var(--primary-ring)'", description: 'Ripple fill.' },
+    ],
+    render: () => (
+      <div style={{ padding: 'var(--space-4)' }}>
+        <Ripple>
+          <Button variant="secondary">Click me</Button>
+        </Ripple>
+      </div>
+    ),
+  },
+  {
+    id: 'text-scramble',
+    name: 'TextScramble',
+    description: 'Mono characters cycle randomly before resolving left-to-right into the real text, once on scroll-into-view (or on hover). Shows the final text immediately under reduced motion.',
+    snippet: `import { TextScramble } from 'prima-ui';
+
+<TextScramble text="ENGINEERED MINIMALISM" onHover />`,
+    props: [
+      { name: 'text', type: 'string', description: 'Target text.' },
+      { name: 'duration', type: 'number', default: '900', description: 'Scramble length in ms.' },
+      { name: 'onHover', type: 'boolean', default: 'false', description: 'Trigger on hover instead of scroll-into-view.' },
+    ],
+    render: () => (
+      <div style={{ padding: 'var(--space-4)' }}>
+        <TextScramble text="HOVER TO SCRAMBLE" onHover style={{ fontSize: 'var(--text-h3)', color: 'var(--on-surface)' }} />
+      </div>
+    ),
+  },
+  {
+    id: 'scroll-progress',
+    name: 'ScrollProgress',
+    description: 'A cobalt bar that fills as the page (or a given container) scrolls. Defaults to fixed-at-top for page-level use; pass a `container` ref to scope it to a scrollable box instead.',
+    snippet: `import { ScrollProgress } from 'prima-ui';
+
+// Page-level (mount once near the app root):
+<ScrollProgress />
+
+// Scoped to a scrollable container:
+<ScrollProgress container={panelRef} style={{ position: 'absolute' }} />`,
+    props: [
+      { name: 'height', type: 'number', default: '3', description: 'Bar height in px.' },
+      { name: 'container', type: 'RefObject<HTMLElement>', description: 'Tracks this element\'s scroll instead of the page.' },
+    ],
+    render: () => <ScrollProgressDemo />,
     block: true,
   },
 ];
