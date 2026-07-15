@@ -1,6 +1,22 @@
 import React from 'react';
-import { Hero, FeatureGrid, StatStrip, CTASection, Footer, BlogList } from 'prima-ui';
+import {
+  Hero, FeatureGrid, StatStrip, CTASection, Footer, BlogList,
+  Navbar, Testimonials, FAQSection, PricingTable, BlogDetail,
+} from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
+import { IsometricFallback } from '../three/IsometricFallback';
+
+const IsometricScene = React.lazy(() => import('../three/IsometricScene'));
+
+function HeroMedia() {
+  return (
+    <div aria-hidden="true" style={{ position: 'relative', height: 260, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+      <React.Suspense fallback={<IsometricFallback />}>
+        <IsometricScene />
+      </React.Suspense>
+    </div>
+  );
+}
 
 export interface BlockMeta {
   id: string;
@@ -12,6 +28,39 @@ export interface BlockMeta {
 }
 
 export const BLOCKS: BlockMeta[] = [
+  {
+    id: 'block-navbar',
+    name: 'Navbar',
+    description: 'The page\'s opening rule — Clash Display wordmark, mono-caps nav links, and an optional cobalt CTA. Pairs with Footer to bookend a page.',
+    snippet: `import { Navbar } from 'prima-ui';
+
+<Navbar
+  logo="PRIMA UI"
+  links={[
+    { label: 'Foundations', href: '#foundations' },
+    { label: 'Components', href: '#components' },
+  ]}
+  action={{ label: 'Get started', href: '#usage' }}
+/>`,
+    props: [
+      { name: 'logo', type: 'string', default: "'PRIMA UI'", description: 'Wordmark, rendered in Clash Display.' },
+      { name: 'logoHref', type: 'string', description: 'Wordmark link target.' },
+      { name: 'links', type: 'NavLink[]', description: '{ label, href?, onClick? } mono-caps nav links.' },
+      { name: 'action', type: 'NavbarAction', description: '{ label, href?, onClick? } — cobalt CTA.' },
+      { name: 'sticky', type: 'boolean', default: 'false', description: 'Sticks to the top of its scroll container.' },
+    ],
+    render: () => (
+      <Navbar
+        logo="PRIMA UI"
+        links={[
+          { label: 'Foundations', href: '#foundations' },
+          { label: 'Components', href: '#components' },
+          { label: 'Blocks', href: '#blocks' },
+        ]}
+        action={{ label: 'Get started' }}
+      />
+    ),
+  },
   {
     id: 'block-hero',
     name: 'Hero',
@@ -40,6 +89,7 @@ export const BLOCKS: BlockMeta[] = [
         lede="Cobalt on ice. One accent, three typefaces, visible structure."
         primaryAction={{ label: 'Get started' }}
         secondaryAction={{ label: 'View components' }}
+        media={<HeroMedia />}
         style={{ padding: 'var(--space-6) 0' }}
       />
     ),
@@ -69,6 +119,28 @@ export const BLOCKS: BlockMeta[] = [
     ),
   },
   {
+    id: 'block-testimonials',
+    name: 'Testimonials',
+    description: 'A grid of quote Cards opened by a cobalt Clash Display quotation mark, Inter body copy, and an Avatar + mono name/role footer.',
+    snippet: `import { Testimonials } from 'prima-ui';
+
+<Testimonials items={[
+  { quote: 'Cobalt on ice made every screen feel like the same product.',
+    name: 'Dea Larasati', role: 'PRODUCT DESIGNER' },
+]} />`,
+    props: [
+      { name: 'items', type: 'Testimonial[]', description: '{ quote, name, role?, avatar? }.' },
+      { name: 'columns', type: '2 | 3', default: '3', description: 'Column count on wide viewports.' },
+    ],
+    render: () => (
+      <Testimonials items={[
+        { quote: 'Cobalt on ice made every screen we shipped feel like the same product — even across three squads.', name: 'Dea Larasati', role: 'PRODUCT DESIGNER' },
+        { quote: 'The hairline rules and mono labels do more work than any shadow ever did.', name: 'Fajar Nugroho', role: 'FRONTEND ENGINEER' },
+        { quote: 'One accent color, zero debates. We just build now.', name: 'Sri Wulandari', role: 'DESIGN LEAD' },
+      ]} />
+    ),
+  },
+  {
     id: 'block-statstrip',
     name: 'StatStrip',
     description: 'A horizontal row of stats separated by hairline rules — Clash Display values over mono uppercase labels. Ice or ink.',
@@ -90,6 +162,62 @@ export const BLOCKS: BlockMeta[] = [
         { value: '3', label: 'Typefaces' },
         { value: '8pt', label: 'Spacing grid' },
       ]} />
+    ),
+  },
+  {
+    id: 'block-pricingtable',
+    name: 'PricingTable',
+    description: 'A grid of plan cards; the `highlighted` plan swaps to the ink storytelling surface with a cobalt border.',
+    snippet: `import { PricingTable } from 'prima-ui';
+
+<PricingTable plans={[
+  { name: 'Starter', price: '$0', period: 'MO',
+    features: ['1 project', 'Community support'],
+    action: { label: 'Start free', href: '#' } },
+  { name: 'Pro', price: '$24', period: 'MO', highlighted: true,
+    features: ['Unlimited projects', 'Priority support', 'Design tokens export'],
+    action: { label: 'Go pro', href: '#' } },
+]} />`,
+    props: [
+      { name: 'plans', type: 'PricingPlan[]', description: '{ name, price, period?, description?, features, action, highlighted? }.' },
+    ],
+    render: () => (
+      <PricingTable plans={[
+        { name: 'Starter', price: '$0', period: 'MO', description: 'For solo projects finding their footing.', features: ['1 project', 'Community support', 'Core components'], action: { label: 'Start free', href: '#/blocks' } },
+        { name: 'Pro', price: '$24', period: 'MO', description: 'For teams shipping product every week.', features: ['Unlimited projects', 'Priority support', 'Design tokens export'], action: { label: 'Go pro', href: '#/blocks' }, highlighted: true },
+        { name: 'Studio', price: '$64', period: 'MO', description: 'For agencies running multiple brands.', features: ['Everything in Pro', 'Multi-brand tokens', 'White-glove onboarding'], action: { label: 'Talk to us', href: '#/blocks' } },
+      ]} />
+    ),
+  },
+  {
+    id: 'block-faqsection',
+    name: 'FAQSection',
+    description: 'A SectionHeader opener over the existing Accordion, for landing-page question/answer blocks.',
+    snippet: `import { FAQSection } from 'prima-ui';
+
+<FAQSection
+  eyebrow="FAQ"
+  title="QUESTIONS, ANSWERED"
+  items={[
+    { title: 'Is Prima free to use?', content: 'Yes — MIT licensed.' },
+  ]}
+/>`,
+    props: [
+      { name: 'eyebrow', type: 'string', default: "'FAQ'", description: 'Mono eyebrow with // prefix.' },
+      { name: 'title', type: 'string', default: "'QUESTIONS, ANSWERED'", description: 'ALL-CAPS Clash Display title.' },
+      { name: 'description', type: 'string', description: 'Optional lede under the title.' },
+      { name: 'items', type: 'AccordionItem[]', description: '{ title, content } passed straight to Accordion.' },
+    ],
+    render: () => (
+      <FAQSection
+        eyebrow="FAQ"
+        title="QUESTIONS, ANSWERED"
+        items={[
+          { title: 'Is Prima free to use?', content: 'Yes — it ships MIT licensed, source included.' },
+          { title: 'Why only one accent color?', content: 'Constraint beats palette. Every decorative choice funnels into cobalt, so hierarchy comes from type and space instead of color.' },
+          { title: 'Can I theme it?', content: 'Every value reads a CSS custom property, so swapping the token files re-themes the whole system.' },
+        ]}
+      />
     ),
   },
   {
@@ -140,6 +268,49 @@ export const BLOCKS: BlockMeta[] = [
         { date: 'MAY 2026', title: 'Inline styles, no regrets', description: 'Shipping a component library with zero CSS classes.', tags: ['React', 'CSS'], readTime: '9 MIN', href: '#/blocks' },
         { date: 'FEB 2026', title: 'The ink surface', description: 'Color-block storytelling instead of dark mode.', readTime: '4 MIN', href: '#/blocks' },
       ]} />
+    ),
+  },
+  {
+    id: 'block-blogdetail',
+    name: 'BlogDetail',
+    description: 'The full article view that BlogList\'s rows link to — mono meta row, Clash Display title, lede, optional author line, then a hairline rule before the body.',
+    snippet: `import { BlogDetail } from 'prima-ui';
+
+<BlogDetail
+  date="JUL 2026"
+  title="Designing with one accent"
+  lede="Why constraint beats palette."
+  tags={['Design']}
+  readTime="6 MIN"
+  backHref="#/blocks"
+>
+  <p>Article body goes here — wrap in RichText for prose styling.</p>
+</BlogDetail>`,
+    props: [
+      { name: 'date', type: 'string', description: 'Mono date — e.g. "JUL 2026".' },
+      { name: 'title', type: 'string', description: 'ALL-CAPS Clash Display title.' },
+      { name: 'lede', type: 'string', description: 'Body-large paragraph under the title.' },
+      { name: 'tags', type: 'string[]', description: 'Chip row.' },
+      { name: 'readTime', type: 'string', description: 'Mono read-time — e.g. "6 MIN".' },
+      { name: 'author', type: 'BlogAuthor', description: '{ name, role?, avatar? }.' },
+      { name: 'backHref', type: 'string', description: 'Back-to-list link.' },
+      { name: 'backLabel', type: 'string', default: "'ALL POSTS'", description: 'Back-link label.' },
+      { name: 'children', type: 'ReactNode', description: 'Article body — wrap in RichText for prose styling.' },
+    ],
+    render: () => (
+      <BlogDetail
+        date="JUL 2026"
+        title="Designing with one accent"
+        lede="Why constraint beats palette — what a single cobalt taught me about hierarchy."
+        tags={['Design']}
+        readTime="6 MIN"
+        author={{ name: 'A. Rayhan Primadedas', role: 'DESIGN ENGINEER' }}
+        backHref="#/blocks"
+      >
+        <p style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)', lineHeight: 'var(--leading-body)' }}>
+          Article body renders here — wrap it in <code>RichText</code> for full prose styling (headings, lists, quotes, code).
+        </p>
+      </BlogDetail>
     ),
   },
   {
