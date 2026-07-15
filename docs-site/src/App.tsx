@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Footer, ToastProvider } from 'arayhan-design-system';
+import { Footer, ToastProvider } from 'prima-ui';
 import { Nav } from './components/Nav';
 import { Container } from './components/Section';
 import { HomePage } from './pages/HomePage';
@@ -54,7 +54,7 @@ export function App() {
 
         <Container>
           <Footer
-            tagline="Prima — the personal design system of Ahmed Rayhan. Engineered minimalism, cobalt on ice."
+            tagline="Prima — the personal design system of A. Rayhan Primadedas. Engineered minimalism, cobalt on ice."
             columns={[
               {
                 title: 'INDEX',
@@ -75,7 +75,7 @@ export function App() {
                 ],
               },
             ]}
-            note="© 2026 AHMED RAYHAN — BUILT WITH PRIMA"
+            note="© 2026 A. RAYHAN PRIMADEDAS — BUILT WITH PRIMA"
           />
         </Container>
       </ToastProvider>

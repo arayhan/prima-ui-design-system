@@ -56,12 +56,12 @@ importers:
       '@shikijs/themes':
         specifier: ^4.3.1
         version: 4.3.1
-      arayhan-design-system:
-        specifier: workspace:*
-        version: link:..
       gsap:
         specifier: ^3.12.5
         version: 3.15.0
+      prima-ui:
+        specifier: workspace:*
+        version: link:..
       react:
         specifier: ^18.3.1
         version: 18.3.1

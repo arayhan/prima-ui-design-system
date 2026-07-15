@@ -1,4 +1,4 @@
-## Building with the Arayhan Design System (Prima)
+## Building with Prima UI
 
 Engineered minimalism: an **ice** base (`#F8FBFD`), cool **ink** text (`#0F1116`), and exactly
 ONE accent — electric **cobalt** (`#1B44F0`). Every neutral is blue-tinted; a warm gray is a bug.
@@ -9,7 +9,7 @@ hairline borders and surface contrast do the work, not shadows.
 
 Components are self-contained React function components; there is **no provider or theme wrapper**,
 and **no dark mode** (the ink surface is a storytelling block, not a theme). One setup step:
-`import 'arayhan-design-system/styles.css'` once at the app root. It defines every `--*` token and
+`import 'prima-ui/styles.css'` once at the app root. It defines every `--*` token and
 `@import`s the fonts (Clash Display from Fontshare; Inter + JetBrains Mono from Google) and the
 Phosphor icon font. Without it nothing is styled and `SocialLinks` icons render empty.
 
@@ -47,7 +47,7 @@ Read **`styles.css`** (the full token list) before styling, and each component's
 ### One idiomatic snippet
 
 ```tsx
-import { SectionHeader, Card, Chip, Button } from 'arayhan-design-system';
+import { SectionHeader, Card, Chip, Button } from 'prima-ui';
 
 function Work() {
   return (

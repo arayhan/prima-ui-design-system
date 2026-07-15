@@ -28,18 +28,18 @@ export function UsageSection() {
     <Section id="usage">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)' }}>
         <Step n="01" title="Install">
-          <CodeBlock label="TERMINAL" lang="bash" code={`pnpm add arayhan-design-system
-# or: npm install arayhan-design-system`} />
+          <CodeBlock label="TERMINAL" lang="bash" code={`pnpm add prima-ui
+# or: npm install prima-ui`} />
         </Step>
 
         <Step n="02" title="Import the styles once">
-          <CodeBlock label="MAIN.TSX" code={`import 'arayhan-design-system/styles.css';
+          <CodeBlock label="MAIN.TSX" code={`import 'prima-ui/styles.css';
 // pulls in all tokens + Clash Display, Inter,
 // JetBrains Mono, and the Phosphor icon font (CDN)`} />
         </Step>
 
         <Step n="03" title="Compose">
-          <CodeBlock label="APP.TSX" code={`import { Hero, FeatureGrid, CTASection, Footer } from 'arayhan-design-system';
+          <CodeBlock label="APP.TSX" code={`import { Hero, FeatureGrid, CTASection, Footer } from 'prima-ui';
 
 export function App() {
   return (

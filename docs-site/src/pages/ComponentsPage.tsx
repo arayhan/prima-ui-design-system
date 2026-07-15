@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionHeader } from 'arayhan-design-system';
+import { SectionHeader } from 'prima-ui';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { Specimen } from '../components/Specimen';

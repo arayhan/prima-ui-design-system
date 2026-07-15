@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'arayhan-design-system/styles.css';
+import 'prima-ui/styles.css';
 import { App } from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

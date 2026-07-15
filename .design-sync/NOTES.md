@@ -1,7 +1,8 @@
-# design-sync notes — Arayhan Design System (Prima)
+# design-sync notes — Prima UI
 
-Storybook shape. Project: `arayhan Design System` (bd91f464-39c1-470b-8a40-658666c1921a).
-Global: `ArayhanDesignSystemBd91f4`. 11 components, all graded `match`.
+Storybook shape. Project: `arayhan Design System` (bd91f464-39c1-470b-8a40-658666c1921a) — the
+Claude Design project title, unchanged since the DesignSync tool has no rename method (see below).
+Global: `PrimaUIBd91f4`. 11 components, all graded `match`.
 
 > The system was rebuilt from the old "arayhan" language to **Prima** (cobalt on ice, Clash
 > Display caps, mono `//` labels, color-block storytelling) — a complete token + component rewrite.
@@ -22,8 +23,8 @@ ScrollProgress, SectionHeading (→ SectionHeader), Tag (→ Chip), ThemeToggle 
 - **[GENERAL] Fonts + icons ride the styles.css closure.** Clash Display (Fontshare), Inter +
   JetBrains Mono (Google), and Phosphor **regular** (`src/tokens/icons.css`) are @imported so
   designs get the real fonts/icons. Prima uses `ph ph-*` (regular), NOT duotone.
-- **globalName normalization.** `cfg.globalName` `ArayhanDesignSystem_bd91f4` → converter emits
-  `ArayhanDesignSystemBd91f4` (underscore dropped). Fine for the design agent.
+- **globalName normalization.** `cfg.globalName` `PrimaUI_bd91f4` → converter emits
+  `PrimaUIBd91f4` (underscore dropped). Fine for the design agent.
 - **Grid-overflow overrides.** `cardMode: "column"` on Button, Input, Select, Textarea,
   SectionHeader — their stories render wider than a grid cell (form fields, side-by-side buttons,
   section rule). Presentation-only; grades carry.
@@ -40,9 +41,9 @@ ScrollProgress, SectionHeading (→ SectionHeader), Tag (→ Chip), ThemeToggle 
   compare oracle can't see it. Keep the Fontshare @import intact.
 - **The CSS flatten step is load-bearing** — `scripts/bundle-css.mjs` must run in `pnpm build`.
 - **No owned previews, no skipped stories.** All 11 use generated previews; every story `match`.
-- **Renamed display to "Arayhan Design System".** The npm package stays `arayhan-design-system`
-  (lowercase). The Claude Design PROJECT title is still `arayhan Design System` — the DesignSync
-  tool has no rename method; rename it in the claude.ai/design UI if desired.
+- **Renamed the npm package to `prima-ui`** (display name **Prima UI**). The Claude Design PROJECT
+  title is still `arayhan Design System` — the DesignSync tool has no rename method; rename it in
+  the claude.ai/design UI if desired.
 - **Old kit removed.** The previous `examples/website/` (old arayhan.dev) and the project's old
   `guidelines/`, `ui_kits/`, flat component files were removed. `SKILL.md`, `support.js`,
   `_adherence.oxlintrc.json`, `_ds_manifest.json` (app infra) were left in the project.

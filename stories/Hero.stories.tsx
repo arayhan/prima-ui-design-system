@@ -9,7 +9,7 @@ export const Default: Story = {
   args: {
     eyebrow: 'DESIGN SYSTEM — V0.1.0',
     title: 'ENGINEERED\nMINIMALISM',
-    lede: 'Cobalt on ice. One accent, three typefaces, visible structure. The personal design system of Ahmed Rayhan.',
+    lede: 'Cobalt on ice. One accent, three typefaces, visible structure. The personal design system of A. Rayhan Primadedas.',
     primaryAction: { label: 'Get started', href: '#usage' },
     secondaryAction: { label: 'View components', href: '#components' },
   },

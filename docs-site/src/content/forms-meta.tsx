@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Button, ButtonGroup, Calendar, Checkbox, Combobox, DatePicker, Input,
   MultiSelect, PasswordInput, RadioGroup, Textarea, useToast,
-} from 'arayhan-design-system';
+} from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
 export interface DocMeta {
@@ -152,7 +152,7 @@ export const FORMS: DocMeta[] = [
     id: 'checkbox',
     name: 'Checkbox',
     description: 'An 18px square that fills cobalt with a check glyph — the same control language as MultiSelect rows. Supports label, disabled, and error.',
-    snippet: `import { Checkbox } from 'arayhan-design-system';
+    snippet: `import { Checkbox } from 'prima-ui';
 
 <Checkbox checked={on} onChange={setOn} label="Ship with source maps" />
 <Checkbox checked disabled label="Peer dependency (locked)" />
@@ -171,7 +171,7 @@ export const FORMS: DocMeta[] = [
     id: 'radio',
     name: 'RadioGroup',
     description: '18px circles with a cobalt dot that scales in. One value per group, laid out in a column or row.',
-    snippet: `import { RadioGroup } from 'arayhan-design-system';
+    snippet: `import { RadioGroup } from 'prima-ui';
 
 <RadioGroup
   label="Project type"
@@ -194,7 +194,7 @@ export const FORMS: DocMeta[] = [
     id: 'buttongroup',
     name: 'ButtonGroup',
     description: 'A segmented control — joined mono uppercase segments inside one 2px ink border; the active segment fills cobalt.',
-    snippet: `import { ButtonGroup } from 'arayhan-design-system';
+    snippet: `import { ButtonGroup } from 'prima-ui';
 
 <ButtonGroup
   value={view} onChange={setView}
@@ -214,7 +214,7 @@ export const FORMS: DocMeta[] = [
     id: 'password',
     name: 'PasswordInput',
     description: "Input's field language plus an eye toggle that reveals the value — the toggle goes cobalt while the value is visible.",
-    snippet: `import { PasswordInput } from 'arayhan-design-system';
+    snippet: `import { PasswordInput } from 'prima-ui';
 
 <PasswordInput label="Password" placeholder="••••••••"
   helper="At least 12 characters." />`,
@@ -233,7 +233,7 @@ export const FORMS: DocMeta[] = [
     id: 'combobox',
     name: 'Combobox',
     description: 'A searchable single select. Type to filter the floating list; pick with the pointer or arrow keys + Enter.',
-    snippet: `import { Combobox } from 'arayhan-design-system';
+    snippet: `import { Combobox } from 'prima-ui';
 
 <Combobox
   label="Framework"
@@ -253,7 +253,7 @@ export const FORMS: DocMeta[] = [
     id: 'multiselect',
     name: 'MultiSelect',
     description: 'A field-language trigger that fills with removable cobalt chips, opening a floating checklist. Controlled via value / onChange.',
-    snippet: `import { MultiSelect } from 'arayhan-design-system';
+    snippet: `import { MultiSelect } from 'prima-ui';
 
 const [stack, setStack] = useState<string[]>(['react']);
 
@@ -275,7 +275,7 @@ const [stack, setStack] = useState<string[]>(['react']);
     id: 'calendar',
     name: 'Calendar',
     description: 'A month grid on the white surface — mono weekday initials, cobalt fill for the selection, cobalt outline for today.',
-    snippet: `import { Calendar } from 'arayhan-design-system';
+    snippet: `import { Calendar } from 'prima-ui';
 
 const [date, setDate] = useState<Date>();
 <Calendar value={date} onChange={setDate} />`,
@@ -289,7 +289,7 @@ const [date, setDate] = useState<Date>();
     id: 'datepicker',
     name: 'DatePicker',
     description: 'A field-language trigger opening the Calendar in a floating panel. Selecting a day closes it; Escape and outside click too.',
-    snippet: `import { DatePicker } from 'arayhan-design-system';
+    snippet: `import { DatePicker } from 'prima-ui';
 
 const [date, setDate] = useState<Date>();
 <DatePicker label="Launch date" value={date} onChange={setDate} />`,

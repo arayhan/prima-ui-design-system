@@ -14,7 +14,7 @@ export interface FooterColumn {
 }
 
 export interface FooterProps {
-  /** Wordmark — e.g. "ARAYHAN®" */
+  /** Wordmark — e.g. "PRIMA UI" */
   name?: string;
   /** Body line under the wordmark */
   tagline?: string;
@@ -22,7 +22,7 @@ export interface FooterProps {
   columns?: FooterColumn[];
   /** Social links row; omit to use SocialLinks defaults */
   links?: SocialLink[];
-  /** Copyright / colophon line — e.g. "© 2026 Ahmed Rayhan" */
+  /** Copyright / colophon line — e.g. "© 2026 A. Rayhan Primadedas" */
   note?: string;
   style?: React.CSSProperties;
 }
@@ -47,7 +47,7 @@ function FooterAnchor({ link }: { link: FooterLink }) {
  * the Clash Display wordmark + tagline, mono-headed nav columns, SocialLinks,
  * and a mono copyright line under a hairline.
  */
-export function Footer({ name = 'ARAYHAN®', tagline, columns = [], links, note, style }: FooterProps) {
+export function Footer({ name = 'PRIMA UI', tagline, columns = [], links, note, style }: FooterProps) {
   return (
     <footer style={{
       borderTop: 'var(--border-width-rule) solid var(--border-strong)',

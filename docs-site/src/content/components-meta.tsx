@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Button, Card, Chip, Input, Textarea, Select, Switch,
   SectionHeader, TimelineItem, Marquee, SocialLinks,
-} from 'arayhan-design-system';
+} from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
 export interface ComponentMeta {
@@ -50,7 +50,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'button',
     name: 'Button',
     description: 'Mono uppercase label, 52px tall, radius sm. Primary is the cobalt fill; secondary is a 2px ink border that inverts on hover.',
-    snippet: `import { Button } from 'arayhan-design-system';
+    snippet: `import { Button } from 'prima-ui';
 
 <Button icon="→">Start a project</Button>
 <Button variant="secondary">View work</Button>
@@ -74,7 +74,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'card',
     name: 'Card',
     description: 'White surface, 1.5px hairline border, radius md. Flat — no shadow. Interactive cards shift to the ice tone and nudge a cobalt arrow on hover.',
-    snippet: `import { Card, Chip } from 'arayhan-design-system';
+    snippet: `import { Card, Chip } from 'prima-ui';
 
 <Card interactive arrow href="#">
   <Chip>React</Chip>
@@ -102,7 +102,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'chip',
     name: 'Chip',
     description: 'A mono uppercase cobalt tag on an ice fill with a hairline border. For tech tags and compact metadata.',
-    snippet: `import { Chip } from 'arayhan-design-system';
+    snippet: `import { Chip } from 'prima-ui';
 
 <Chip>TypeScript</Chip>
 <Chip>Three.js</Chip>`,
@@ -120,7 +120,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'input',
     name: 'Input',
     description: 'White field, 1.5px border, mono label above, cobalt focus ring. Error text replaces the helper and turns the border red.',
-    snippet: `import { Input } from 'arayhan-design-system';
+    snippet: `import { Input } from 'prima-ui';
 
 <Input label="Name" placeholder="Ada Lovelace" />
 <Input label="Email" error="This email looks wrong." />`,
@@ -142,7 +142,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'textarea',
     name: 'Textarea',
     description: "Input's field language with a 120px minimum height and vertical resize.",
-    snippet: `import { Textarea } from 'arayhan-design-system';
+    snippet: `import { Textarea } from 'prima-ui';
 
 <Textarea label="Message" placeholder="Tell me about the project…" />`,
     props: [
@@ -159,7 +159,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'select',
     name: 'Select',
     description: "Input's field language plus a 1.5px ink chevron — the native outline is replaced by the cobalt ring.",
-    snippet: `import { Select } from 'arayhan-design-system';
+    snippet: `import { Select } from 'prima-ui';
 
 <Select
   label="Project type"
@@ -180,7 +180,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'switch',
     name: 'Switch',
     description: 'A 50×28 pill. Cobalt track when on, hairline track when off; the white knob slides in 150ms.',
-    snippet: `import { Switch } from 'arayhan-design-system';
+    snippet: `import { Switch } from 'prima-ui';
 
 <Switch checked={on} onChange={setOn} label="Available for work" />`,
     props: [
@@ -195,7 +195,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'sectionheader',
     name: 'SectionHeader',
     description: 'The Prima section opener: mono `//` cobalt eyebrow and running number above a 3px ink rule, then an ALL-CAPS Clash Display title and optional lede.',
-    snippet: `import { SectionHeader } from 'arayhan-design-system';
+    snippet: `import { SectionHeader } from 'prima-ui';
 
 <SectionHeader
   eyebrow="SELECTED WORK"
@@ -222,7 +222,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'timelineitem',
     name: 'TimelineItem',
     description: 'A vertical timeline row: mono year column, 2px connector with a cobalt node, ALL-CAPS title with optional org, description, and chips.',
-    snippet: `import { TimelineItem } from 'arayhan-design-system';
+    snippet: `import { TimelineItem } from 'prima-ui';
 
 <TimelineItem
   period="2023 — NOW" title="Design Engineer" org="Freelance"
@@ -253,7 +253,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'marquee',
     name: 'Marquee',
     description: 'A mono uppercase text strip that divides major sections. Decorative only — one per page. Loops right-to-left and respects reduced motion.',
-    snippet: `import { Marquee } from 'arayhan-design-system';
+    snippet: `import { Marquee } from 'prima-ui';
 
 <Marquee items={['ENGINEERED MINIMALISM', 'COBALT ON ICE']} />
 <Marquee inverse items={['PRIMA']} separator="→" />`,
@@ -267,7 +267,7 @@ export const COMPONENTS: ComponentMeta[] = [
     render: () => (
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
         <Marquee items={['ENGINEERED MINIMALISM', 'COBALT ON ICE', 'VISIBLE STRUCTURE']} speed={18} />
-        <Marquee inverse items={['PRIMA', 'ARAYHAN DESIGN SYSTEM']} speed={22} separator="→" />
+        <Marquee inverse items={['PRIMA UI', 'ENGINEERED MINIMALISM']} speed={22} separator="→" />
       </div>
     ),
   },
@@ -275,7 +275,7 @@ export const COMPONENTS: ComponentMeta[] = [
     id: 'sociallinks',
     name: 'SocialLinks',
     description: 'Bordered square icon links (Phosphor regular). Border and glyph go cobalt on hover. Ships sensible defaults; pass links to override.',
-    snippet: `import { SocialLinks } from 'arayhan-design-system';
+    snippet: `import { SocialLinks } from 'prima-ui';
 
 <SocialLinks />
 <SocialLinks size={56} links={[

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero, FeatureGrid, StatStrip, CTASection, Footer, BlogList } from 'arayhan-design-system';
+import { Hero, FeatureGrid, StatStrip, CTASection, Footer, BlogList } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
 export interface BlockMeta {
@@ -16,7 +16,7 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-hero',
     name: 'Hero',
     description: 'The page opener — `//` eyebrow, mega Clash Display caps title, lede, Button pair, and an optional media slot that sits beside the copy on wide viewports.',
-    snippet: `import { Hero } from 'arayhan-design-system';
+    snippet: `import { Hero } from 'prima-ui';
 
 <Hero
   eyebrow="DESIGN SYSTEM — V0.1.0"
@@ -48,7 +48,7 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-featuregrid',
     name: 'FeatureGrid',
     description: 'A grid of Cards, each opened by a mono running number and an optional cobalt Phosphor icon. Collapses automatically on narrow viewports.',
-    snippet: `import { FeatureGrid } from 'arayhan-design-system';
+    snippet: `import { FeatureGrid } from 'prima-ui';
 
 <FeatureGrid items={[
   { icon: 'ph ph-drop', title: 'One accent',
@@ -72,7 +72,7 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-statstrip',
     name: 'StatStrip',
     description: 'A horizontal row of stats separated by hairline rules — Clash Display values over mono uppercase labels. Ice or ink.',
-    snippet: `import { StatStrip } from 'arayhan-design-system';
+    snippet: `import { StatStrip } from 'prima-ui';
 
 <StatStrip stats={[
   { value: '16', label: 'Components' },
@@ -96,7 +96,7 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-ctasection',
     name: 'CTASection',
     description: 'The contact/CTA block on the ink storytelling surface — eyebrow, big caps headline, cobalt CTA, mono email link, and SocialLinks.',
-    snippet: `import { CTASection } from 'arayhan-design-system';
+    snippet: `import { CTASection } from 'prima-ui';
 
 <CTASection
   eyebrow="CONTACT"
@@ -124,7 +124,7 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-bloglist',
     name: 'BlogList',
     description: 'Hairline-separated article rows — mono date column, caps title that goes cobalt on hover with an arrow nudge, optional description, chips, and read-time.',
-    snippet: `import { BlogList } from 'arayhan-design-system';
+    snippet: `import { BlogList } from 'prima-ui';
 
 <BlogList posts={[
   { date: 'JUL 2026', title: 'Designing with one accent',
@@ -146,17 +146,17 @@ export const BLOCKS: BlockMeta[] = [
     id: 'block-footer',
     name: 'Footer',
     description: 'The page close: a 3px ink rule, Clash Display wordmark and tagline, mono-headed nav columns, SocialLinks, and a colophon line.',
-    snippet: `import { Footer } from 'arayhan-design-system';
+    snippet: `import { Footer } from 'prima-ui';
 
 <Footer
-  tagline="Prima — the personal design system of Ahmed Rayhan."
+  tagline="Prima — the personal design system of A. Rayhan Primadedas."
   columns={[{ title: 'INDEX', links: [
     { label: 'Components', href: '#components' },
   ]}]}
-  note="© 2026 AHMED RAYHAN"
+  note="© 2026 A. RAYHAN PRIMADEDAS"
 />`,
     props: [
-      { name: 'name', type: 'string', default: "'ARAYHAN®'", description: 'Wordmark.' },
+      { name: 'name', type: 'string', default: "'PRIMA UI'", description: 'Wordmark.' },
       { name: 'tagline', type: 'string', description: 'Body line under the wordmark.' },
       { name: 'columns', type: 'FooterColumn[]', description: '{ title, links: { label, href }[] } nav columns.' },
       { name: 'links', type: 'SocialLink[]', default: 'built-in', description: 'Social links row.' },
@@ -164,7 +164,7 @@ export const BLOCKS: BlockMeta[] = [
     ],
     render: () => (
       <Footer
-        tagline="Prima — the personal design system of Ahmed Rayhan. Engineered minimalism, cobalt on ice."
+        tagline="Prima — the personal design system of A. Rayhan Primadedas. Engineered minimalism, cobalt on ice."
         columns={[
           { title: 'INDEX', links: [
             { label: 'Foundations', href: '#foundations' },
@@ -175,7 +175,7 @@ export const BLOCKS: BlockMeta[] = [
             { label: 'GitHub', href: 'https://github.com/arayhan' },
           ] },
         ]}
-        note="© 2026 AHMED RAYHAN — BUILT WITH PRIMA"
+        note="© 2026 A. RAYHAN PRIMADEDAS — BUILT WITH PRIMA"
       />
     ),
   },

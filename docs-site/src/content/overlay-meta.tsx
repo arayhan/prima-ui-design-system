@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dialog, Drawer, Dropdown, Input, useToast } from 'arayhan-design-system';
+import { Button, Dialog, Drawer, Dropdown, Input, useToast } from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function ToastDemo() {
@@ -61,7 +61,7 @@ export const OVERLAYS: DocMeta[] = [
     id: 'dropdown',
     name: 'Dropdown',
     description: 'A secondary-button trigger opening a floating white menu — the one sanctioned shadow. Escape, outside click, and arrow keys are handled; danger items render in the error color.',
-    snippet: `import { Dropdown } from 'arayhan-design-system';
+    snippet: `import { Dropdown } from 'prima-ui';
 
 <Dropdown
   label="Actions"
@@ -91,7 +91,7 @@ export const OVERLAYS: DocMeta[] = [
     id: 'dialog',
     name: 'Dialog',
     description: 'A centered white panel over the scrim, rendered in a portal. Escape and scrim click close; body scroll locks while open; actions sit under a hairline.',
-    snippet: `import { Dialog, Button } from 'arayhan-design-system';
+    snippet: `import { Dialog, Button } from 'prima-ui';
 
 <Dialog
   open={open} onClose={close}
@@ -117,7 +117,7 @@ export const OVERLAYS: DocMeta[] = [
     id: 'drawer',
     name: 'Drawer',
     description: 'A full-height side panel that slides over the scrim — for settings, filters, and detail views. Portal-rendered with Escape/scrim close and scroll lock.',
-    snippet: `import { Drawer, Button, Input } from 'arayhan-design-system';
+    snippet: `import { Drawer, Button, Input } from 'prima-ui';
 
 <Drawer
   open={open} onClose={close}
@@ -139,7 +139,7 @@ export const OVERLAYS: DocMeta[] = [
     id: 'toast',
     name: 'Toast',
     description: 'Ink-surface notifications that stack bottom-right with a semantic rule and auto-dismiss. Wrap the app in ToastProvider once, then dispatch from anywhere with useToast().',
-    snippet: `import { ToastProvider, useToast, Button } from 'arayhan-design-system';
+    snippet: `import { ToastProvider, useToast, Button } from 'prima-ui';
 
 // main.tsx — once, at the root
 <ToastProvider><App /></ToastProvider>

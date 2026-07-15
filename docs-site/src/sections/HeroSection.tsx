@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'arayhan-design-system';
+import { Button } from 'prima-ui';
 import { Container } from '../components/Section';
 import { useLineReveal, useMagnetic, usePrefersReducedMotion } from '../motion/hooks';
 import { gsap, useGSAP, MOTION_OK } from '../motion/gsap';
@@ -78,7 +78,7 @@ export function HeroSection() {
             lineHeight: 'var(--leading-body-lg)', color: 'var(--text-secondary)', margin: 0, maxWidth: 540,
           }}>
             Cobalt on ice. One accent, three typefaces, visible structure — the personal
-            design system of Ahmed Rayhan, documented end to end.
+            design system of A. Rayhan Primadedas, documented end to end.
           </p>
 
           <div data-hero-fade style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-4)', marginTop: 'var(--space-2)' }}>

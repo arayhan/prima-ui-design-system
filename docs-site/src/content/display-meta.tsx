@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Accordion, Alert, AnalyticsCard, Avatar, BarChart, Bubble, Button, Carousel,
   Chip, CodeSnippet, DataTable, EmptyState, ErrorState, LineChart, RichText, Thumbnail,
-} from 'arayhan-design-system';
+} from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function DismissibleAlertDemo() {
@@ -46,7 +46,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'alert',
     name: 'Alert',
     description: 'White surface, hairline border, and a 3px semantic rule on the left edge. Icon and rule take the semantic color; the body stays ink. Pass onClose to make it dismissible.',
-    snippet: `import { Alert } from 'arayhan-design-system';
+    snippet: `import { Alert } from 'prima-ui';
 
 <Alert title="Heads up">Semantic colors are functional, never decorative.</Alert>
 <Alert variant="success" title="Saved">Your changes are live.</Alert>
@@ -65,11 +65,11 @@ export const DISPLAY: DocMeta[] = [
     id: 'avatar',
     name: 'Avatar',
     description: 'A full-radius circle — the one sanctioned use of radius-full — with a hairline border. Falls back to mono initials on ice; the optional status dot uses semantic colors.',
-    snippet: `import { Avatar } from 'arayhan-design-system';
+    snippet: `import { Avatar } from 'prima-ui';
 
-<Avatar name="Ahmed Rayhan" status="online" />
+<Avatar name="A. Rayhan Primadedas" status="online" />
 <Avatar name="Ada Lovelace" size={56} />
-<Avatar src="/me.jpg" name="Ahmed Rayhan" size={64} status="busy" />`,
+<Avatar src="/me.jpg" name="A. Rayhan Primadedas" size={64} status="busy" />`,
     props: [
       { name: 'name', type: 'string', description: 'Used for initials fallback and alt text.' },
       { name: 'src', type: 'string', description: 'Image source; broken images fall back to initials.' },
@@ -78,7 +78,7 @@ export const DISPLAY: DocMeta[] = [
     ],
     render: () => (
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-5)' }}>
-        <Avatar name="Ahmed Rayhan" status="online" />
+        <Avatar name="A. Rayhan Primadedas" status="online" />
         <Avatar name="Ada Lovelace" size={56} status="away" />
         <Avatar name="Grace Hopper" size={64} status="busy" />
         <Avatar name="Prima" size={72} />
@@ -89,7 +89,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'thumbnail',
     name: 'Thumbnail',
     description: 'A hairline media frame (radius md) whose image eases to a gentle zoom on hover — one of the smallest Prima micro-interactions — with a mono caption line.',
-    snippet: `import { Thumbnail } from 'arayhan-design-system';
+    snippet: `import { Thumbnail } from 'prima-ui';
 
 <Thumbnail
   src="/work/alpha.jpg" alt="Alpha case study"
@@ -113,7 +113,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'bubble',
     name: 'Bubble',
     description: 'Chat bubbles — received messages sit left on the white surface with a hairline; sent messages sit right in cobalt. The corner nearest the sender squares off for direction.',
-    snippet: `import { Bubble } from 'arayhan-design-system';
+    snippet: `import { Bubble } from 'prima-ui';
 
 <Bubble meta="AR · 09:41">Morning — is the docs site live?</Bubble>
 <Bubble side="out" meta="09:42">Deployed last night. Take a look.</Bubble>`,
@@ -134,12 +134,12 @@ export const DISPLAY: DocMeta[] = [
     id: 'accordion',
     name: 'Accordion',
     description: 'Hairline-separated rows with mono running numbers and a plus glyph that rotates into a close. Height animates smoothly; one item open by default, or several with multiple.',
-    snippet: `import { Accordion } from 'arayhan-design-system';
+    snippet: `import { Accordion } from 'prima-ui';
 
 <Accordion
   defaultOpen={0}
   items={[
-    { title: 'What is Prima?', content: 'The personal design system of Ahmed Rayhan.' },
+    { title: 'What is Prima?', content: 'The personal design system of A. Rayhan Primadedas.' },
     { title: 'Can I use it?', content: 'MIT licensed — go ahead.' },
   ]}
 />`,
@@ -152,7 +152,7 @@ export const DISPLAY: DocMeta[] = [
       <Accordion
         defaultOpen={0}
         items={[
-          { title: 'What is Prima?', content: 'The personal design system of Ahmed Rayhan — engineered minimalism: one cobalt accent, three typefaces, visible structure.' },
+          { title: 'What is Prima?', content: 'The personal design system of A. Rayhan Primadedas — engineered minimalism: one cobalt accent, three typefaces, visible structure.' },
           { title: 'Can I use it?', content: 'MIT licensed. Install it, import the styles once, and compose.' },
           { title: 'Why only one accent?', content: 'Constraint is the design. With a single accent, every cobalt pixel means something.' },
         ]}
@@ -164,7 +164,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'carousel',
     name: 'Carousel',
     description: 'A scroll-snap track with prev/next controls and a mono running counter. Native scrolling stays available — swipe and trackpad both work; buttons honor reduced motion.',
-    snippet: `import { Carousel, Thumbnail } from 'arayhan-design-system';
+    snippet: `import { Carousel, Thumbnail } from 'prima-ui';
 
 <Carousel items={projects.map((p) => (
   <Thumbnail key={p.id} src={p.image} alt={p.title} caption={p.title} />
@@ -181,7 +181,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'datatable',
     name: 'DataTable',
     description: 'Mono uppercase headers over a 2px ink rule, hairline row separators, ice hover. Columns opt into click-to-sort with sortable.',
-    snippet: `import { DataTable } from 'arayhan-design-system';
+    snippet: `import { DataTable } from 'prima-ui';
 
 <DataTable
   caption="PROJECTS — 2026"
@@ -218,7 +218,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'charts',
     name: 'Charts',
     description: 'LineChart, BarChart, and Sparkline — cobalt data on hairline grids with mono labels. SVG, zero dependencies, one data color: the accent.',
-    snippet: `import { LineChart, BarChart, Sparkline } from 'arayhan-design-system';
+    snippet: `import { LineChart, BarChart, Sparkline } from 'prima-ui';
 
 <LineChart data={[12, 18, 14, 22, 28, 34, 48]} labels={['JAN', 'JUL']} />
 <BarChart data={[
@@ -249,7 +249,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'analytics',
     name: 'AnalyticsCard',
     description: 'An at-a-glance metric: mono label, Clash Display value, semantic delta chip, cobalt sparkline. Compose a dashboard from a grid of these plus a LineChart.',
-    snippet: `import { AnalyticsCard } from 'arayhan-design-system';
+    snippet: `import { AnalyticsCard } from 'prima-ui';
 
 <AnalyticsCard
   label="PAGE VIEWS" value="48.2K"
@@ -276,7 +276,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'empty',
     name: 'EmptyState',
     description: 'A centered hairline panel for nothing-here moments: icon in a bordered square, caps title, muted description, optional cobalt action.',
-    snippet: `import { EmptyState } from 'arayhan-design-system';
+    snippet: `import { EmptyState } from 'prima-ui';
 
 <EmptyState
   icon="ph ph-tray"
@@ -304,7 +304,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'error',
     name: 'ErrorState',
     description: 'Error pages, the Prima way: a mono // ERROR eyebrow, the code in mega cobalt Clash Display, caps title, and a way back. Use fullPage for 404/500 routes.',
-    snippet: `import { ErrorState } from 'arayhan-design-system';
+    snippet: `import { ErrorState } from 'prima-ui';
 
 <ErrorState
   code="404" fullPage
@@ -335,11 +335,11 @@ export const DISPLAY: DocMeta[] = [
     id: 'code',
     name: 'CodeSnippet',
     description: 'The ink code panel as a shippable component — mono toolbar, copy button, monochrome on purpose (zero dependencies). This docs site layers Shiki on top of the same shell.',
-    snippet: `import { CodeSnippet } from 'arayhan-design-system';
+    snippet: `import { CodeSnippet } from 'prima-ui';
 
 <CodeSnippet
   label="INSTALL.SH"
-  code={'pnpm add arayhan-design-system'}
+  code={'pnpm add prima-ui'}
 />`,
     props: [
       { name: 'code', type: 'string', description: 'The snippet text.' },
@@ -348,7 +348,7 @@ export const DISPLAY: DocMeta[] = [
     ],
     render: () => (
       <div style={{ width: '100%', maxWidth: 560 }}>
-        <CodeSnippet label="INSTALL.SH" code={`pnpm add arayhan-design-system
+        <CodeSnippet label="INSTALL.SH" code={`pnpm add prima-ui
 # peer deps: react >= 18`} />
       </div>
     ),
@@ -357,7 +357,7 @@ export const DISPLAY: DocMeta[] = [
     id: 'richtext',
     name: 'RichText',
     description: 'Long-form prose styling for articles and blog content. Wrap rendered markdown/CMS HTML — headings, links, lists, quotes, and inline code all pick up the Prima voice.',
-    snippet: `import { RichText } from 'arayhan-design-system';
+    snippet: `import { RichText } from 'prima-ui';
 
 <RichText>
   <h2>Engineered minimalism</h2>

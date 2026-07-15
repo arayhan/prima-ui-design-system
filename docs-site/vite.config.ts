@@ -11,8 +11,8 @@ export default defineConfig({
     // Alias the library to its live source so edits reflect instantly and
     // no tsup build is needed. The /styles.css alias must precede the bare one.
     alias: [
-      { find: 'arayhan-design-system/styles.css', replacement: r('../src/styles.css') },
-      { find: 'arayhan-design-system', replacement: r('../src/index.ts') },
+      { find: 'prima-ui/styles.css', replacement: r('../src/styles.css') },
+      { find: 'prima-ui', replacement: r('../src/index.ts') },
     ],
     dedupe: ['react', 'react-dom'],
   },

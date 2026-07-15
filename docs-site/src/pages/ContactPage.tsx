@@ -1,5 +1,5 @@
 import React from 'react';
-import { CTASection, SocialLinks } from 'arayhan-design-system';
+import { CTASection, SocialLinks } from 'prima-ui';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { useScrollReveal } from '../motion/hooks';

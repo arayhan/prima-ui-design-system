@@ -12,8 +12,8 @@
     "resolveJsonModule": true,
     "types": ["react", "react-dom", "vite/client"],
     "paths": {
-      "arayhan-design-system/styles.css": ["../src/styles.css"],
-      "arayhan-design-system": ["../src/index.ts"]
+      "prima-ui/styles.css": ["../src/styles.css"],
+      "prima-ui": ["../src/index.ts"]
     }
   },
   "include": ["src"]

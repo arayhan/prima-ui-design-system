@@ -14,7 +14,7 @@ export const AvatarStory: StoryObj = {
   name: 'Avatar',
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-      <Avatar name="Ahmed Rayhan" status="online" />
+      <Avatar name="A. Rayhan Primadedas" status="online" />
       <Avatar name="Ada Lovelace" size={56} status="away" />
       <Avatar name="Grace Hopper" size={64} status="busy" />
     </div>
@@ -46,7 +46,7 @@ export const AccordionStory: StoryObj = {
     <Accordion
       defaultOpen={0}
       items={[
-        { title: 'What is Prima?', content: 'The personal design system of Ahmed Rayhan.' },
+        { title: 'What is Prima?', content: 'The personal design system of A. Rayhan Primadedas.' },
         { title: 'Can I use it?', content: 'MIT licensed — go ahead.' },
       ]}
     />
@@ -123,7 +123,7 @@ export const CodeSnippetStory: StoryObj = {
   name: 'CodeSnippet',
   render: () => (
     <div style={{ maxWidth: 520 }}>
-      <CodeSnippet label="INSTALL.SH" code={'pnpm add arayhan-design-system'} />
+      <CodeSnippet label="INSTALL.SH" code={'pnpm add prima-ui'} />
     </div>
   ),
 };

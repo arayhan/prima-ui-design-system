@@ -7,7 +7,7 @@ type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
   args: {
-    tagline: 'Prima — the personal design system of Ahmed Rayhan. Engineered minimalism, cobalt on ice.',
+    tagline: 'Prima — the personal design system of A. Rayhan Primadedas. Engineered minimalism, cobalt on ice.',
     columns: [
       {
         title: 'INDEX',
@@ -25,6 +25,6 @@ export const Default: Story = {
         ],
       },
     ],
-    note: '© 2026 AHMED RAYHAN — BUILT WITH PRIMA',
+    note: '© 2026 A. RAYHAN PRIMADEDAS — BUILT WITH PRIMA',
   },
 };

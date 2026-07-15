@@ -64,7 +64,7 @@ export const TYPE_SCALE: TypeToken[] = [
   { varName: '--text-h3', px: 21, label: 'H3', family: 'display', sample: 'VISIBLE STRUCTURE' },
   { varName: '--text-body-lg', px: 19, label: 'Body large', family: 'body', sample: 'Inter carries the reading voice of the system.' },
   { varName: '--text-body', px: 16, label: 'Body', family: 'body', sample: 'Body text is set in Inter at a generous line height.' },
-  { varName: '--text-code', px: 14, label: 'Code', family: 'mono', sample: "import { Button } from 'arayhan-design-system';" },
+  { varName: '--text-code', px: 14, label: 'Code', family: 'mono', sample: "import { Button } from 'prima-ui';" },
   { varName: '--text-label', px: 12, label: 'Label', family: 'mono', sample: '// EYEBROWS, LABELS, RUNNING NUMBERS' },
 ];
 

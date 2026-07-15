@@ -1,8 +1,8 @@
 {
   "projectId": "bd91f464-39c1-470b-8a40-658666c1921a",
   "shape": "storybook",
-  "pkg": "arayhan-design-system",
-  "globalName": "ArayhanDesignSystem_bd91f4",
+  "pkg": "prima-ui",
+  "globalName": "PrimaUI_bd91f4",
   "storybookConfigDir": ".storybook",
   "storybookStatic": ".design-sync/sb-reference",
   "buildCmd": "pnpm build",

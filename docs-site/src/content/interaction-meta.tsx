@@ -1,4 +1,4 @@
-import { CountUp, MagneticButton, RevealOnScroll, TiltCard } from 'arayhan-design-system';
+import { CountUp, MagneticButton, RevealOnScroll, TiltCard } from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 export const INTERACTIONS: DocMeta[] = [
@@ -6,7 +6,7 @@ export const INTERACTIONS: DocMeta[] = [
     id: 'magnetic-button',
     name: 'MagneticButton',
     description: 'The Button eases toward the pointer (a few px) and springs back on leave. Pointer-fine devices only; inert under reduced motion. Pure CSS transitions — the library ships no animation dependency.',
-    snippet: `import { MagneticButton } from 'arayhan-design-system';
+    snippet: `import { MagneticButton } from 'prima-ui';
 
 <MagneticButton icon="→" href="https://arayhan.com" strength={8}>
   Start a project
@@ -26,7 +26,7 @@ export const INTERACTIONS: DocMeta[] = [
     id: 'tilt-card',
     name: 'TiltCard',
     description: 'A hairline card that tilts in 3D toward the pointer and settles back on leave, gaining a faint cobalt glow at full tilt. Pointer-fine only; inert under reduced motion.',
-    snippet: `import { TiltCard } from 'arayhan-design-system';
+    snippet: `import { TiltCard } from 'prima-ui';
 
 <TiltCard maxTilt={8}>
   <h3>Realtime infrastructure</h3>
@@ -59,7 +59,7 @@ export const INTERACTIONS: DocMeta[] = [
     id: 'count-up',
     name: 'CountUp',
     description: 'A Clash Display figure that counts from zero the first time it scrolls into view, easing out. Renders the final value immediately under reduced motion.',
-    snippet: `import { CountUp } from 'arayhan-design-system';
+    snippet: `import { CountUp } from 'prima-ui';
 
 <CountUp value={48} suffix="+" label="Components" />
 <CountUp value={99.9} suffix="%" decimals={1} label="Uptime" />`,
@@ -82,7 +82,7 @@ export const INTERACTIONS: DocMeta[] = [
     id: 'reveal-on-scroll',
     name: 'RevealOnScroll',
     description: 'Wraps content that rises and fades in the first time it enters the viewport — the system easing at the reveal duration. Stagger siblings with increasing delay. Content stays visible under reduced motion.',
-    snippet: `import { RevealOnScroll } from 'arayhan-design-system';
+    snippet: `import { RevealOnScroll } from 'prima-ui';
 
 <RevealOnScroll><Card>First</Card></RevealOnScroll>
 <RevealOnScroll delay={80}><Card>Second</Card></RevealOnScroll>

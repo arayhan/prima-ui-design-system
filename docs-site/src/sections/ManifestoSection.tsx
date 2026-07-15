@@ -1,4 +1,4 @@
-import { SectionHeader, FeatureGrid, StatStrip } from 'arayhan-design-system';
+import { SectionHeader, FeatureGrid, StatStrip } from 'prima-ui';
 import { Section } from '../components/Section';
 
 /** The Prima principles — what "engineered minimalism" actually means. */

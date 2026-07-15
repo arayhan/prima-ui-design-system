@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CTASection, Marquee, SectionHeader } from 'arayhan-design-system';
+import { Card, CTASection, Marquee, SectionHeader } from 'prima-ui';
 import { Section } from '../components/Section';
 import { HeroSection } from '../sections/HeroSection';
 import { ManifestoSection } from '../sections/ManifestoSection';
