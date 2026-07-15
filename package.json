@@ -16,6 +16,7 @@
   },
   "files": ["dist"],
   "scripts": {
+    "prepublishOnly": "pnpm build",
     "build": "tsup && node scripts/bundle-css.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
