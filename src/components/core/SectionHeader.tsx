@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCountAnimationText } from './_countAnimation';
 
 export interface SectionHeaderProps {
   /** Mono eyebrow, rendered with a `//` prefix — e.g. "ABOUT" → "// ABOUT" */
@@ -14,6 +15,20 @@ export interface SectionHeaderProps {
  * Prima section opener: a mono `//` cobalt eyebrow + running number above a 3px ink
  * rule, then an ALL-CAPS Clash Display title and an optional lede.
  */
+function AnimatedNumber({ number }: { number: string }) {
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const display = useCountAnimationText(ref as React.RefObject<Element>, number);
+  return (
+    <span
+      ref={ref}
+      style={{
+        fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
+        letterSpacing: 'var(--tracking-label)', color: 'var(--text-secondary)', fontVariantNumeric: 'tabular-nums',
+      }}
+    >{display}</span>
+  );
+}
+
 export function SectionHeader({ eyebrow, number, title, description, style }: SectionHeaderProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', ...style }}>
@@ -27,12 +42,7 @@ export function SectionHeader({ eyebrow, number, title, description, style }: Se
             letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--primary)',
           } as React.CSSProperties}>// {eyebrow}</span>
         )}
-        {number && (
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
-            letterSpacing: 'var(--tracking-label)', color: 'var(--text-secondary)',
-          }}>{number}</span>
-        )}
+        {number && <AnimatedNumber number={number} />}
       </div>
       <h2 style={{
         fontFamily: 'var(--font-display)', fontSize: 'var(--text-h2)', fontWeight: 600,
