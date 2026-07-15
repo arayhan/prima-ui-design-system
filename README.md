@@ -5,7 +5,7 @@ component library built around *engineered minimalism*: an ice-blue base, exactl
 cobalt accent, bold **Clash Display** all-caps display type, mono `//` labels, and color-block
 storytelling. Reconstructed with a `tsup` build and Storybook.
 
-> The npm package is `prima-ui`; the design language is **Prima**.
+> The npm package is `@arayhan/prima-ui`; the design language is **Prima**.
 
 ## Install
 
@@ -27,8 +27,8 @@ pnpm install
 ## Usage
 
 ```tsx
-import { Button, Card, Chip, SectionHeader } from 'prima-ui';
-import 'prima-ui/styles.css';
+import { Button, Card, Chip, SectionHeader } from '@arayhan/prima-ui';
+import '@arayhan/prima-ui/styles.css';
 
 export function Example() {
   return (

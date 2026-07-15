@@ -1,10 +1,11 @@
 {
-  "name": "prima-ui",
+  "name": "@arayhan/prima-ui",
   "version": "0.1.0",
   "description": "Prima UI: engineered minimalism (cobalt on ice, Clash Display caps) by A. Rayhan Primadedas.",
   "author": "A. Rayhan Primadedas",
   "type": "module",
   "license": "MIT",
+  "publishConfig": { "access": "public" },
   "sideEffects": ["*.css"],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
