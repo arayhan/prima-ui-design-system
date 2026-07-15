@@ -67,6 +67,8 @@ export { CodeSnippet } from './components/advanced/CodeSnippet';
 export type { CodeSnippetProps } from './components/advanced/CodeSnippet';
 export { RichText } from './components/advanced/RichText';
 export type { RichTextProps } from './components/advanced/RichText';
+export { RichTextEditor, stripHtmlToText } from './components/advanced/RichTextEditor';
+export type { RichTextEditorProps } from './components/advanced/RichTextEditor';
 export { LineChart, BarChart, Sparkline } from './components/advanced/Chart';
 export type { LineChartProps, BarChartProps, SparklineProps } from './components/advanced/Chart';
 export { AnalyticsCard } from './components/advanced/AnalyticsCard';

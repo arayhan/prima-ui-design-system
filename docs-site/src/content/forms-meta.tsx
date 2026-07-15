@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Button, ButtonGroup, Calendar, Checkbox, Combobox, DatePicker, Input,
-  MultiSelect, PasswordInput, RadioGroup, Textarea, useToast,
+  MultiSelect, PasswordInput, RadioGroup, RichTextEditor, Textarea, useToast,
 } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
@@ -100,6 +100,13 @@ function DatePickerDemo() {
       <DatePicker label="Launch date" value={date} onChange={setDate} helper="Opens the Calendar in a popover." />
     </div>
   );
+}
+
+function RichTextEditorDemo() {
+  const [html, setHtml] = React.useState(
+    '<h2>Release notes</h2><p>Shipping the <code>RichTextEditor</code> today — <strong>bold</strong>, <em>italic</em>, links, and more.</p><ul><li>Zero editor dependency</li><li>Built on execCommand</li></ul>',
+  );
+  return <RichTextEditor label="Post body" value={html} onChange={setHtml} helper="Formats to HTML — read it back with onChange." />;
 }
 
 interface FormState { name: string; email: string; message: string }
@@ -300,6 +307,26 @@ const [date, setDate] = useState<Date>();
       { name: 'label / helper / error', type: 'string', description: 'Prima field language.' },
     ],
     render: () => <DatePickerDemo />,
+  },
+  {
+    id: 'richtexteditor',
+    name: 'RichTextEditor',
+    description: 'A full WYSIWYG field — bold/italic/underline/strike, H2/H3, blockquote, inline code, lists, alignment, link/image/table insert, undo/redo, and a live word/char count. Built on execCommand — zero editor dependency.',
+    snippet: `import { RichTextEditor, stripHtmlToText } from 'prima-ui';
+
+const [html, setHtml] = useState('<p>Hello world</p>');
+
+<RichTextEditor label="Post body" value={html} onChange={setHtml} />
+stripHtmlToText(html); // "Hello world" — plain-text utility`,
+    props: [
+      { name: 'value / onChange', type: 'string / (html) => void', description: 'Controlled HTML content.' },
+      { name: 'defaultValue', type: 'string', description: 'Initial HTML (uncontrolled).' },
+      { name: 'placeholder', type: 'string', description: 'Shown when the editor is empty.' },
+      { name: 'minHeight', type: 'number', default: '220', description: 'Editable area height in px.' },
+      { name: 'label / helper / error', type: 'string', description: 'Prima field language.' },
+    ],
+    render: () => <RichTextEditorDemo />,
+    block: true,
   },
   {
     id: 'form-validation',
