@@ -10,12 +10,14 @@ import { BlocksPage } from './pages/BlocksPage';
 import { UsagePage } from './pages/UsagePage';
 import { ContactPage } from './pages/ContactPage';
 import { ScrollTrigger } from './motion/gsap';
+import { trackPageview } from './analytics/ga';
 
 /** Scroll to top + recalibrate ScrollTrigger whenever the route changes. */
 function RouteReset() {
   const { pathname } = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    trackPageview(pathname);
     const t = window.setTimeout(() => ScrollTrigger.refresh(), 80);
     return () => window.clearTimeout(t);
   }, [pathname]);

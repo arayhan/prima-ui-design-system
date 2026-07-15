@@ -3,6 +3,9 @@ dist/
 storybook-static/
 *.log
 .DS_Store
+.env
+.env.local
+!.env.example
 
 storybook-static/
 
