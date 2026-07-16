@@ -7,6 +7,14 @@ export interface ComboboxProps {
   helper?: string;
   error?: string;
   options: SelectOption[];
+  /**
+   * Async option loader. When provided, options are fetched from this
+   * function instead of filtered client-side: it's called once on mount
+   * with `''` to populate an initial list, then debounced (~300ms) on every
+   * query change. `options` is still used as the initial/fallback list
+   * shown while the first request is in flight.
+   */
+  loadOptions?: (query: string) => Promise<SelectOption[]>;
   /** Selected value (controlled) */
   value?: string;
   onChange?: (value: string) => void;
@@ -42,20 +50,59 @@ function ComboOption({ option, selected, highlighted, onSelect }: {
 /**
  * Prima combobox — a searchable single select. Type to filter the floating list,
  * pick with the pointer or ArrowUp/ArrowDown + Enter. Escape and outside click close.
+ *
+ * Pass `loadOptions` to fetch options asynchronously instead of filtering the
+ * static `options` list client-side — see `ComboboxProps.loadOptions`.
  */
-export function Combobox({ label, helper, error, options, value, onChange, placeholder = 'Search…', emptyText = 'No matches.', id, style, className }: ComboboxProps) {
+export function Combobox({ label, helper, error, options, loadOptions, value, onChange, placeholder = 'Search…', emptyText = 'No matches.', id, style, className }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
   const [focus, setFocus] = React.useState(false);
   const [highlight, setHighlight] = React.useState(0);
+  const [asyncOptions, setAsyncOptions] = React.useState<SelectOption[]>(options);
+  const [loading, setLoading] = React.useState(false);
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const requestRef = React.useRef(0);
+  const didInitialLoad = React.useRef(false);
   const inputId = id || (label ? 'cb-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
   const invalid = !!error;
 
-  const selectedOption = options.find((o) => o.value === value);
-  const filtered = query
-    ? options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()))
-    : options;
+  const runLoad = React.useCallback((q: string) => {
+    if (!loadOptions) return;
+    const reqId = ++requestRef.current;
+    setLoading(true);
+    loadOptions(q)
+      .then((result) => {
+        if (requestRef.current !== reqId) return; // stale response, ignore
+        setAsyncOptions(result);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (requestRef.current === reqId) setLoading(false);
+      });
+  }, [loadOptions]);
+
+  // On mount: load an initial page immediately. On later query changes: debounce.
+  React.useEffect(() => {
+    if (!loadOptions) return;
+    if (!didInitialLoad.current) {
+      didInitialLoad.current = true;
+      runLoad(query);
+      return;
+    }
+    const t = window.setTimeout(() => runLoad(query), 300);
+    return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, loadOptions, runLoad]);
+
+  const selectedOption =
+    (loadOptions ? asyncOptions : options).find((o) => o.value === value) ??
+    options.find((o) => o.value === value);
+  const filtered = loadOptions
+    ? asyncOptions
+    : query
+      ? options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()))
+      : options;
 
   React.useEffect(() => {
     if (!open) return;
@@ -108,18 +155,27 @@ export function Combobox({ label, helper, error, options, value, onChange, place
             background: 'var(--surface)', border: 'var(--border-width) solid var(--border)',
             borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-floating)',
           }}>
-            {filtered.length === 0 && (
+            {loading ? (
               <div style={{
                 padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
                 letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--text-secondary)',
-              } as React.CSSProperties}>{emptyText}</div>
+              } as React.CSSProperties}>Loading…</div>
+            ) : (
+              <>
+                {filtered.length === 0 && (
+                  <div style={{
+                    padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)',
+                    letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--text-secondary)',
+                  } as React.CSSProperties}>{emptyText}</div>
+                )}
+                {filtered.map((o, i) => (
+                  <ComboOption
+                    key={o.value} option={o} selected={o.value === value} highlighted={i === highlight}
+                    onSelect={() => pick(o.value)}
+                  />
+                ))}
+              </>
             )}
-            {filtered.map((o, i) => (
-              <ComboOption
-                key={o.value} option={o} selected={o.value === value} highlighted={i === highlight}
-                onSelect={() => pick(o.value)}
-              />
-            ))}
           </div>
         )}
       </div>
