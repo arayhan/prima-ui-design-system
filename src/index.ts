@@ -53,6 +53,8 @@ export { Carousel } from './components/advanced/Carousel';
 export type { CarouselProps } from './components/advanced/Carousel';
 export { DataTable } from './components/advanced/DataTable';
 export type { DataTableProps, DataTableColumn } from './components/advanced/DataTable';
+export { Pagination } from './components/advanced/Pagination';
+export type { PaginationProps } from './components/advanced/Pagination';
 export { Avatar } from './components/advanced/Avatar';
 export type { AvatarProps, AvatarStatus } from './components/advanced/Avatar';
 export { Thumbnail } from './components/advanced/Thumbnail';
