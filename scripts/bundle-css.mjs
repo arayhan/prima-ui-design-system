@@ -12,3 +12,17 @@ await esbuild.build({
 });
 
 console.log('bundled dist/styles.css (flattened token @imports)');
+
+// Tailwind v4 theme bridge — flatten its local ./styles.css import the same
+// way, but leave `@import "tailwindcss"` untouched: that's the consumer's
+// own Tailwind build resolving it, not ours. `external` keeps esbuild from
+// trying (and failing) to resolve the bare "tailwindcss" package specifier.
+await esbuild.build({
+  entryPoints: ['src/tailwind.css'],
+  bundle: true,
+  outfile: 'dist/tailwind.css',
+  external: ['tailwindcss'],
+  logLevel: 'info',
+});
+
+console.log('bundled dist/tailwind.css (flattened token @imports, tailwindcss import left external)');

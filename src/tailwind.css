@@ -1,0 +1,102 @@
+/* Prima — Tailwind v4 theme bridge.
+   Aliases Prima's existing CSS custom properties into Tailwind's @theme
+   namespaces, so utilities like `bg-primary`, `text-h1`, `font-display`,
+   `p-space-4`, and `rounded-md` read the exact same tokens Prima's React
+   components already use. Nothing here duplicates a raw value — every line
+   is `var(--*)` pointing back at the real token in tokens/*.css.
+
+   One import gets you everything: tokens, webfonts, the icon font, base
+   element resets, AND the Tailwind theme mapping.
+
+   Usage (consumer's global CSS):
+     @import "tailwindcss";
+     @import "prima-ui/tailwind.css";
+
+   Border widths and motion easing/duration are deliberately NOT themed here
+   — Tailwind v4 doesn't have a clean named namespace for either, so faking
+   one would be more confusing than useful. Reach for the raw token instead:
+     border-[length:var(--border-width)] duration-[var(--duration-fast)]
+     ease-[var(--ease-spatial)]
+*/
+@import "tailwindcss";
+@import "./styles.css";
+
+@theme {
+  /* — colors — */
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-on-inverse: var(--on-inverse);
+  --color-inverse-muted: var(--inverse-muted);
+  --color-inverse-border: var(--inverse-border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  /* — type families — */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* — type sizes, paired with Prima's own line-height/letter-spacing/weight
+     (Tailwind v4's --text-{name}--line-height / --letter-spacing / --font-weight) — */
+  --text-display: var(--text-display);
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-display--font-weight: var(--weight-semibold);
+
+  --text-h1: var(--text-h1);
+  --text-h1--line-height: var(--leading-h1);
+  --text-h1--letter-spacing: var(--tracking-heading);
+  --text-h1--font-weight: var(--weight-bold);
+
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--leading-h2);
+  --text-h2--letter-spacing: var(--tracking-heading);
+  --text-h2--font-weight: var(--weight-semibold);
+
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--leading-h3);
+  --text-h3--font-weight: var(--weight-semibold);
+
+  --text-body-lg: var(--text-body-lg);
+  --text-body-lg--line-height: var(--leading-body-lg);
+  --text-body-lg--font-weight: var(--weight-medium);
+
+  --text-body: var(--text-body);
+  --text-body--line-height: var(--leading-body);
+
+  --text-label: var(--text-label);
+  --text-label--line-height: var(--leading-label);
+  --text-label--letter-spacing: var(--tracking-label);
+  --text-label--font-weight: var(--weight-medium);
+
+  --text-code: var(--text-code);
+  --text-code--line-height: var(--leading-code);
+
+  /* — spacing, namespaced under "space-*" so it can't collide with
+     Tailwind's own numeric scale (p-4 stays stock Tailwind; p-space-4 is Prima's) — */
+  --spacing-space-1: var(--space-1);
+  --spacing-space-2: var(--space-2);
+  --spacing-space-3: var(--space-3);
+  --spacing-space-4: var(--space-4);
+  --spacing-space-5: var(--space-5);
+  --spacing-space-6: var(--space-6);
+  --spacing-space-7: var(--space-7);
+  --spacing-space-8: var(--space-8);
+  --spacing-space-9: var(--space-9);
+
+  /* — radii — overrides Tailwind's defaults with Prima's exact scale — */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+}
