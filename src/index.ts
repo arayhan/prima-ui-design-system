@@ -103,6 +103,8 @@ export { LineChart, BarChart, Sparkline } from './components/advanced/Chart';
 export type { LineChartProps, BarChartProps, SparklineProps } from './components/advanced/Chart';
 export { AnalyticsCard } from './components/advanced/AnalyticsCard';
 export type { AnalyticsCardProps } from './components/advanced/AnalyticsCard';
+export { Dropzone } from './components/advanced/Dropzone';
+export type { DropzoneProps, DropzoneFile } from './components/advanced/Dropzone';
 
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
