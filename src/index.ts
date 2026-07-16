@@ -116,6 +116,8 @@ export { ScrollProgress } from './components/blocks/ScrollProgress';
 export type { ScrollProgressProps } from './components/blocks/ScrollProgress';
 export { Navbar } from './components/blocks/Navbar';
 export type { NavbarProps, NavLink, NavbarAction } from './components/blocks/Navbar';
+export { MegaMenu } from './components/blocks/MegaMenu';
+export type { MegaMenuProps, MegaMenuItem, MegaMenuColumn, MegaMenuLink, MegaMenuAction } from './components/blocks/MegaMenu';
 export { Testimonials } from './components/blocks/Testimonials';
 export type { TestimonialsProps, Testimonial } from './components/blocks/Testimonials';
 export { FAQSection } from './components/blocks/FAQSection';
