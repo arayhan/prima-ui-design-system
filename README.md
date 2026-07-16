@@ -45,13 +45,36 @@ Import `styles.css` once at your app root — it `@import`s all design tokens pl
 (**Clash Display** from Fontshare, **Inter** + **JetBrains Mono** from Google Fonts) and the
 **Phosphor** icon font, all from CDN.
 
+## Tailwind (optional)
+
+Prefer Tailwind utilities? Swap the plain-CSS import for one line:
+
+```css
+@import "tailwindcss";
+@import "@arayhan/prima-ui/tailwind.css";
+```
+
+`tailwind.css` is a Tailwind v4 `@theme` bridge — it aliases Prima's existing tokens into
+Tailwind's namespaces (nothing is duplicated), so utilities like `bg-primary`, `text-h1`,
+`font-display`, and `rounded-md` read the exact same values the components already use. Spacing
+is namespaced under `p-space-4`, `gap-space-6`, etc., so it can't collide with Tailwind's own
+numeric scale. Every component also takes a `className` prop, so you can layer Tailwind (or any)
+utility classes onto it directly — see [Components](#components-exported-api) below for the
+caveat on what `className` can and can't override.
+
 ## Components (exported API)
 
 Fifty-nine components — eleven core atoms, twenty-eight advanced controls, and twenty composed
 blocks (eleven page sections + nine micro-interaction primitives) — each a React function
 component styled with inline `style={{}}` objects that read `var(--*)` tokens — **no CSS
-classes, no CSS-in-JS**. All heading/label styling comes from tokens; the only real class names
-are Phosphor's `ph ph-*` icon classes.
+classes, no CSS-in-JS** internally. Every component also accepts an optional `className`, applied
+to its outermost element, for layering Tailwind or your own utility classes on top. Because the
+component's own styling is inline, `className` wins for properties the component *doesn't* already
+set (margin, width, grid placement, animations); properties it *does* set (color, padding,
+background — anything token-driven) are still controlled by `style`/props, since inline styles
+beat classes on specificity. The only hardcoded class names are Phosphor's `ph ph-*` icon classes
+and a handful of internal ones (e.g. `prima-prose`, `prima-rte-content`) that stay untouched by
+`className`.
 
 | Component | Purpose |
 |---|---|
@@ -159,6 +182,7 @@ src/
   components/blocks/   11 composed blocks + 9 micro-interaction primitives
   tokens/            colors, typography, fonts, spacing/radii/borders/motion, base, icons (.css)
   styles.css         @imports all tokens
+  tailwind.css       Tailwind v4 @theme bridge — aliases tokens into Tailwind utilities
   index.ts           public API barrel
 stories/             *.stories.tsx
 docs-site/           documentation website (Vite + React + GSAP + three.js — including an
