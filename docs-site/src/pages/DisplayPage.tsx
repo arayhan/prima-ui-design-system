@@ -4,36 +4,38 @@ import { Section } from '../components/Section';
 import { Specimen } from '../components/Specimen';
 import { DocLayout } from '../components/DocLayout';
 import { CategoryNav } from '../components/CategoryNav';
-import { BLOCKS } from '../content/blocks-meta';
+import { DISPLAY } from '../content/display-meta';
 import { useScrollReveal } from '../motion/hooks';
 
 const CATEGORY_ITEMS = [
-  { label: 'Sections', to: '/blocks' },
-  { label: 'Interactions', to: '/blocks/interactions' },
+  { label: 'Core', to: '/components/core' },
+  { label: 'Forms', to: '/components/forms' },
+  { label: 'Overlays', to: '/components/overlays' },
+  { label: 'Display', to: '/components/display' },
 ];
 
-const GROUPS = [{ title: 'BLOCKS', items: BLOCKS.map((b) => ({ id: b.id, label: b.name })) }];
+const GROUPS = [{ title: 'DISPLAY', items: DISPLAY.map((c) => ({ id: c.id, label: c.name })) }];
 
-export function BlocksPage() {
+export function DisplayPage() {
   const ref = React.useRef<HTMLDivElement>(null);
   useScrollReveal(ref as React.RefObject<HTMLElement>);
 
   return (
     <div ref={ref}>
       <PageHeader
-        eyebrow="BLOCKS" number="003"
-        title={'COMPOSED\nSECTIONS'}
-        lede="Blocks assemble the core components into page-ready sections — hero, features, stats, blog, contact, footer."
+        eyebrow="COMPONENTS" number="002.4"
+        title={'DISPLAY\n& DATA'}
+        lede="Content and data presentation — avatars, media, chat, accordions, carousels, tables, charts, prose, and the empty/error states."
       />
-      <Section id="blocks-list">
+      <Section id="display-list">
         <div data-reveal style={{ marginBottom: 'var(--space-7)' }}>
           <CategoryNav items={CATEGORY_ITEMS} />
         </div>
         <DocLayout groups={GROUPS}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
-            {BLOCKS.map((b) => (
-              <Specimen key={b.id} id={b.id} name={b.name} description={b.description} snippet={b.snippet} props={b.props} block>
-                {b.render()}
+            {DISPLAY.map((c) => (
+              <Specimen key={c.id} id={c.id} name={c.name} description={c.description} snippet={c.snippet} props={c.props} block={c.block}>
+                {c.render()}
               </Specimen>
             ))}
           </div>

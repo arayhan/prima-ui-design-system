@@ -56,7 +56,7 @@ export function Nav() {
   );
 
   const links = LINKS.map((l) => (
-    <NavLink key={l.to} {...l} active={pathname === l.to} onNavigate={() => setOpen(false)} />
+    <NavLink key={l.to} {...l} active={pathname === l.to || pathname.startsWith(`${l.to}/`)} onNavigate={() => setOpen(false)} />
   ));
 
   return (

@@ -1,12 +1,16 @@
 import React from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Footer, ToastProvider } from 'prima-ui';
 import { Nav } from './components/Nav';
 import { Container } from './components/Section';
 import { HomePage } from './pages/HomePage';
 import { FoundationsPage } from './pages/FoundationsPage';
-import { ComponentsPage } from './pages/ComponentsPage';
+import { CorePage } from './pages/CorePage';
+import { FormsPage } from './pages/FormsPage';
+import { OverlaysPage } from './pages/OverlaysPage';
+import { DisplayPage } from './pages/DisplayPage';
 import { BlocksPage } from './pages/BlocksPage';
+import { InteractionsPage } from './pages/InteractionsPage';
 import { UsagePage } from './pages/UsagePage';
 import { ContactPage } from './pages/ContactPage';
 import { ScrollTrigger } from './motion/gsap';
@@ -46,8 +50,13 @@ export function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/foundations" element={<FoundationsPage />} />
-            <Route path="/components" element={<ComponentsPage />} />
+            <Route path="/components" element={<Navigate to="/components/core" replace />} />
+            <Route path="/components/core" element={<CorePage />} />
+            <Route path="/components/forms" element={<FormsPage />} />
+            <Route path="/components/overlays" element={<OverlaysPage />} />
+            <Route path="/components/display" element={<DisplayPage />} />
             <Route path="/blocks" element={<BlocksPage />} />
+            <Route path="/blocks/interactions" element={<InteractionsPage />} />
             <Route path="/usage" element={<UsagePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<HomePage />} />
