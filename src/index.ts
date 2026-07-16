@@ -33,6 +33,8 @@ export { HoverCard } from './components/advanced/HoverCard';
 export type { HoverCardProps } from './components/advanced/HoverCard';
 export { MenuBar } from './components/advanced/MenuBar';
 export type { MenuBarProps, MenuBarMenu, MenuBarItem } from './components/advanced/MenuBar';
+export { Popover } from './components/advanced/Popover';
+export type { PopoverProps } from './components/advanced/Popover';
 export { MultiSelect } from './components/advanced/MultiSelect';
 export type { MultiSelectProps } from './components/advanced/MultiSelect';
 export { Checkbox } from './components/advanced/Checkbox';
