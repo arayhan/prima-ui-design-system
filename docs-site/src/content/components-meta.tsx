@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Button, Card, Chip, Input, Textarea, Select, Switch,
   SectionHeader, TimelineItem, Marquee, SocialLinks,
+  Progress, Slider, Tabs, Toggle, ToggleGroup,
 } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
@@ -42,6 +43,48 @@ function SelectDemo() {
       ]}
       style={{ minWidth: 260 }}
     />
+  );
+}
+
+function SliderDemo() {
+  const [volume, setVolume] = React.useState(60);
+  return <Slider value={volume} onChange={setVolume} label="Volume" style={{ minWidth: 280 }} />;
+}
+
+function ToggleDemo() {
+  const [bold, setBold] = React.useState(true);
+  const [italic, setItalic] = React.useState(false);
+  return (
+    <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+      <Toggle pressed={bold} onPressedChange={setBold}><i className="ph ph-text-b" aria-hidden="true" /></Toggle>
+      <Toggle pressed={italic} onPressedChange={setItalic}><i className="ph ph-text-italic" aria-hidden="true" /></Toggle>
+      <Toggle pressed={false} onPressedChange={() => {}} disabled>Locked</Toggle>
+    </div>
+  );
+}
+
+function ToggleGroupDemo() {
+  const [align, setAlign] = React.useState('left');
+  const [format, setFormat] = React.useState<string[]>(['bold']);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
+      <ToggleGroup
+        value={align} onChange={setAlign}
+        options={[
+          { value: 'left', label: 'Left', icon: 'ph ph-text-align-left' },
+          { value: 'center', label: 'Center', icon: 'ph ph-text-align-center' },
+          { value: 'right', label: 'Right', icon: 'ph ph-text-align-right' },
+        ]}
+      />
+      <ToggleGroup
+        type="multiple" value={format} onChange={setFormat}
+        options={[
+          { value: 'bold', label: 'Bold', icon: 'ph ph-text-b' },
+          { value: 'italic', label: 'Italic', icon: 'ph ph-text-italic' },
+          { value: 'underline', label: 'Underline', icon: 'ph ph-text-underline' },
+        ]}
+      />
+    </div>
   );
 }
 
@@ -286,5 +329,140 @@ export const COMPONENTS: ComponentMeta[] = [
       { name: 'size', type: 'number', default: '44', description: 'Square size in px.' },
     ],
     render: () => <SocialLinks />,
+  },
+  {
+    id: 'progress',
+    name: 'Progress',
+    description: 'A cobalt-filled track, 8px tall by default, with an optional mono label and a right-aligned percentage above it.',
+    snippet: `import { Progress } from 'prima-ui';
+
+<Progress value={68} label="Uploading" />
+<Progress value={42} showPercentage={false} />`,
+    props: [
+      { name: 'value', type: 'number', description: 'Percentage filled — clamped to 0–100.' },
+      { name: 'label', type: 'string', description: 'Mono label shown above the bar.' },
+      { name: 'showPercentage', type: 'boolean', default: 'true', description: 'Shows the rounded "N%" value next to the label.' },
+      { name: 'height', type: 'number', default: '8', description: 'Bar height in pixels.' },
+    ],
+    render: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', minWidth: 280 }}>
+        <Progress value={68} label="Uploading" />
+        <Progress value={42} showPercentage={false} />
+      </div>
+    ),
+  },
+  {
+    id: 'slider',
+    name: 'Slider',
+    description: 'A native range input under a 6px cobalt-filled track and an 18px ink-ringed thumb that lifts with a floating shadow while dragging.',
+    snippet: `import { Slider } from 'prima-ui';
+
+<Slider value={volume} onChange={setVolume} label="Volume" />`,
+    props: [
+      { name: 'value', type: 'number', description: 'Current value (controlled).' },
+      { name: 'onChange', type: '(value: number) => void', description: 'Fires on drag, keyboard, or click.' },
+      { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+      { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+      { name: 'step', type: 'number', default: '1', description: 'Increment step.' },
+      { name: 'label', type: 'string', description: 'Mono label above the track.' },
+      { name: 'showValue', type: 'boolean', default: 'true', description: 'Shows the current value next to the label.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Dims the track and blocks interaction.' },
+    ],
+    render: () => <SliderDemo />,
+  },
+  {
+    id: 'tabs',
+    name: 'Tabs',
+    description: 'A mono-caps tab list with a 2px cobalt underline on the active tab, rendering a single panel below.',
+    snippet: `import { Tabs } from 'prima-ui';
+
+<Tabs
+  defaultValue="overview"
+  items={[
+    { value: 'overview', label: 'Overview', content: <p>...</p> },
+    { value: 'activity', label: 'Activity', content: <p>...</p> },
+  ]}
+/>`,
+    props: [
+      { name: 'items', type: 'TabItem[]', description: '{ value, label, icon?, content, disabled? } tab definitions.' },
+      { name: 'value / onChange', type: 'string / (value) => void', description: 'Controlled active tab.' },
+      { name: 'defaultValue', type: 'string', description: 'Uncontrolled initial tab — defaults to the first item.' },
+    ],
+    block: true,
+    render: () => (
+      <Tabs
+        defaultValue="overview"
+        style={{ width: '100%' }}
+        items={[
+          {
+            value: 'overview', label: 'Overview', content: (
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)', lineHeight: 'var(--leading-body)', margin: 0 }}>
+                A quick summary of the project — status, owner, and the last update.
+              </p>
+            ),
+          },
+          {
+            value: 'activity', label: 'Activity', content: (
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)', lineHeight: 'var(--leading-body)', margin: 0 }}>
+                A running log of recent changes and comments.
+              </p>
+            ),
+          },
+          {
+            value: 'settings', label: 'Settings', content: (
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)', lineHeight: 'var(--leading-body)', margin: 0 }}>
+                Permissions, notifications, and danger-zone actions.
+              </p>
+            ),
+          },
+        ]}
+      />
+    ),
+  },
+  {
+    id: 'toggle',
+    name: 'Toggle',
+    description: 'A single pressable button that fills cobalt and stays "on" once pressed — the toolbar bold/italic pattern, distinct from the Switch settings pill.',
+    snippet: `import { Toggle } from 'prima-ui';
+
+<Toggle pressed={bold} onPressedChange={setBold}>
+  <i className="ph ph-text-b" />
+</Toggle>`,
+    props: [
+      { name: 'pressed', type: 'boolean', description: 'On/off state.' },
+      { name: 'onPressedChange', type: '(pressed: boolean) => void', description: 'Toggle handler.' },
+      { name: 'children', type: 'ReactNode', description: 'Label and/or icon content.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Dims to 40% and blocks toggling.' },
+    ],
+    render: () => <ToggleDemo />,
+  },
+  {
+    id: 'togglegroup',
+    name: 'ToggleGroup',
+    description: 'ButtonGroup\'s joined-segment language repurposed for toggling — type="single" keeps exactly one segment active, type="multiple" lets any number stay pressed.',
+    snippet: `import { ToggleGroup } from 'prima-ui';
+
+<ToggleGroup
+  value={align} onChange={setAlign}
+  options={[
+    { value: 'left', label: 'Left', icon: 'ph ph-text-align-left' },
+    { value: 'center', label: 'Center', icon: 'ph ph-text-align-center' },
+  ]}
+/>
+
+<ToggleGroup
+  type="multiple" value={format} onChange={setFormat}
+  options={[
+    { value: 'bold', label: 'Bold', icon: 'ph ph-text-b' },
+    { value: 'italic', label: 'Italic', icon: 'ph ph-text-italic' },
+  ]}
+/>`,
+    props: [
+      { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Selection mode — one active segment, or any number independently toggled.' },
+      { name: 'value', type: 'string | string[]', description: 'Controlled selection — a string in single mode, an array in multiple mode.' },
+      { name: 'onChange', type: '(value) => void', description: 'Change handler — receives the new string or string[].' },
+      { name: 'options', type: 'ToggleGroupOption[]', description: '{ value, label, icon? } segments.' },
+    ],
+    render: () => <ToggleGroupDemo />,
   },
 ];
