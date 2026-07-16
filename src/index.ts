@@ -27,6 +27,8 @@ export { ToastProvider, useToast } from './components/advanced/Toast';
 export type { ToastOptions } from './components/advanced/Toast';
 export { Dropdown } from './components/advanced/Dropdown';
 export type { DropdownProps, DropdownItem } from './components/advanced/Dropdown';
+export { ContextMenu } from './components/advanced/ContextMenu';
+export type { ContextMenuProps, ContextMenuItem } from './components/advanced/ContextMenu';
 export { MultiSelect } from './components/advanced/MultiSelect';
 export type { MultiSelectProps } from './components/advanced/MultiSelect';
 export { Checkbox } from './components/advanced/Checkbox';
