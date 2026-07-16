@@ -83,6 +83,8 @@ export { Avatar } from './components/advanced/Avatar';
 export type { AvatarProps, AvatarStatus } from './components/advanced/Avatar';
 export { AvatarStack } from './components/advanced/AvatarStack';
 export type { AvatarStackProps, AvatarStackItem } from './components/advanced/AvatarStack';
+export { ColorPicker } from './components/advanced/ColorPicker';
+export type { ColorPickerProps } from './components/advanced/ColorPicker';
 export { Thumbnail } from './components/advanced/Thumbnail';
 export type { ThumbnailProps } from './components/advanced/Thumbnail';
 export { Bubble } from './components/advanced/Bubble';
