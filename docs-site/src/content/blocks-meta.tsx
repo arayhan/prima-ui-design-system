@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Hero, FeatureGrid, StatStrip, CTASection, Footer, BlogList,
-  Navbar, Testimonials, FAQSection, PricingTable, BlogDetail,
+  Navbar, MegaMenu, Testimonials, FAQSection, PricingTable, BlogDetail,
 } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 import { IsometricFallback } from '../three/IsometricFallback';
@@ -55,6 +55,64 @@ export const BLOCKS: BlockMeta[] = [
         links={[
           { label: 'Foundations', href: '#foundations' },
           { label: 'Components', href: '#components' },
+          { label: 'Blocks', href: '#blocks' },
+        ]}
+        action={{ label: 'Get started' }}
+      />
+    ),
+  },
+  {
+    id: 'block-megamenu',
+    name: 'MegaMenu',
+    description: 'A nav bar where top-level items can open a full-width panel of grouped, described links instead of navigating directly — Navbar\'s bigger sibling for larger site maps.',
+    snippet: `import { MegaMenu } from 'prima-ui';
+
+<MegaMenu
+  logo="PRIMA UI"
+  items={[
+    {
+      label: 'Components',
+      columns: [
+        { title: 'CORE', links: [
+          { label: 'Button', href: '#components', description: 'Primary, ghost, and link variants.' },
+          { label: 'Card', href: '#components', description: 'Bordered surface with optional hover lift.' },
+        ] },
+        { title: 'ADVANCED', links: [
+          { label: 'Dropzone', href: '#components', description: 'Drag-and-drop file upload.' },
+          { label: 'VideoPlayer', href: '#components', description: 'Custom-chrome video playback.' },
+        ] },
+      ],
+    },
+    { label: 'Blocks', href: '#blocks' },
+  ]}
+  action={{ label: 'Get started', href: '#usage' }}
+/>`,
+    props: [
+      { name: 'logo', type: 'string', default: "'PRIMA UI'", description: 'Wordmark, rendered in Clash Display.' },
+      { name: 'logoHref', type: 'string', description: 'Wordmark link target.' },
+      { name: 'items', type: 'MegaMenuItem[]', description: '{ label, href?, onClick?, columns? } — items with `columns` open a full-width panel of MegaMenuColumn groups ({ title?, links: MegaMenuLink[] }) instead of navigating; each MegaMenuLink is { label, href?, onClick?, description? }.' },
+      { name: 'action', type: 'MegaMenuAction', description: '{ label, href?, onClick? } — cobalt CTA.' },
+    ],
+    render: () => (
+      <MegaMenu
+        logo="PRIMA UI"
+        items={[
+          { label: 'Foundations', href: '#foundations' },
+          {
+            label: 'Components',
+            columns: [
+              { title: 'CORE', links: [
+                { label: 'Button', href: '#components', description: 'Primary, ghost, and link variants.' },
+                { label: 'Card', href: '#components', description: 'Bordered surface with optional hover lift.' },
+                { label: 'Input', href: '#components', description: 'Text field with label and error state.' },
+              ] },
+              { title: 'ADVANCED', links: [
+                { label: 'Dropzone', href: '#components', description: 'Drag-and-drop file upload.' },
+                { label: 'ImageCropper', href: '#components', description: 'Crop and export images inline.' },
+                { label: 'VideoPlayer', href: '#components', description: 'Custom-chrome video playback.' },
+              ] },
+            ],
+          },
           { label: 'Blocks', href: '#blocks' },
         ]}
         action={{ label: 'Get started' }}
