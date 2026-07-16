@@ -107,6 +107,8 @@ export { Dropzone } from './components/advanced/Dropzone';
 export type { DropzoneProps, DropzoneFile } from './components/advanced/Dropzone';
 export { ImageCropper } from './components/advanced/ImageCropper';
 export type { ImageCropperProps, CropRect } from './components/advanced/ImageCropper';
+export { ImageZoom } from './components/advanced/ImageZoom';
+export type { ImageZoomProps } from './components/advanced/ImageZoom';
 
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
