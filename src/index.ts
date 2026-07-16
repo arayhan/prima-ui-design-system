@@ -33,6 +33,8 @@ export type { SocialLinksProps, SocialLink, SocialName } from './components/core
 
 export { Alert } from './components/advanced/Alert';
 export type { AlertProps, AlertVariant } from './components/advanced/Alert';
+export { VideoPlayer } from './components/advanced/VideoPlayer';
+export type { VideoPlayerProps } from './components/advanced/VideoPlayer';
 export { ToastProvider, useToast } from './components/advanced/Toast';
 export type { ToastOptions } from './components/advanced/Toast';
 export { Dropdown } from './components/advanced/Dropdown';
