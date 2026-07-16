@@ -1,5 +1,8 @@
 import React from 'react';
-import { Button, Dialog, Drawer, Dropdown, Input, useToast } from 'prima-ui';
+import {
+  Button, ContextMenu, Dialog, DialogForm, Drawer, Dropdown, HoverCard, Input, MenuBar, Popover,
+  Tooltip, useToast,
+} from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function ToastDemo() {
@@ -52,6 +55,122 @@ function DrawerDemo() {
           <Input label="Domain" placeholder="arayhan.com" />
         </div>
       </Drawer>
+    </>
+  );
+}
+
+function TooltipDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
+      <Tooltip content="Saves your changes">
+        <Button variant="secondary">Hover me</Button>
+      </Tooltip>
+    </div>
+  );
+}
+
+function ContextMenuDemo() {
+  const { toast } = useToast();
+  return (
+    <ContextMenu
+      items={[
+        { label: 'Rename', icon: 'ph ph-pencil-simple', onSelect: () => toast({ title: 'Renamed', variant: 'success' }) },
+        { label: 'Duplicate', icon: 'ph ph-copy', onSelect: () => toast({ title: 'Duplicated', variant: 'success' }) },
+        { label: 'Share', icon: 'ph ph-share-network' },
+        { label: 'Delete', icon: 'ph ph-trash', danger: true, onSelect: () => toast({ title: 'Deleted', variant: 'error' }) },
+      ]}
+    >
+      <div
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: 280, height: 120, border: 'var(--border-width) dashed var(--border)',
+          borderRadius: 'var(--radius-md)', color: 'var(--on-surface-muted)',
+          fontFamily: 'var(--font-body)', fontSize: 14, userSelect: 'none',
+        }}
+      >
+        Right-click for options
+      </div>
+    </ContextMenu>
+  );
+}
+
+function PopoverDemo() {
+  return (
+    <Popover trigger={<Button variant="secondary">Open popover</Button>}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', width: 220 }}>
+        <Input label="Quick rename" placeholder="New name" />
+        <Button>Save</Button>
+      </div>
+    </Popover>
+  );
+}
+
+function HoverCardDemo() {
+  return (
+    <HoverCard
+      trigger={
+        <a href="#" onClick={(e) => e.preventDefault()} style={{ color: 'var(--primary)', fontFamily: 'var(--font-body)', fontWeight: 600 }}>
+          @arayhan
+        </a>
+      }
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', width: 220 }}>
+        <strong style={{ fontFamily: 'var(--font-display)' }}>Rayhan</strong>
+        <span style={{ fontSize: 13, color: 'var(--on-surface-muted)' }}>Building Prima, a design system for fast-moving teams.</span>
+      </div>
+    </HoverCard>
+  );
+}
+
+function MenuBarDemo() {
+  const { toast } = useToast();
+  return (
+    <MenuBar
+      menus={[
+        {
+          label: 'File',
+          items: [
+            { label: 'New', icon: 'ph ph-file-plus', onSelect: () => toast({ title: 'New file' }) },
+            { label: 'Open', icon: 'ph ph-folder-open' },
+            { label: 'Save', icon: 'ph ph-floppy-disk' },
+          ],
+        },
+        {
+          label: 'Edit',
+          items: [
+            { label: 'Cut', icon: 'ph ph-scissors' },
+            { label: 'Copy', icon: 'ph ph-copy' },
+            { label: 'Paste', icon: 'ph ph-clipboard' },
+            { label: 'Delete', icon: 'ph ph-trash', danger: true },
+          ],
+        },
+      ]}
+    />
+  );
+}
+
+function DialogFormDemo() {
+  const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const { toast } = useToast();
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>New project</Button>
+      <DialogForm
+        open={open} onClose={() => setOpen(false)}
+        eyebrow="CREATE" title="New project"
+        submitLabel="Create"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setOpen(false);
+          toast({ title: 'Project created', description: name || 'Untitled', variant: 'success' });
+        }}
+      >
+        <Input label="Project name" placeholder="Prima" value={name} onChange={(e) => setName(e.target.value)} />
+        <Input label="Description" placeholder="What are you building?" value={description} onChange={(e) => setDescription(e.target.value)} />
+      </DialogForm>
     </>
   );
 }
@@ -159,5 +278,131 @@ const { toast } = useToast();
       { name: 'options.duration', type: 'number', default: '4000', description: 'Auto-dismiss delay in ms.' },
     ],
     render: () => <ToastDemo />,
+  },
+  {
+    id: 'tooltip',
+    name: 'Tooltip',
+    description: 'A short plain-text hint on hover or focus. Distinct from HoverCard — shorter delay, simpler positioning, and role="tooltip" since content is a single label, not a rich panel.',
+    snippet: `import { Tooltip, Button } from 'prima-ui';
+
+<Tooltip content="Saves your changes">
+  <Button variant="secondary">Hover me</Button>
+</Tooltip>`,
+    props: [
+      { name: 'content', type: 'string', description: 'Short plain-text hint.' },
+      { name: 'children', type: 'ReactElement', description: 'The single element that triggers the tooltip.' },
+      { name: 'side', type: "'top' | 'bottom' | 'left' | 'right'", default: "'top'", description: 'Which side the tooltip opens on.' },
+      { name: 'delay', type: 'number', default: '200', description: 'Delay before showing, in ms.' },
+    ],
+    render: () => <TooltipDemo />,
+  },
+  {
+    id: 'context-menu',
+    name: 'ContextMenu',
+    description: 'Right-click anywhere inside the wrapped content to open a menu at the cursor. Closes on selection, outside click, and Escape; danger items render in the error color.',
+    snippet: `import { ContextMenu } from 'prima-ui';
+
+<ContextMenu
+  items={[
+    { label: 'Rename', icon: 'ph ph-pencil-simple', onSelect: rename },
+    { label: 'Duplicate', icon: 'ph ph-copy', onSelect: duplicate },
+    { label: 'Delete', icon: 'ph ph-trash', danger: true, onSelect: remove },
+  ]}
+>
+  <div>Right-click for options</div>
+</ContextMenu>`,
+    props: [
+      { name: 'children', type: 'ReactNode', description: 'The content that reveals the menu on right-click.' },
+      { name: 'items', type: 'ContextMenuItem[]', description: '{ label, icon?, onSelect?, danger? }.' },
+    ],
+    render: () => <ContextMenuDemo />,
+  },
+  {
+    id: 'popover',
+    name: 'Popover',
+    description: 'A generic floating content panel anchored to a trigger. Unlike Dropdown (a fixed list of menu items), Popover content is arbitrary — forms, previews, anything. Closes on Escape and outside click.',
+    snippet: `import { Popover, Button, Input } from 'prima-ui';
+
+<Popover trigger={<Button variant="secondary">Open popover</Button>}>
+  <Input label="Quick rename" placeholder="New name" />
+</Popover>`,
+    props: [
+      { name: 'trigger', type: 'ReactNode', description: 'The element that opens the popover on click.' },
+      { name: 'children', type: 'ReactNode', description: 'Arbitrary floating content.' },
+      { name: 'side', type: "'top' | 'bottom' | 'left' | 'right'", default: "'bottom'", description: 'Which side the panel opens on.' },
+      { name: 'align', type: "'start' | 'end'", default: "'start'", description: 'Edge alignment along the trigger (top/bottom sides only).' },
+    ],
+    render: () => <PopoverDemo />,
+  },
+  {
+    id: 'hover-card',
+    name: 'HoverCard',
+    description: 'Hovering or focusing the trigger reveals a floating preview after a short delay; leaving both the trigger and the card closes it after a shorter delay, so crossing the gap between them doesn\'t flicker.',
+    snippet: `import { HoverCard } from 'prima-ui';
+
+<HoverCard trigger={<a href="/u/arayhan">@arayhan</a>}>
+  <div>
+    <strong>Rayhan</strong>
+    <p>Building Prima, a design system for fast-moving teams.</p>
+  </div>
+</HoverCard>`,
+    props: [
+      { name: 'trigger', type: 'ReactNode', description: 'The element that triggers the card on hover/focus.' },
+      { name: 'children', type: 'ReactNode', description: 'Floating preview content.' },
+      { name: 'openDelay', type: 'number', default: '400', description: 'Delay before opening, in ms.' },
+      { name: 'closeDelay', type: 'number', default: '150', description: 'Delay before closing after the pointer leaves, in ms.' },
+      { name: 'side', type: "'top' | 'bottom'", default: "'bottom'", description: 'Which side the panel opens on.' },
+    ],
+    render: () => <HoverCardDemo />,
+  },
+  {
+    id: 'menu-bar',
+    name: 'MenuBar',
+    description: 'A row of top-level triggers, each opening a dropdown of items — like a native app menu bar. Only one menu is open at a time; hovering a sibling trigger switches to it. Arrow keys move between triggers and items.',
+    snippet: `import { MenuBar } from 'prima-ui';
+
+<MenuBar
+  menus={[
+    { label: 'File', items: [
+      { label: 'New', icon: 'ph ph-file-plus', onSelect: newFile },
+      { label: 'Open', icon: 'ph ph-folder-open' },
+      { label: 'Save', icon: 'ph ph-floppy-disk' },
+    ] },
+    { label: 'Edit', items: [
+      { label: 'Cut', icon: 'ph ph-scissors' },
+      { label: 'Copy', icon: 'ph ph-copy' },
+      { label: 'Paste', icon: 'ph ph-clipboard' },
+    ] },
+  ]}
+/>`,
+    props: [
+      { name: 'menus', type: 'MenuBarMenu[]', description: '{ label, items: MenuBarItem[] }[] — top-level menus in order.' },
+    ],
+    render: () => <MenuBarDemo />,
+  },
+  {
+    id: 'dialog-form',
+    name: 'DialogForm',
+    description: 'Dialog wired for form submission — a <form> around the body, with a cancel/submit Button pair in the footer. Submit uses the HTML form attribute so it can live outside the <form> element itself.',
+    snippet: `import { DialogForm, Input } from 'prima-ui';
+
+<DialogForm
+  open={open} onClose={close}
+  eyebrow="CREATE" title="New project"
+  submitLabel="Create"
+  onSubmit={(e) => { e.preventDefault(); createProject(); }}
+>
+  <Input label="Project name" placeholder="Prima" />
+  <Input label="Description" placeholder="What are you building?" />
+</DialogForm>`,
+    props: [
+      { name: 'open / onClose', type: 'boolean / () => void', description: 'Controlled visibility.' },
+      { name: 'onSubmit', type: '(e: FormEvent<HTMLFormElement>) => void', description: 'Form submit handler.' },
+      { name: 'title / eyebrow', type: 'string', description: 'Header text.' },
+      { name: 'submitLabel / cancelLabel', type: 'string', default: "'Save' / 'Cancel'", description: 'Footer button labels.' },
+      { name: 'loading', type: 'boolean', default: 'false', description: 'Disables both actions and shows a saving state on submit.' },
+      { name: 'width', type: 'number', default: '480', description: 'Max panel width in px.' },
+    ],
+    render: () => <DialogFormDemo />,
   },
 ];
