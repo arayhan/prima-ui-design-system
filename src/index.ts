@@ -49,6 +49,8 @@ export { Accordion } from './components/advanced/Accordion';
 export type { AccordionProps, AccordionItem } from './components/advanced/Accordion';
 export { Dialog } from './components/advanced/Dialog';
 export type { DialogProps } from './components/advanced/Dialog';
+export { DialogForm } from './components/advanced/DialogForm';
+export type { DialogFormProps } from './components/advanced/DialogForm';
 export { Drawer } from './components/advanced/Drawer';
 export type { DrawerProps } from './components/advanced/Drawer';
 export { Carousel } from './components/advanced/Carousel';
