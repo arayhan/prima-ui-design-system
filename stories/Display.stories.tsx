@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import {
-  Accordion, AnalyticsCard, Avatar, BarChart, Bubble, Carousel, Chip, CodeSnippet,
-  DataTable, EmptyState, ErrorState, LineChart, RichText, Thumbnail,
+  Accordion, AnalyticsCard, Avatar, AvatarStack, Bubble, BarChart, Carousel, Chip, CodeSnippet,
+  DataTable, EmptyState, ErrorState, ImageCropper, ImageZoom, LineChart, Pagination,
+  RichText, Thumbnail, VideoPlayer,
 } from '../src/index';
 
 const meta: Meta = { title: 'Advanced/Display' };
@@ -9,6 +11,14 @@ export default meta;
 
 const IMG = (seed: string) =>
   `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#F8FBFD"/><circle cx="${100 + (seed.charCodeAt(0) % 200)}" cy="150" r="40" fill="#1B44F0"/></svg>`)}`;
+
+const PLACEHOLDER_IMG = 'https://picsum.photos/seed/prima/800/600';
+const SAMPLE_VIDEO = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+
+function PaginationDemo() {
+  const [page, setPage] = React.useState(4);
+  return <Pagination page={page} totalPages={12} onChange={setPage} />;
+}
 
 export const AvatarStory: StoryObj = {
   name: 'Avatar',
@@ -137,5 +147,51 @@ export const RichTextStory: StoryObj = {
       <blockquote>A warm gray is a bug.</blockquote>
       <ul><li>Ice, not white</li><li>Ink as a surface, not a mode</li></ul>
     </RichText>
+  ),
+};
+
+export const AvatarStackStory: StoryObj = {
+  name: 'AvatarStack',
+  render: () => (
+    <AvatarStack
+      max={4}
+      items={[
+        { name: 'A. Rayhan Primadedas' },
+        { name: 'Ada Lovelace' },
+        { name: 'Grace Hopper' },
+        { name: 'Alan Turing' },
+        { name: 'Margaret Hamilton' },
+      ]}
+    />
+  ),
+};
+
+export const PaginationStory: StoryObj = {
+  name: 'Pagination',
+  render: () => <PaginationDemo />,
+};
+
+export const ImageCropperStory: StoryObj = {
+  name: 'ImageCropper',
+  render: () => (
+    <ImageCropper src={PLACEHOLDER_IMG} aspect={1} onCropChange={() => {}} />
+  ),
+};
+
+export const ImageZoomStory: StoryObj = {
+  name: 'ImageZoom',
+  render: () => (
+    <div style={{ width: 240 }}>
+      <ImageZoom src={PLACEHOLDER_IMG} alt="Placeholder study" />
+    </div>
+  ),
+};
+
+export const VideoPlayerStory: StoryObj = {
+  name: 'VideoPlayer',
+  render: () => (
+    <div style={{ maxWidth: 560 }}>
+      <VideoPlayer src={SAMPLE_VIDEO} />
+    </div>
   ),
 };

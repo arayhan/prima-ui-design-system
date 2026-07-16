@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  Accordion, Alert, AnalyticsCard, Avatar, BarChart, Bubble, Button, Carousel,
-  Chip, CodeSnippet, DataTable, EmptyState, ErrorState, LineChart, RichText, Thumbnail,
+  Accordion, Alert, AnalyticsCard, Avatar, AvatarStack, BarChart, Banner, Bubble, Button, Carousel,
+  Chip, CodeSnippet, DataTable, EmptyState, ErrorState, ImageCropper, ImageZoom, LineChart,
+  Pagination, RichText, Thumbnail, VideoPlayer,
 } from 'prima-ui';
+import type { CropRect } from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function DismissibleAlertDemo() {
@@ -27,6 +29,67 @@ function DismissibleAlertDemo() {
 
 const IMG = (seed: string) =>
   `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#F8FBFD"/><g stroke="#1B44F0" stroke-width="1" opacity="0.55">${Array.from({ length: 11 }, (_, i) => `<line x1="${i * 40}" y1="0" x2="${i * 40}" y2="300"/><line x1="0" y1="${i * 30}" x2="400" y2="${i * 30}"/>`).join('')}</g><circle cx="${100 + (seed.charCodeAt(0) % 200)}" cy="${80 + (seed.charCodeAt(1) % 140)}" r="34" fill="#1B44F0"/><text x="20" y="284" font-family="monospace" font-size="14" fill="#0F1116">// ${seed.toUpperCase()}</text></svg>`)}`;
+
+// Stable, deterministic placeholder media used across the ImageCropper/ImageZoom/VideoPlayer demos.
+const PLACEHOLDER_IMG = 'https://picsum.photos/seed/prima/800/600';
+const SAMPLE_VIDEO = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+
+function DismissibleBannerDemo() {
+  const [dismissed, setDismissed] = React.useState(false);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: '100%' }}>
+      <Banner variant="info" action={{ label: 'Read the changelog', href: '#/foundations' }}>
+        Prima 2.3 ships six new advanced components.
+      </Banner>
+      {!dismissed && (
+        <Banner variant="warning" onDismiss={() => setDismissed(true)}>
+          Your API key expires in 3 days. Rotate it before it lapses.
+        </Banner>
+      )}
+    </div>
+  );
+}
+
+function AvatarStackDemo() {
+  return (
+    <AvatarStack
+      max={4}
+      items={[
+        { name: 'A. Rayhan Primadedas' },
+        { name: 'Ada Lovelace' },
+        { name: 'Grace Hopper' },
+        { name: 'Alan Turing' },
+        { name: 'Margaret Hamilton' },
+        { name: 'Katherine Johnson' },
+      ]}
+    />
+  );
+}
+
+function PaginationDemo() {
+  const [page, setPage] = React.useState(4);
+  return <Pagination page={page} totalPages={12} onChange={setPage} />;
+}
+
+function ImageCropperDemo() {
+  const [rect, setRect] = React.useState<CropRect | null>(null);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
+      <ImageCropper src={PLACEHOLDER_IMG} aspect={1} onCropChange={setRect} />
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', color: 'var(--text-secondary)' }}>
+        {rect ? `x:${rect.x} y:${rect.y} w:${rect.width} h:${rect.height}` : 'Loading…'}
+      </div>
+    </div>
+  );
+}
+
+function VideoPlayerDemo() {
+  return (
+    <div style={{ width: '100%', maxWidth: 560 }}>
+      <VideoPlayer src={SAMPLE_VIDEO} />
+    </div>
+  );
+}
 
 function CarouselDemo() {
   return (
@@ -62,6 +125,27 @@ export const DISPLAY: DocMeta[] = [
     render: () => <DismissibleAlertDemo />,
   },
   {
+    id: 'banner',
+    name: 'Banner',
+    description: 'Full-width, page-level notification — where Alert is a bordered card meant to sit inline, Banner spans edge to edge with a bolder semantic top rule, for pinning at the top of a page or section. Reuses Alert\'s exact semantic color/icon mapping.',
+    snippet: `import { Banner } from 'prima-ui';
+
+<Banner variant="info" action={{ label: 'Read the changelog', href: '/changelog' }}>
+  Prima 2.3 ships six new advanced components.
+</Banner>
+<Banner variant="warning" onDismiss={() => setDismissed(true)}>
+  Your API key expires in 3 days. Rotate it before it lapses.
+</Banner>`,
+    props: [
+      { name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", default: "'info'", description: 'Semantic color of the top rule and icon.' },
+      { name: 'children', type: 'ReactNode', description: 'Message content.' },
+      { name: 'action', type: '{ label, href?, onClick? }', description: 'Optional inline action link/button.' },
+      { name: 'onDismiss', type: '() => void', description: 'Renders a dismiss button when provided.' },
+    ],
+    render: () => <DismissibleBannerDemo />,
+    block: true,
+  },
+  {
     id: 'avatar',
     name: 'Avatar',
     description: 'A full-radius circle — the one sanctioned use of radius-full — with a hairline border. Falls back to mono initials on ice; the optional status dot uses semantic colors.',
@@ -84,6 +168,29 @@ export const DISPLAY: DocMeta[] = [
         <Avatar name="Prima" size={72} />
       </div>
     ),
+  },
+  {
+    id: 'avatarstack',
+    name: 'AvatarStack',
+    description: 'An overlapping row of Avatars — e.g. "who\'s in this meeting" — with a "+N" overflow bubble once items exceeds max. Each avatar gets a surface-colored ring so overlaps read as intentional layering rather than muddy clipping.',
+    snippet: `import { AvatarStack } from 'prima-ui';
+
+<AvatarStack
+  max={4}
+  items={[
+    { name: 'A. Rayhan Primadedas' },
+    { name: 'Ada Lovelace' },
+    { name: 'Grace Hopper' },
+    { name: 'Alan Turing' },
+    { name: 'Margaret Hamilton' },
+  ]}
+/>`,
+    props: [
+      { name: 'items', type: '{ name, src? }[]', description: 'People in stacking order; src falls back to initials.' },
+      { name: 'max', type: 'number', default: '4', description: 'Avatars shown before collapsing the rest into a "+N" bubble.' },
+      { name: 'size', type: 'number', default: '40', description: 'Diameter in px.' },
+    ],
+    render: () => <AvatarStackDemo />,
   },
   {
     id: 'thumbnail',
@@ -352,6 +459,75 @@ export const DISPLAY: DocMeta[] = [
 # peer deps: react >= 18`} />
       </div>
     ),
+  },
+  {
+    id: 'pagination',
+    name: 'Pagination',
+    description: 'Mono numbered page buttons with prev/next arrows and an ellipsis for large ranges. Controlled: page/onChange.',
+    snippet: `import { Pagination } from 'prima-ui';
+
+const [page, setPage] = useState(1);
+<Pagination page={page} totalPages={12} onChange={setPage} />`,
+    props: [
+      { name: 'page', type: 'number', description: 'Current page, 1-indexed.' },
+      { name: 'totalPages', type: 'number', description: 'Total number of pages.' },
+      { name: 'onChange', type: '(page: number) => void', description: 'Called with the next page.' },
+      { name: 'siblingCount', type: 'number', default: '1', description: 'Numbered pages shown on each side of the current one.' },
+    ],
+    render: () => <PaginationDemo />,
+  },
+  {
+    id: 'imagecropper',
+    name: 'ImageCropper',
+    description: 'A fixed-aspect (or free-form) draggable/resizable selection box over an image. Reports the selection in the image\'s natural pixel coordinates via onCropChange; does not itself produce a cropped bitmap.',
+    snippet: `import { ImageCropper } from 'prima-ui';
+
+<ImageCropper
+  src="/photo.jpg"
+  aspect={1}
+  onCropChange={(rect) => console.log(rect)}
+/>`,
+    props: [
+      { name: 'src', type: 'string', description: 'Image to crop.' },
+      { name: 'aspect', type: 'number', description: 'Width/height ratio to lock the crop box to, e.g. 1 for square. Omit for free-form.' },
+      { name: 'onCropChange', type: '(rect: CropRect) => void', description: 'Called with the selection in natural pixel coordinates whenever it changes.' },
+      { name: 'maxDisplaySize', type: 'number', default: '480', description: 'Max display width/height in px.' },
+    ],
+    render: () => <ImageCropperDemo />,
+    block: true,
+  },
+  {
+    id: 'imagezoom',
+    name: 'ImageZoom',
+    description: 'A thumbnail that opens a full-screen lightbox — same scrim/Escape/scroll-lock pattern as Dialog — where the image scales up and pans to follow the cursor.',
+    snippet: `import { ImageZoom } from 'prima-ui';
+
+<ImageZoom src="/photo.jpg" alt="Case study detail" />`,
+    props: [
+      { name: 'src', type: 'string', description: 'Image source.' },
+      { name: 'alt', type: 'string', description: 'Alt text, reused in the lightbox.' },
+    ],
+    render: () => (
+      <div style={{ width: 240 }}>
+        <ImageZoom src={PLACEHOLDER_IMG} alt="Placeholder study" />
+      </div>
+    ),
+  },
+  {
+    id: 'videoplayer',
+    name: 'VideoPlayer',
+    description: 'A native <video> element with fully custom chrome — play/pause, seek, volume, time, fullscreen — laid over it. Controls stay visible while paused or hovered, and fade out otherwise so the content isn\'t obscured during playback.',
+    snippet: `import { VideoPlayer } from 'prima-ui';
+
+<VideoPlayer src="/clip.mp4" poster="/clip-poster.jpg" />`,
+    props: [
+      { name: 'src', type: 'string', description: 'Video source.' },
+      { name: 'poster', type: 'string', description: 'Poster image shown before playback.' },
+      { name: 'autoPlay', type: 'boolean', default: 'false', description: 'Autoplay muted on mount.' },
+      { name: 'loop', type: 'boolean', default: 'false', description: 'Loop playback.' },
+    ],
+    render: () => <VideoPlayerDemo />,
+    block: true,
   },
   {
     id: 'richtext',

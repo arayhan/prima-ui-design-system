@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { Alert } from '../src/components/advanced/Alert';
+import { Banner } from '../src/components/advanced/Banner';
 
 const meta: Meta<typeof Alert> = { title: 'Advanced/Alert', component: Alert };
 export default meta;
@@ -24,6 +26,20 @@ export const Stack: Story = {
       <Alert variant="success" title="Saved">Your changes are live.</Alert>
       <Alert variant="warning" title="Check your tokens">A warm gray is a bug in Prima.</Alert>
       <Alert variant="error" title="Build failed" onClose={() => {}}>styles.css could not be resolved.</Alert>
+    </div>
+  ),
+};
+
+export const BannerStory: StoryObj = {
+  name: 'Banner',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Banner variant="info" action={{ label: 'Read the changelog', href: '#' }}>
+        Prima 2.3 ships six new advanced components.
+      </Banner>
+      <Banner variant="warning" onDismiss={() => {}}>
+        Your API key expires in 3 days. Rotate it before it lapses.
+      </Banner>
     </div>
   ),
 };
