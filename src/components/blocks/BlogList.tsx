@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chip } from '../core/Chip';
+import { Pagination } from '../advanced/Pagination';
 
 export interface BlogPost {
   /** Mono date column — e.g. "JUL 2026" */
@@ -14,6 +15,8 @@ export interface BlogPost {
 
 export interface BlogListProps {
   posts: BlogPost[];
+  /** Paginate posts at this many per page. Omit to render the full list. */
+  pageSize?: number;
   style?: React.CSSProperties;
   className?: string;
 }
@@ -77,12 +80,21 @@ function PostRow({ post, last }: { post: BlogPost; last: boolean }) {
 /**
  * Prima blog list — hairline-separated article rows: mono date column, caps
  * title that goes cobalt on hover with an arrow nudge, optional description,
- * chips, and read-time.
+ * chips, and read-time. Pass `pageSize` to paginate internally.
  */
-export function BlogList({ posts, style, className }: BlogListProps) {
+export function BlogList({ posts, pageSize, style, className }: BlogListProps) {
+  const [page, setPage] = React.useState(1);
+  const totalPages = pageSize ? Math.ceil(posts.length / pageSize) : 1;
+  const visible = pageSize ? posts.slice((page - 1) * pageSize, page * pageSize) : posts;
+
   return (
     <div className={className} style={{ borderTop: 'var(--border-width-emphasis) solid var(--border-strong)', ...style }}>
-      {posts.map((post, i) => <PostRow key={post.title} post={post} last={i === posts.length - 1} />)}
+      {visible.map((post, i) => <PostRow key={post.title} post={post} last={i === visible.length - 1} />)}
+      {pageSize && (
+        <div style={{ padding: 'var(--space-5) 0' }}>
+          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+        </div>
+      )}
     </div>
   );
 }
