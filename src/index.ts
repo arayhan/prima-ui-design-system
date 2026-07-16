@@ -105,6 +105,8 @@ export { AnalyticsCard } from './components/advanced/AnalyticsCard';
 export type { AnalyticsCardProps } from './components/advanced/AnalyticsCard';
 export { Dropzone } from './components/advanced/Dropzone';
 export type { DropzoneProps, DropzoneFile } from './components/advanced/Dropzone';
+export { ImageCropper } from './components/advanced/ImageCropper';
+export type { ImageCropperProps, CropRect } from './components/advanced/ImageCropper';
 
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
