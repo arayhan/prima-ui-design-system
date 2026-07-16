@@ -12,6 +12,8 @@ export { Select } from './components/core/Select';
 export type { SelectProps, SelectOption } from './components/core/Select';
 export { Switch } from './components/core/Switch';
 export type { SwitchProps } from './components/core/Switch';
+export { Progress } from './components/core/Progress';
+export type { ProgressProps } from './components/core/Progress';
 export { SectionHeader } from './components/core/SectionHeader';
 export type { SectionHeaderProps } from './components/core/SectionHeader';
 export { TimelineItem } from './components/core/TimelineItem';
