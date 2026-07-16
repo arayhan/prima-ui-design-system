@@ -13,16 +13,17 @@ export interface InputProps {
   onChange?: (e: any) => void;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
   [key: string]: unknown;
 }
 
 /** Prima text input. White field, 1.5px border, mono label above, cobalt focus ring. */
-export function Input({ label, helper, error, id, style, ...rest }: InputProps) {
+export function Input({ label, helper, error, id, style, className, ...rest }: InputProps) {
   const [focus, setFocus] = React.useState(false);
   const inputId = id || (label ? 'in-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
   const invalid = !!error;
   return (
-    <div style={fieldWrap}>
+    <div style={fieldWrap} className={className}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <input
         id={inputId}

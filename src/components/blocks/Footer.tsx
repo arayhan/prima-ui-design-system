@@ -25,6 +25,7 @@ export interface FooterProps {
   /** Copyright / colophon line — e.g. "© 2026 A. Rayhan Primadedas" */
   note?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function FooterAnchor({ link }: { link: FooterLink }) {
@@ -47,9 +48,9 @@ function FooterAnchor({ link }: { link: FooterLink }) {
  * the Clash Display wordmark + tagline, mono-headed nav columns, SocialLinks,
  * and a mono copyright line under a hairline.
  */
-export function Footer({ name = 'PRIMA UI', tagline, columns = [], links, note, style }: FooterProps) {
+export function Footer({ name = 'PRIMA UI', tagline, columns = [], links, note, style, className }: FooterProps) {
   return (
-    <footer style={{
+    <footer className={className} style={{
       borderTop: 'var(--border-width-rule) solid var(--border-strong)',
       paddingTop: 'var(--space-7)', display: 'flex', flexDirection: 'column', gap: 'var(--space-7)', ...style,
     }}>

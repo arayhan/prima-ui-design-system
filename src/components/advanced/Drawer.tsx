@@ -14,13 +14,14 @@ export interface DrawerProps {
   side?: 'left' | 'right';
   /** Panel width in px. Default 400. */
   width?: number;
+  className?: string;
 }
 
 /**
  * Prima drawer — a full-height side panel that slides over the scrim.
  * Portal-rendered; Escape and scrim click close; body scroll locks while open.
  */
-export function Drawer({ open, onClose, eyebrow, title, children, actions, side = 'right', width = 400 }: DrawerProps) {
+export function Drawer({ open, onClose, eyebrow, title, children, actions, side = 'right', width = 400, className }: DrawerProps) {
   React.useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -45,6 +46,7 @@ export function Drawer({ open, onClose, eyebrow, title, children, actions, side 
     >
       <div
         role="dialog" aria-modal="true" aria-label={title}
+        className={className}
         style={{
           position: 'absolute', top: 0, bottom: 0, [side]: 0,
           width, maxWidth: 'calc(100vw - 48px)',

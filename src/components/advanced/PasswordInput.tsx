@@ -10,6 +10,7 @@ export interface PasswordInputProps {
   onChange?: (e: any) => void;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
   [key: string]: unknown;
 }
 
@@ -17,14 +18,14 @@ export interface PasswordInputProps {
  * Prima password field — Input's field language plus an eye toggle that
  * reveals the value. The toggle announces its state for screen readers.
  */
-export function PasswordInput({ label, helper, error, id, style, ...rest }: PasswordInputProps) {
+export function PasswordInput({ label, helper, error, id, style, className, ...rest }: PasswordInputProps) {
   const [focus, setFocus] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const inputId = id || (label ? 'pw-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
   const invalid = !!error;
   return (
-    <div style={fieldWrap}>
+    <div className={className} style={fieldWrap}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div style={{ position: 'relative' }}>
         <input

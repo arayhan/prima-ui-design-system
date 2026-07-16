@@ -17,6 +17,7 @@ export interface AlertProps {
   /** Renders a dismiss button when provided */
   onClose?: () => void;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function CloseButton({ onClose }: { onClose: () => void }) {
@@ -41,10 +42,10 @@ function CloseButton({ onClose }: { onClose: () => void }) {
  * edge. Icon and rule take the semantic color; the body stays ink. Semantic colors
  * are functional here, never decorative.
  */
-export function Alert({ variant = 'info', title, children, onClose, style }: AlertProps) {
+export function Alert({ variant = 'info', title, children, onClose, style, className }: AlertProps) {
   const v = VARIANTS[variant];
   return (
-    <div role={variant === 'error' ? 'alert' : 'status'} style={{
+    <div role={variant === 'error' ? 'alert' : 'status'} className={className} style={{
       display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-start',
       background: 'var(--surface)', border: 'var(--border-width) solid var(--border)',
       borderLeft: `var(--border-width-rule) solid ${v.color}`,

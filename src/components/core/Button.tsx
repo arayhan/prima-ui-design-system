@@ -11,6 +11,7 @@ export interface ButtonProps {
   icon?: React.ReactNode;
   children?: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
   [key: string]: unknown;
 }
 
@@ -18,7 +19,7 @@ export interface ButtonProps {
  * Prima button. Mono uppercase label, 52px tall, radius sm.
  * primary = cobalt fill; secondary = transparent with a 2px ink border that inverts on hover.
  */
-export function Button({ variant = 'primary', href, disabled, onClick, icon, children, style, ...rest }: ButtonProps) {
+export function Button({ variant = 'primary', href, disabled, onClick, icon, children, style, className, ...rest }: ButtonProps) {
   const [hover, setHover] = React.useState(false);
   const lift = hover && !disabled;
 
@@ -52,7 +53,7 @@ export function Button({ variant = 'primary', href, disabled, onClick, icon, chi
   const Tag: any = href ? 'a' : 'button';
   return (
     <Tag
-      href={href} onClick={onClick} disabled={disabled} style={s}
+      href={href} onClick={onClick} disabled={disabled} style={s} className={className}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} {...rest}
     >
       {children}{icon}

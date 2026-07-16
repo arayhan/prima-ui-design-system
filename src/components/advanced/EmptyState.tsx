@@ -14,15 +14,16 @@ export interface EmptyStateProps {
   description?: string;
   action?: EmptyStateAction;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima empty state — a centered hairline panel: icon in a bordered square,
  * caps title, muted description, optional cobalt action.
  */
-export function EmptyState({ icon = 'ph ph-tray', title, description, action, style }: EmptyStateProps) {
+export function EmptyState({ icon = 'ph ph-tray', title, description, action, style, className }: EmptyStateProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
       gap: 'var(--space-4)', padding: 'var(--space-8) var(--space-6)',
       background: 'var(--surface)', border: 'var(--border-width) solid var(--border)',

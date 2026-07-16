@@ -7,6 +7,7 @@ export interface CodeSnippetProps {
   /** Hide the copy button */
   noCopy?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -14,7 +15,7 @@ export interface CodeSnippetProps {
  * button. Monochrome on purpose (zero dependencies); pair with a highlighter
  * in your app if you need color.
  */
-export function CodeSnippet({ code, label = 'CODE', noCopy = false, style }: CodeSnippetProps) {
+export function CodeSnippet({ code, label = 'CODE', noCopy = false, style, className }: CodeSnippetProps) {
   const [copied, setCopied] = React.useState(false);
   const [hover, setHover] = React.useState(false);
 
@@ -27,7 +28,7 @@ export function CodeSnippet({ code, label = 'CODE', noCopy = false, style }: Cod
   };
 
   return (
-    <div style={{
+    <div className={className} style={{
       background: 'var(--inverse-surface)', borderRadius: 'var(--radius-md)',
       border: 'var(--border-width) solid var(--inverse-border)', overflow: 'hidden', ...style,
     }}>

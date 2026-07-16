@@ -8,13 +8,14 @@ export interface SwitchProps {
   label?: string;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /** Prima switch — 50×28 pill. Cobalt track on, hairline track off; white knob slides 150ms. */
-export function Switch({ checked = false, onChange, disabled, label, id, style }: SwitchProps) {
+export function Switch({ checked = false, onChange, disabled, label, id, style, className }: SwitchProps) {
   return (
     <button
-      type="button" role="switch" aria-checked={checked} id={id} disabled={disabled}
+      type="button" role="switch" aria-checked={checked} id={id} disabled={disabled} className={className}
       onClick={() => !disabled && onChange && onChange(!checked)}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 'var(--space-3)',

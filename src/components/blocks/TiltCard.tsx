@@ -5,6 +5,7 @@ export interface TiltCardProps {
   /** Maximum tilt in degrees. Default 8. */
   maxTilt?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -12,7 +13,7 @@ export interface TiltCardProps {
  * and settles back on leave, with a faint cobalt glow at full tilt.
  * Pointer-fine only; inert under reduced motion. Pure CSS transforms.
  */
-export function TiltCard({ children, maxTilt = 8, style }: TiltCardProps) {
+export function TiltCard({ children, maxTilt = 8, style, className }: TiltCardProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = React.useState({ rx: 0, ry: 0 });
   const [settling, setSettling] = React.useState(false);
@@ -38,7 +39,7 @@ export function TiltCard({ children, maxTilt = 8, style }: TiltCardProps) {
   const intensity = Math.min(1, (Math.abs(tilt.rx) + Math.abs(tilt.ry)) / maxTilt);
 
   return (
-    <div style={{ perspective: 800 }}>
+    <div className={className} style={{ perspective: 800 }}>
       <div
         ref={ref}
         onPointerMove={onMove} onPointerLeave={onLeave}

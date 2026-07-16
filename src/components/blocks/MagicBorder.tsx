@@ -9,6 +9,7 @@ export interface MagicBorderProps {
   /** Corner radius; inherits the card scale by default. */
   radius?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -16,10 +17,10 @@ export interface MagicBorderProps {
  * rotates behind a clipped surface. Pure CSS keyframes, no dependency.
  * The ring freezes under reduced motion (static accent, not decoration-in-motion).
  */
-export function MagicBorder({ children, thickness = 2, speed = 3.5, radius = 'var(--radius-md)', style }: MagicBorderProps) {
+export function MagicBorder({ children, thickness = 2, speed = 3.5, radius = 'var(--radius-md)', style, className }: MagicBorderProps) {
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
-    <div style={{
+    <div className={className} style={{
       position: 'relative', borderRadius: radius, padding: thickness,
       overflow: 'hidden', isolation: 'isolate', ...style,
     }}>

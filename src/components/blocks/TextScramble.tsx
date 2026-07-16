@@ -9,6 +9,7 @@ export interface TextScrambleProps {
   /** Trigger on hover instead of once-on-scroll-into-view. Default false. */
   onHover?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -16,7 +17,7 @@ export interface TextScrambleProps {
  * left-to-right into the real text, once on scroll-into-view (or on hover).
  * Renders the final text immediately under reduced motion.
  */
-export function TextScramble({ text, duration = 900, onHover = false, style }: TextScrambleProps) {
+export function TextScramble({ text, duration = 900, onHover = false, style, className }: TextScrambleProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const running = React.useRef(false);
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -53,6 +54,7 @@ export function TextScramble({ text, duration = 900, onHover = false, style }: T
     <span
       ref={ref}
       onMouseEnter={onHover ? scramble : undefined}
+      className={className}
       style={{ fontFamily: 'var(--font-mono)', letterSpacing: 'var(--tracking-label)', ...style }}
     >{display}</span>
   );

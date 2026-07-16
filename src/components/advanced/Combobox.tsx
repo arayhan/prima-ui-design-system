@@ -15,6 +15,7 @@ export interface ComboboxProps {
   emptyText?: string;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function ComboOption({ option, selected, highlighted, onSelect }: {
@@ -42,7 +43,7 @@ function ComboOption({ option, selected, highlighted, onSelect }: {
  * Prima combobox — a searchable single select. Type to filter the floating list,
  * pick with the pointer or ArrowUp/ArrowDown + Enter. Escape and outside click close.
  */
-export function Combobox({ label, helper, error, options, value, onChange, placeholder = 'Search…', emptyText = 'No matches.', id, style }: ComboboxProps) {
+export function Combobox({ label, helper, error, options, value, onChange, placeholder = 'Search…', emptyText = 'No matches.', id, style, className }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
   const [focus, setFocus] = React.useState(false);
@@ -79,7 +80,7 @@ export function Combobox({ label, helper, error, options, value, onChange, place
   };
 
   return (
-    <div style={{ ...fieldWrap, ...style }}>
+    <div className={className} style={{ ...fieldWrap, ...style }}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div ref={rootRef} style={{ position: 'relative' }}>
         <input

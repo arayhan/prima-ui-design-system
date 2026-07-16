@@ -15,6 +15,7 @@ export interface RichTextEditorProps {
   minHeight?: number;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /** Strips HTML down to plain text — e.g. for search indexing, previews, or `getText()`-style reads. */
@@ -110,7 +111,7 @@ function ToolbarButton({ icon, label, active, onClick }: {
  */
 export function RichTextEditor({
   label, helper, error, value, defaultValue, onChange,
-  placeholder = 'Start writing…', minHeight = 220, id, style,
+  placeholder = 'Start writing…', minHeight = 220, id, style, className,
 }: RichTextEditorProps) {
   const editorRef = React.useRef<HTMLDivElement>(null);
   const savedRange = React.useRef<Range | null>(null);
@@ -238,7 +239,7 @@ export function RichTextEditor({
   }
 
   return (
-    <div style={{ ...fieldWrap, ...style }}>
+    <div className={className} style={{ ...fieldWrap, ...style }}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div style={{
         background: 'var(--surface)', borderRadius: 'var(--radius-sm)',

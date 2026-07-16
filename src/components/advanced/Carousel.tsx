@@ -8,6 +8,7 @@ export interface CarouselProps {
   /** Accessible name */
   label?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function ArrowButton({ icon, label, onClick, disabled }: { icon: string; label: string; onClick: () => void; disabled: boolean }) {
@@ -36,7 +37,7 @@ function ArrowButton({ icon, label, onClick, disabled }: { icon: string; label: 
  * running counter ("002 / 005"). Native scrolling stays available (swipe,
  * trackpad); buttons scroll one slide, honoring reduced motion.
  */
-export function Carousel({ items, slideWidth = 'min(420px, 85%)', label = 'Carousel', style }: CarouselProps) {
+export function Carousel({ items, slideWidth = 'min(420px, 85%)', label = 'Carousel', style, className }: CarouselProps) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const [index, setIndex] = React.useState(0);
 
@@ -58,7 +59,7 @@ export function Carousel({ items, slideWidth = 'min(420px, 85%)', label = 'Carou
   };
 
   return (
-    <div role="region" aria-label={label} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', ...style }}>
+    <div role="region" aria-label={label} className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', ...style }}>
       <div
         ref={trackRef}
         onScroll={measure}

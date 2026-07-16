@@ -12,18 +12,20 @@ export interface ThumbnailProps {
   /** Renders as a link */
   href?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima thumbnail — a hairline media frame (radius md) whose image eases to a
  * gentle zoom on hover, with a mono caption line underneath.
  */
-export function Thumbnail({ src, alt, ratio = '4 / 3', caption, index, href, style }: ThumbnailProps) {
+export function Thumbnail({ src, alt, ratio = '4 / 3', caption, index, href, style, className }: ThumbnailProps) {
   const [hover, setHover] = React.useState(false);
   const Tag: any = href ? 'a' : 'figure';
   return (
     <Tag
       href={href}
+      className={className}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: 'block', margin: 0, textDecoration: 'none', cursor: href ? 'pointer' : 'default', ...style,

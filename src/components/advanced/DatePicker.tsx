@@ -14,13 +14,14 @@ export interface DatePickerProps {
   format?: (date: Date) => string;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima date picker — a field-language trigger opening the Calendar in a
  * floating panel. Selecting a day closes it; Escape and outside click too.
  */
-export function DatePicker({ label, helper, error, value, onChange, placeholder = 'Pick a date', format, id, style }: DatePickerProps) {
+export function DatePicker({ label, helper, error, value, onChange, placeholder = 'Pick a date', format, id, style, className }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
   const rootRef = React.useRef<HTMLDivElement>(null);
   const inputId = id || (label ? 'dp-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
@@ -42,7 +43,7 @@ export function DatePicker({ label, helper, error, value, onChange, placeholder 
   }, [open]);
 
   return (
-    <div style={{ ...fieldWrap, ...style }}>
+    <div className={className} style={{ ...fieldWrap, ...style }}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div ref={rootRef} style={{ position: 'relative' }}>
         <button

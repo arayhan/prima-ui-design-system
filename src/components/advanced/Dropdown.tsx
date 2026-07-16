@@ -16,6 +16,7 @@ export interface DropdownProps {
   /** Edge the menu aligns to. Default 'left'. */
   align?: 'left' | 'right';
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function MenuItem({ item, onClose, itemRef }: { item: DropdownItem; onClose: () => void; itemRef: (el: HTMLButtonElement | null) => void }) {
@@ -46,7 +47,7 @@ function MenuItem({ item, onClose, itemRef }: { item: DropdownItem; onClose: () 
  * (the one sanctioned shadow). Closes on Escape, outside click, and selection;
  * ArrowUp/ArrowDown move focus through the items.
  */
-export function Dropdown({ label, items, align = 'left', style }: DropdownProps) {
+export function Dropdown({ label, items, align = 'left', style, className }: DropdownProps) {
   const [open, setOpen] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const rootRef = React.useRef<HTMLDivElement>(null);
@@ -78,7 +79,7 @@ export function Dropdown({ label, items, align = 'left', style }: DropdownProps)
   }, [open]);
 
   return (
-    <div ref={rootRef} style={{ position: 'relative', display: 'inline-block', ...style }}>
+    <div ref={rootRef} className={className} style={{ position: 'relative', display: 'inline-block', ...style }}>
       <button
         aria-haspopup="menu" aria-expanded={open}
         onClick={() => setOpen((v) => !v)}

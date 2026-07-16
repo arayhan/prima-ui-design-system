@@ -6,6 +6,7 @@ export interface RippleProps {
   /** Ripple fill. Default the cobalt focus-ring tint. */
   color?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 interface Dot { id: number; x: number; y: number; size: number }
@@ -14,7 +15,7 @@ interface Dot { id: number; x: number; y: number; size: number }
  * Prima ripple — wraps a click target with an expanding, fading ripple from
  * the pointer-down point. Pure CSS keyframes; a no-op wrapper under reduced motion.
  */
-export function Ripple({ children, color = 'var(--primary-ring)', style }: RippleProps) {
+export function Ripple({ children, color = 'var(--primary-ring)', style, className }: RippleProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const [dots, setDots] = React.useState<Dot[]>([]);
   const idRef = React.useRef(0);
@@ -32,6 +33,7 @@ export function Ripple({ children, color = 'var(--primary-ring)', style }: Rippl
   return (
     <span
       ref={ref} onPointerDown={onPointerDown}
+      className={className}
       style={{ position: 'relative', display: 'inline-block', overflow: 'hidden', borderRadius: 'inherit', ...style }}
     >
       {children}

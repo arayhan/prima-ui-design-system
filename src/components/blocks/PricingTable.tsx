@@ -23,15 +23,16 @@ export interface PricingPlan {
 export interface PricingTableProps {
   plans: PricingPlan[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima pricing table — a grid of plan cards; the `highlighted` plan swaps to
  * the ink surface with a cobalt border, mirroring CTASection's storytelling surface.
  */
-export function PricingTable({ plans, style }: PricingTableProps) {
+export function PricingTable({ plans, style, className }: PricingTableProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'grid', gap: 'var(--space-5)',
       gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
       ...style,

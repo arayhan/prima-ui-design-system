@@ -7,6 +7,7 @@ export interface BubbleProps {
   /** Mono meta line under the bubble — e.g. "09:41" or "AR · 09:41" */
   meta?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -14,10 +15,10 @@ export interface BubbleProps {
  * hairline; sent messages sit right in cobalt. The corner nearest the sender
  * is squared to radius-sm for direction.
  */
-export function Bubble({ side = 'in', children, meta, style }: BubbleProps) {
+export function Bubble({ side = 'in', children, meta, style, className }: BubbleProps) {
   const out = side === 'out';
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'flex', flexDirection: 'column', gap: 'var(--space-1)',
       alignItems: out ? 'flex-end' : 'flex-start', ...style,
     }}>

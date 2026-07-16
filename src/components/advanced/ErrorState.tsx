@@ -12,6 +12,7 @@ export interface ErrorStateProps {
   /** Full-page treatment (min-height 60vh, centered) for error pages */
   fullPage?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -19,9 +20,9 @@ export interface ErrorStateProps {
  * cobalt, caps title, muted description, and a way back. Use `fullPage` for
  * 404/500 pages; omit it for inline error panels.
  */
-export function ErrorState({ code = '404', title, description, action, fullPage = false, style }: ErrorStateProps) {
+export function ErrorState({ code = '404', title, description, action, fullPage = false, style, className }: ErrorStateProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
       textAlign: 'center', gap: 'var(--space-4)',
       minHeight: fullPage ? '60vh' : undefined,

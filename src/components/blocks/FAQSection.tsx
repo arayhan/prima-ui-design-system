@@ -11,6 +11,7 @@ export interface FAQSectionProps {
   description?: string;
   items: AccordionItem[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -18,10 +19,10 @@ export interface FAQSectionProps {
  * for landing-page question/answer blocks.
  */
 export function FAQSection({
-  eyebrow = 'FAQ', title = 'QUESTIONS, ANSWERED', description, items, style,
+  eyebrow = 'FAQ', title = 'QUESTIONS, ANSWERED', description, items, style, className,
 }: FAQSectionProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)', ...style }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-7)', ...style }}>
       <SectionHeader eyebrow={eyebrow} title={title} description={description} />
       <Accordion items={items} />
     </div>

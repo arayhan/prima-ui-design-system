@@ -21,6 +21,7 @@ export interface CTASectionProps {
   /** Social links row; omit to use SocialLinks defaults */
   links?: SocialLink[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function EmailLink({ email }: { email: string }) {
@@ -44,9 +45,9 @@ function EmailLink({ email }: { email: string }) {
  * Prima CTA / contact block — the ink storytelling surface. Mono `//` eyebrow,
  * big caps headline, cobalt CTA, mono email link, and a SocialLinks row.
  */
-export function CTASection({ eyebrow, title, action, email, links, style }: CTASectionProps) {
+export function CTASection({ eyebrow, title, action, email, links, style, className }: CTASectionProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       background: 'var(--inverse-surface)', borderRadius: 'var(--radius-lg)',
       padding: 'clamp(var(--space-7), 8vw, var(--space-9))',
       display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', ...style,

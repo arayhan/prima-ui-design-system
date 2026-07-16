@@ -21,6 +21,7 @@ export interface HeroProps {
   /** Optional media slot (illustration, canvas, image) shown beside the copy */
   media?: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -28,9 +29,9 @@ export interface HeroProps {
  * (one manual line break max), lede, and a primary/secondary Button pair. An optional
  * `media` slot sits to the right on wide viewports and below the copy on narrow ones.
  */
-export function Hero({ eyebrow, title, lede, primaryAction, secondaryAction, media, style }: HeroProps) {
+export function Hero({ eyebrow, title, lede, primaryAction, secondaryAction, media, style, className }: HeroProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'var(--space-8)',
       padding: 'var(--space-9) 0', ...style,
     }}>

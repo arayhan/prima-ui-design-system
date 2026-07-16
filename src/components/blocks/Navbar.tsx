@@ -23,6 +23,7 @@ export interface NavbarProps {
   /** Sticks to the top of its scroll container. Default false. */
   sticky?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 const RESPONSIVE_CSS = `
@@ -56,10 +57,10 @@ function NavAnchor({ link, onNavigate }: { link: NavLink; onNavigate: () => void
  * nav links, and an optional cobalt CTA. Pairs with Footer to bookend a page.
  * Below 768px the links collapse behind a hamburger toggle into a stacked panel.
  */
-export function Navbar({ logo = 'PRIMA UI', logoHref, links = [], action, sticky = false, style }: NavbarProps) {
+export function Navbar({ logo = 'PRIMA UI', logoHref, links = [], action, sticky = false, style, className }: NavbarProps) {
   const [open, setOpen] = React.useState(false);
   return (
-    <nav style={{
+    <nav className={className} style={{
       position: sticky ? 'sticky' : 'static', top: 0, zIndex: 10,
       background: 'var(--surface)',
       borderBottom: 'var(--border-width-rule) solid var(--border-strong)',

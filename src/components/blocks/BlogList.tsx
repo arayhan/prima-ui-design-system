@@ -15,6 +15,7 @@ export interface BlogPost {
 export interface BlogListProps {
   posts: BlogPost[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function PostRow({ post, last }: { post: BlogPost; last: boolean }) {
@@ -78,9 +79,9 @@ function PostRow({ post, last }: { post: BlogPost; last: boolean }) {
  * title that goes cobalt on hover with an arrow nudge, optional description,
  * chips, and read-time.
  */
-export function BlogList({ posts, style }: BlogListProps) {
+export function BlogList({ posts, style, className }: BlogListProps) {
   return (
-    <div style={{ borderTop: 'var(--border-width-emphasis) solid var(--border-strong)', ...style }}>
+    <div className={className} style={{ borderTop: 'var(--border-width-emphasis) solid var(--border-strong)', ...style }}>
       {posts.map((post, i) => <PostRow key={post.title} post={post} last={i === posts.length - 1} />)}
     </div>
   );

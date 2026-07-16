@@ -7,6 +7,7 @@ export interface RevealOnScrollProps {
   /** Rise distance in px. Default 24. */
   distance?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -15,7 +16,7 @@ export interface RevealOnScrollProps {
  * Pure CSS transition driven by IntersectionObserver; content renders
  * immediately (and stays visible) under reduced motion.
  */
-export function RevealOnScroll({ children, delay = 0, distance = 24, style }: RevealOnScrollProps) {
+export function RevealOnScroll({ children, delay = 0, distance = 24, style, className }: RevealOnScrollProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [shown, setShown] = React.useState(() =>
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -37,6 +38,7 @@ export function RevealOnScroll({ children, delay = 0, distance = 24, style }: Re
   return (
     <div
       ref={ref}
+      className={className}
       style={{
         opacity: shown ? 1 : 0,
         transform: shown ? 'translateY(0)' : `translateY(${distance}px)`,

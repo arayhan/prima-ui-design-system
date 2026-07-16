@@ -14,6 +14,7 @@ export interface ButtonGroupProps {
   /** Accessible name for the group */
   label?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function Segment({ option, selected, first, onSelect }: {
@@ -47,10 +48,11 @@ function Segment({ option, selected, first, onSelect }: {
  * Prima button group — a segmented control. Joined mono uppercase segments inside
  * one 2px ink border; the active segment fills cobalt.
  */
-export function ButtonGroup({ options, value, onChange, label, style }: ButtonGroupProps) {
+export function ButtonGroup({ options, value, onChange, label, style, className }: ButtonGroupProps) {
   return (
     <div
       role="group" aria-label={label}
+      className={className}
       style={{
         display: 'inline-flex', overflow: 'hidden',
         border: 'var(--border-width-emphasis) solid var(--border-strong)',

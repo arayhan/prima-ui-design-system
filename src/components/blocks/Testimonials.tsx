@@ -14,15 +14,16 @@ export interface TestimonialsProps {
   /** Column count on wide viewports (collapses automatically when narrow) */
   columns?: 2 | 3;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima testimonials — a grid of quote Cards opened by a cobalt Clash Display
  * quotation mark, Inter body copy, and an Avatar + mono name/role footer.
  */
-export function Testimonials({ items, columns = 3, style }: TestimonialsProps) {
+export function Testimonials({ items, columns = 3, style, className }: TestimonialsProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'grid', gap: 'var(--space-5)',
       gridTemplateColumns: `repeat(auto-fit, minmax(min(100%, ${columns === 2 ? 380 : 280}px), 1fr))`,
       ...style,

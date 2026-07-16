@@ -10,16 +10,17 @@ export interface CheckboxProps {
   error?: string;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima checkbox — an 18px square that fills cobalt with a check glyph.
  * The same control language as MultiSelect's option rows.
  */
-export function Checkbox({ checked = false, onChange, label, disabled, error, id, style }: CheckboxProps) {
+export function Checkbox({ checked = false, onChange, label, disabled, error, id, style, className }: CheckboxProps) {
   const invalid = !!error;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', ...style }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', ...style }}>
       <button
         type="button" role="checkbox" aria-checked={checked} id={id} disabled={disabled}
         onClick={() => !disabled && onChange && onChange(!checked)}

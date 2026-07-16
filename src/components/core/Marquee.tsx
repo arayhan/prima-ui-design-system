@@ -10,13 +10,14 @@ export interface MarqueeProps {
   /** Cobalt separator drawn between items */
   separator?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima marquee — a mono uppercase text strip that divides major sections.
  * Decorative only; one per page. Loops right-to-left; respects reduced motion via base.css.
  */
-export function Marquee({ items, speed = 30, inverse = false, separator = '//', style }: MarqueeProps) {
+export function Marquee({ items, speed = 30, inverse = false, separator = '//', style, className }: MarqueeProps) {
   const row = (
     <div style={{ display: 'flex', flex: 'none', alignItems: 'center' }}>
       {items.map((t, i) => (
@@ -31,7 +32,7 @@ export function Marquee({ items, speed = 30, inverse = false, separator = '//', 
     </div>
   );
   return (
-    <div style={{
+    <div className={className} style={{
       overflow: 'hidden',
       background: inverse ? 'var(--inverse-surface)' : 'var(--background)',
       borderTop: `var(--border-width) solid ${inverse ? 'var(--inverse-border)' : 'var(--border)'}`,

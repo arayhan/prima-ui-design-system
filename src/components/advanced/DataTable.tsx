@@ -15,6 +15,7 @@ export interface DataTableProps {
   /** Mono caption above the table — e.g. "PROJECTS — 2026" */
   caption?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 type Sort = { key: string; dir: 1 | -1 } | null;
@@ -47,7 +48,7 @@ function BodyRow({ row, columns }: { row: Record<string, React.ReactNode>; colum
  * Prima data table — mono uppercase headers over a 2px ink rule, hairline row
  * separators, ice hover. Columns opt into sorting with `sortable`.
  */
-export function DataTable({ columns, rows, caption, style }: DataTableProps) {
+export function DataTable({ columns, rows, caption, style, className }: DataTableProps) {
   const [sort, setSort] = React.useState<Sort>(null);
 
   const sorted = React.useMemo(() => {
@@ -60,7 +61,7 @@ export function DataTable({ columns, rows, caption, style }: DataTableProps) {
   };
 
   return (
-    <div style={{ overflowX: 'auto', ...style }}>
+    <div className={className} style={{ overflowX: 'auto', ...style }}>
       {caption && (
         <div style={{
           fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', fontWeight: 500,

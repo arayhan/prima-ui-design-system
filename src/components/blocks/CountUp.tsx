@@ -13,6 +13,7 @@ export interface CountUpProps {
   /** Decimal places. Default 0. */
   decimals?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -20,7 +21,7 @@ export interface CountUpProps {
  * scrolls into view (once), easing out. Renders the final value immediately
  * under reduced motion.
  */
-export function CountUp({ value, prefix = '', suffix = '', label, duration = 1200, decimals = 0, style }: CountUpProps) {
+export function CountUp({ value, prefix = '', suffix = '', label, duration = 1200, decimals = 0, style, className }: CountUpProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [display, setDisplay] = React.useState(() =>
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? value : 0,
@@ -51,7 +52,7 @@ export function CountUp({ value, prefix = '', suffix = '', label, duration = 120
   }, [value, duration]);
 
   return (
-    <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', ...style }}>
+    <div ref={ref} className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', ...style }}>
       <span style={{
         fontFamily: 'var(--font-display)', fontSize: 'var(--text-h1)', fontWeight: 600,
         lineHeight: 'var(--leading-h1)', letterSpacing: 'var(--tracking-heading)',

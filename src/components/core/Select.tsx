@@ -15,16 +15,17 @@ export interface SelectProps {
   onChange?: (e: any) => void;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
   [key: string]: unknown;
 }
 
 /** Prima select. Field language of Input + a 1.5px ink chevron (no native outline). */
-export function Select({ label, helper, error, options, id, style, ...rest }: SelectProps) {
+export function Select({ label, helper, error, options, id, style, className, ...rest }: SelectProps) {
   const [focus, setFocus] = React.useState(false);
   const inputId = id || (label ? 'sel-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
   const invalid = !!error;
   return (
-    <div style={fieldWrap}>
+    <div style={fieldWrap} className={className}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div style={{ position: 'relative' }}>
         <select

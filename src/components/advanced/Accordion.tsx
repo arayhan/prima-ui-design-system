@@ -12,6 +12,7 @@ export interface AccordionProps {
   /** Index open initially */
   defaultOpen?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function Row({ item, index, open, onToggle, last }: {
@@ -69,7 +70,7 @@ function Row({ item, index, open, onToggle, last }: {
  * Prima accordion — hairline-separated rows with mono running numbers and a
  * plus glyph that rotates into a close. Height animates via the grid-rows trick.
  */
-export function Accordion({ items, multiple = false, defaultOpen, style }: AccordionProps) {
+export function Accordion({ items, multiple = false, defaultOpen, style, className }: AccordionProps) {
   const [open, setOpen] = React.useState<Set<number>>(
     () => new Set(defaultOpen !== undefined ? [defaultOpen] : []),
   );
@@ -83,7 +84,7 @@ export function Accordion({ items, multiple = false, defaultOpen, style }: Accor
   };
 
   return (
-    <div style={{ borderTop: 'var(--border-width-emphasis) solid var(--border-strong)', ...style }}>
+    <div className={className} style={{ borderTop: 'var(--border-width-emphasis) solid var(--border-strong)', ...style }}>
       {items.map((item, i) => (
         <Row key={i} item={item} index={i} open={open.has(i)} onToggle={() => toggle(i)} last={i === items.length - 1} />
       ))}

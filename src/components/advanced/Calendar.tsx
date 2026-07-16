@@ -5,6 +5,7 @@ export interface CalendarProps {
   value?: Date;
   onChange?: (date: Date) => void;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -56,7 +57,7 @@ function DayCell({ day, selected, today, onSelect }: { day: number; selected: bo
  * Prima calendar — a month grid on the white surface. Mono weekday initials,
  * cobalt fill for the selection, cobalt outline for today.
  */
-export function Calendar({ value, onChange, style }: CalendarProps) {
+export function Calendar({ value, onChange, style, className }: CalendarProps) {
   const today = new Date();
   const [view, setView] = React.useState(() => {
     const base = value ?? today;
@@ -79,7 +80,7 @@ export function Calendar({ value, onChange, style }: CalendarProps) {
   };
 
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'inline-block', padding: 'var(--space-5)',
       background: 'var(--surface)', border: 'var(--border-width) solid var(--border)',
       borderRadius: 'var(--radius-md)', ...style,

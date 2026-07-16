@@ -13,6 +13,7 @@ export interface StatStripProps {
   /** Ink-surface variant for use on inverse blocks */
   inverse?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function StatCell({ stat, inverse, rule }: { stat: Stat; inverse: boolean; rule: string }) {
@@ -49,10 +50,10 @@ function StatCell({ stat, inverse, rule }: { stat: Stat; inverse: boolean; rule:
  * the first time it scrolls into view (instant under reduced motion). Wraps on
  * narrow viewports.
  */
-export function StatStrip({ stats, inverse = false, style }: StatStripProps) {
+export function StatStrip({ stats, inverse = false, style, className }: StatStripProps) {
   const rule = inverse ? 'var(--inverse-border)' : 'var(--border)';
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'grid',
       gridTemplateColumns: `repeat(auto-fit, minmax(min(100%, 200px), 1fr))`,
       borderTop: `var(--border-width) solid ${rule}`,

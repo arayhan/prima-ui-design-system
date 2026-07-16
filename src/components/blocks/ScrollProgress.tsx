@@ -6,6 +6,7 @@ export interface ScrollProgressProps {
   /** Track a scrollable element instead of the whole page. */
   container?: React.RefObject<HTMLElement>;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -15,7 +16,7 @@ export interface ScrollProgressProps {
  * The fill still tracks scroll under reduced motion — it's a position
  * indicator, not decoration.
  */
-export function ScrollProgress({ height = 3, container, style }: ScrollProgressProps) {
+export function ScrollProgress({ height = 3, container, style, className }: ScrollProgressProps) {
   const [progress, setProgress] = React.useState(0);
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -50,6 +51,7 @@ export function ScrollProgress({ height = 3, container, style }: ScrollProgressP
   return (
     <div
       aria-hidden="true"
+      className={className}
       style={{
         position: container ? 'absolute' : 'fixed', top: 0, left: 0, right: 0, height, zIndex: 100,
         ...style,

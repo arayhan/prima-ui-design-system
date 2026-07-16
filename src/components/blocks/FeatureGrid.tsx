@@ -15,15 +15,16 @@ export interface FeatureGridProps {
   columns?: 2 | 3;
   items: FeatureItem[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima feature grid — a grid of Cards, each opened by a mono running number
  * (and optional cobalt Phosphor icon), then an H3 title and body copy.
  */
-export function FeatureGrid({ columns = 3, items, style }: FeatureGridProps) {
+export function FeatureGrid({ columns = 3, items, style, className }: FeatureGridProps) {
   return (
-    <div style={{
+    <div className={className} style={{
       display: 'grid', gap: 'var(--space-5)',
       gridTemplateColumns: `repeat(auto-fit, minmax(min(100%, ${columns === 2 ? 380 : 280}px), 1fr))`,
       ...style,

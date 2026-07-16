@@ -10,6 +10,7 @@ export interface CardProps {
   arrow?: boolean;
   children?: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
   [key: string]: unknown;
 }
 
@@ -17,7 +18,7 @@ export interface CardProps {
  * Prima card. White surface, 1.5px hairline border, radius md. Flat — no shadow, no lift.
  * Interactive cards shift to the ice background tone and nudge a cobalt arrow on hover.
  */
-export function Card({ interactive = false, href, onClick, arrow = false, children, style, ...rest }: CardProps) {
+export function Card({ interactive = false, href, onClick, arrow = false, children, style, className, ...rest }: CardProps) {
   const [hover, setHover] = React.useState(false);
   const active = interactive && hover;
 
@@ -34,7 +35,7 @@ export function Card({ interactive = false, href, onClick, arrow = false, childr
   const Tag: any = href ? 'a' : 'div';
   return (
     <Tag
-      href={href} onClick={onClick} style={s}
+      href={href} onClick={onClick} style={s} className={className}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} {...rest}
     >
       {children}

@@ -9,6 +9,7 @@ export interface SectionHeaderProps {
   title: string;
   description?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -29,9 +30,9 @@ function AnimatedNumber({ number }: { number: string }) {
   );
 }
 
-export function SectionHeader({ eyebrow, number, title, description, style }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, number, title, description, style, className }: SectionHeaderProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', ...style }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', ...style }}>
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
         borderTop: 'var(--border-width-rule) solid var(--border-strong)', paddingTop: 'var(--space-3)', gap: 'var(--space-4)',

@@ -13,6 +13,7 @@ export interface RadioGroupProps {
   helper?: string;
   error?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function RadioDot({ selected, invalid }: { selected: boolean; invalid: boolean }) {
@@ -37,10 +38,10 @@ function RadioDot({ selected, invalid }: { selected: boolean; invalid: boolean }
  * Prima radio group — 18px circles with a cobalt dot that scales in.
  * Same field language as every other Prima control.
  */
-export function RadioGroup({ label, options, value, onChange, direction = 'column', helper, error, style }: RadioGroupProps) {
+export function RadioGroup({ label, options, value, onChange, direction = 'column', helper, error, style, className }: RadioGroupProps) {
   const invalid = !!error;
   return (
-    <div role="radiogroup" aria-label={label} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', ...style }}>
+    <div role="radiogroup" aria-label={label} className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', ...style }}>
       {label && <FieldLabel>{label}</FieldLabel>}
       <div style={{
         display: 'flex', flexDirection: direction, flexWrap: 'wrap',

@@ -22,6 +22,7 @@ export interface SocialLinksProps {
   /** Square size in px, default 44 */
   size?: number;
   links?: SocialLink[];
+  className?: string;
 }
 
 function SocialSquare({ link, size }: { link: SocialLink; size: number }) {
@@ -51,9 +52,9 @@ const LINKS: SocialLink[] = [
 ];
 
 /** Prima social links — a row of bordered square icon links; border and glyph go cobalt on hover. */
-export function SocialLinks({ size = 44, links = LINKS }: SocialLinksProps) {
+export function SocialLinks({ size = 44, links = LINKS, className }: SocialLinksProps) {
   return (
-    <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+    <div className={className} style={{ display: 'flex', gap: 'var(--space-3)' }}>
       {links.map((l) => <SocialSquare key={l.name} link={l} size={size} />)}
     </div>
   );

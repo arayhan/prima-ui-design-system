@@ -18,6 +18,7 @@ export interface AvatarProps {
   size?: number;
   status?: AvatarStatus;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function initials(name: string): string {
@@ -29,11 +30,11 @@ function initials(name: string): string {
  * with a hairline border. Falls back to mono initials on ice; an optional
  * semantic status dot sits bottom-right.
  */
-export function Avatar({ src, name, size = 44, status, style }: AvatarProps) {
+export function Avatar({ src, name, size = 44, status, style, className }: AvatarProps) {
   const [failed, setFailed] = React.useState(false);
   const showImage = src && !failed;
   return (
-    <span style={{ position: 'relative', display: 'inline-block', width: size, height: size, flex: 'none', ...style }}>
+    <span className={className} style={{ position: 'relative', display: 'inline-block', width: size, height: size, flex: 'none', ...style }}>
       {showImage ? (
         <img
           src={src} alt={name} onError={() => setFailed(true)}

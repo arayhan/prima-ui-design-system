@@ -14,6 +14,7 @@ export interface AnalyticsCardProps {
   /** Sparkline series */
   data?: number[];
   style?: React.CSSProperties;
+  className?: string;
 }
 
 const TREND_COLOR = { up: 'var(--success)', down: 'var(--error)', flat: 'var(--text-secondary)' };
@@ -23,12 +24,13 @@ const TREND_COLOR = { up: 'var(--success)', down: 'var(--error)', flat: 'var(--t
  * value, semantic delta chip, cobalt sparkline. Compose a dashboard from a
  * grid of these plus a LineChart or BarChart.
  */
-export function AnalyticsCard({ label, value, delta, trend = 'up', data, style }: AnalyticsCardProps) {
+export function AnalyticsCard({ label, value, delta, trend = 'up', data, style, className }: AnalyticsCardProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const display = useCountAnimationText(ref as React.RefObject<Element>, value);
   return (
     <div
       ref={ref}
+      className={className}
       style={{
         display: 'flex', flexDirection: 'column', gap: 'var(--space-3)',
         padding: 'var(--space-5)', background: 'var(--surface)',

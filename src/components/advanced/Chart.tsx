@@ -27,10 +27,11 @@ export interface LineChartProps {
   /** Accessible description */
   label?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /** Prima line chart — a 2px cobalt line over hairline gridlines, min/max mono labels. */
-export function LineChart({ data, labels, height = 220, area = true, label = 'Line chart', style }: LineChartProps) {
+export function LineChart({ data, labels, height = 220, area = true, label = 'Line chart', style, className }: LineChartProps) {
   const W = 600, H = height, PAD = 28;
   const pts = scalePoints(data, W, H, PAD);
   const path = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x},${y}`).join(' ');
@@ -41,6 +42,7 @@ export function LineChart({ data, labels, height = 220, area = true, label = 'Li
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}
+      className={className}
       style={{ width: '100%', height: 'auto', display: 'block', ...style }}
     >
       {gridYs.map((y) => (
@@ -72,6 +74,7 @@ export interface BarChartProps {
   /** Accessible description */
   label?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function Bar({ x, y, w, h, value, cx }: { x: number; y: number; w: number; h: number; value: number; cx: number }) {
@@ -91,7 +94,7 @@ function Bar({ x, y, w, h, value, cx }: { x: number; y: number; w: number; h: nu
 }
 
 /** Prima bar chart — cobalt bars on a 1.5px ink baseline, mono value + category labels. */
-export function BarChart({ data, height = 220, label = 'Bar chart', style }: BarChartProps) {
+export function BarChart({ data, height = 220, label = 'Bar chart', style, className }: BarChartProps) {
   const W = 600, H = height, PAD = 28;
   const max = Math.max(...data.map((d) => d.value)) || 1;
   const slot = (W - PAD * 2) / data.length;
@@ -100,6 +103,7 @@ export function BarChart({ data, height = 220, label = 'Bar chart', style }: Bar
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}
+      className={className}
       style={{ width: '100%', height: 'auto', display: 'block', ...style }}
     >
       <line x1={PAD} x2={W - PAD} y1={H - PAD} y2={H - PAD} stroke="var(--border-strong)" strokeWidth="1.5" />
@@ -124,15 +128,16 @@ export interface SparklineProps {
   width?: number;
   height?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /** Prima sparkline — a bare cobalt line with an end dot, for stat cards. */
-export function Sparkline({ data, width = 120, height = 36, style }: SparklineProps) {
+export function Sparkline({ data, width = 120, height = 36, style, className }: SparklineProps) {
   const pts = scalePoints(data, width, height, 3);
   const path = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x},${y}`).join(' ');
   const [ex, ey] = pts[pts.length - 1];
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} aria-hidden="true" style={{ width, height, display: 'block', ...style }}>
+    <svg viewBox={`0 0 ${width} ${height}`} aria-hidden="true" className={className} style={{ width, height, display: 'block', ...style }}>
       <path d={path} fill="none" stroke="var(--primary)" strokeWidth="1.5" strokeLinejoin="round" />
       <circle cx={ex} cy={ey} r="2.5" fill="var(--primary)" />
     </svg>

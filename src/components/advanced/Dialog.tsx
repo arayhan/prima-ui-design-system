@@ -12,6 +12,7 @@ export interface DialogProps {
   actions?: React.ReactNode;
   /** Max panel width in px. Default 480. */
   width?: number;
+  className?: string;
 }
 
 /**
@@ -19,7 +20,7 @@ export interface DialogProps {
  * so ancestor transforms can't trap it. Escape and scrim click close; body
  * scroll locks while open.
  */
-export function Dialog({ open, onClose, eyebrow, title, children, actions, width = 480 }: DialogProps) {
+export function Dialog({ open, onClose, eyebrow, title, children, actions, width = 480, className }: DialogProps) {
   React.useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -45,6 +46,7 @@ export function Dialog({ open, onClose, eyebrow, title, children, actions, width
     >
       <div
         role="dialog" aria-modal="true" aria-label={title}
+        className={className}
         style={{
           width: '100%', maxWidth: width, maxHeight: '85vh', overflowY: 'auto',
           background: 'var(--surface)', borderRadius: 'var(--radius-lg)',

@@ -14,6 +14,7 @@ export interface MultiSelectProps {
   placeholder?: string;
   id?: string;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 function OptionRow({ option, selected, onToggle }: { option: SelectOption; selected: boolean; onToggle: () => void }) {
@@ -52,7 +53,7 @@ function OptionRow({ option, selected, onToggle }: { option: SelectOption; selec
  * chips, opening a floating checklist (the one sanctioned shadow). Closes on
  * Escape and outside click. Controlled via `value` / `onChange`.
  */
-export function MultiSelect({ label, helper, error, options, value, onChange, placeholder = 'Select…', id, style }: MultiSelectProps) {
+export function MultiSelect({ label, helper, error, options, value, onChange, placeholder = 'Select…', id, style, className }: MultiSelectProps) {
   const [open, setOpen] = React.useState(false);
   const rootRef = React.useRef<HTMLDivElement>(null);
   const inputId = id || (label ? 'ms-' + label.toLowerCase().replace(/\W+/g, '-') : undefined);
@@ -79,7 +80,7 @@ export function MultiSelect({ label, helper, error, options, value, onChange, pl
   const selected = options.filter((o) => value.includes(o.value));
 
   return (
-    <div style={{ ...fieldWrap, ...style }}>
+    <div className={className} style={{ ...fieldWrap, ...style }}>
       {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
       <div ref={rootRef} style={{ position: 'relative' }}>
         <button

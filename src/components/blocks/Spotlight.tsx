@@ -5,13 +5,14 @@ export interface SpotlightProps {
   /** Spotlight diameter in px. Default 260. */
   size?: number;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
  * Prima spotlight — a cobalt radial glow that follows the pointer inside a
  * hairline card. Pointer-fine devices only; a no-op wrapper on touch.
  */
-export function Spotlight({ children, size = 260, style }: SpotlightProps) {
+export function Spotlight({ children, size = 260, style, className }: SpotlightProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [pos, setPos] = React.useState({ x: size / 2, y: size / 2 });
   const [active, setActive] = React.useState(false);
@@ -27,6 +28,7 @@ export function Spotlight({ children, size = 260, style }: SpotlightProps) {
     <div
       ref={ref}
       onPointerMove={onMove} onPointerEnter={() => setActive(true)} onPointerLeave={() => setActive(false)}
+      className={className}
       style={{
         position: 'relative', overflow: 'hidden',
         background: 'var(--surface)', border: 'var(--border-width) solid var(--border)',

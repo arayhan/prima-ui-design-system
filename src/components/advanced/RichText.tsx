@@ -1,9 +1,11 @@
 import React from 'react';
+import { cx } from '../core/_cx';
 
 export interface RichTextProps {
   /** Rendered HTML content (headings, paragraphs, lists, quotes, code…) */
   children: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 // Descendant styling needs real CSS — same precedent as Marquee's keyframes.
@@ -34,9 +36,9 @@ const PROSE_CSS = `
  * rendered markdown/CMS HTML; headings, links, lists, quotes, and code all
  * pick up the Prima voice.
  */
-export function RichText({ children, style }: RichTextProps) {
+export function RichText({ children, style, className }: RichTextProps) {
   return (
-    <div className="prima-prose" style={style}>
+    <div className={cx('prima-prose', className)} style={style}>
       {children}
       <style>{PROSE_CSS}</style>
     </div>

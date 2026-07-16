@@ -12,15 +12,16 @@ export interface TimelineItemProps {
   tags?: string[];
   /** Hides the 2px connector below (last row) */
   last?: boolean;
+  className?: string;
 }
 
 /**
  * Prima timeline row for color-block storytelling: a mono year column, a 2px connector
  * with a cobalt node dot, and an ALL-CAPS title with optional org, description, and chips.
  */
-export function TimelineItem({ period, title, org, description, tags = [], last = false }: TimelineItemProps) {
+export function TimelineItem({ period, title, org, description, tags = [], last = false, className }: TimelineItemProps) {
   return (
-    <div style={{ display: 'flex', gap: 'var(--space-5)' }}>
+    <div className={className} style={{ display: 'flex', gap: 'var(--space-5)' }}>
       <div style={{
         flex: 'none', width: 88, paddingTop: 2, textAlign: 'right',
         fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', letterSpacing: 'var(--tracking-label)',

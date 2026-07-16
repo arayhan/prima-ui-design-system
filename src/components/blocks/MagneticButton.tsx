@@ -5,6 +5,7 @@ import type { ButtonProps } from '../core/Button';
 export interface MagneticButtonProps extends ButtonProps {
   /** Maximum pull toward the pointer in px. Default 8. */
   strength?: number;
+  className?: string;
 }
 
 /**
@@ -12,7 +13,7 @@ export interface MagneticButtonProps extends ButtonProps {
  * and springs back on leave. Pointer-fine devices only; inert under reduced
  * motion. Pure CSS transitions — no animation library.
  */
-export function MagneticButton({ strength = 8, style, ...rest }: MagneticButtonProps) {
+export function MagneticButton({ strength = 8, style, className, ...rest }: MagneticButtonProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const [offset, setOffset] = React.useState({ x: 0, y: 0 });
   const [snapping, setSnapping] = React.useState(false);
@@ -41,6 +42,7 @@ export function MagneticButton({ strength = 8, style, ...rest }: MagneticButtonP
   return (
     <span
       ref={ref}
+      className={className}
       onPointerMove={onMove} onPointerLeave={onLeave}
       style={{
         display: 'inline-block',

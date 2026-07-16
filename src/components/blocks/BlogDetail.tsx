@@ -23,6 +23,7 @@ export interface BlogDetailProps {
   /** Article body — wrap in RichText for prose styling */
   children?: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 /**
@@ -31,10 +32,10 @@ export interface BlogDetailProps {
  * optional author line, then a hairline rule before the article body.
  */
 export function BlogDetail({
-  date, title, lede, tags, readTime, author, backHref, backLabel = 'ALL POSTS', children, style,
+  date, title, lede, tags, readTime, author, backHref, backLabel = 'ALL POSTS', children, style, className,
 }: BlogDetailProps) {
   return (
-    <article style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', ...style }}>
+    <article className={className} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', ...style }}>
       {backHref && (
         <a href={backHref} style={{
           display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)', width: 'fit-content',
