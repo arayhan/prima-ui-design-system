@@ -16,6 +16,8 @@ export { Progress } from './components/core/Progress';
 export type { ProgressProps } from './components/core/Progress';
 export { Slider } from './components/core/Slider';
 export type { SliderProps } from './components/core/Slider';
+export { Tabs } from './components/core/Tabs';
+export type { TabsProps, TabItem } from './components/core/Tabs';
 export { SectionHeader } from './components/core/SectionHeader';
 export type { SectionHeaderProps } from './components/core/SectionHeader';
 export { TimelineItem } from './components/core/TimelineItem';
