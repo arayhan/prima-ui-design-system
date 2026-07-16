@@ -31,6 +31,8 @@ export { ContextMenu } from './components/advanced/ContextMenu';
 export type { ContextMenuProps, ContextMenuItem } from './components/advanced/ContextMenu';
 export { HoverCard } from './components/advanced/HoverCard';
 export type { HoverCardProps } from './components/advanced/HoverCard';
+export { MenuBar } from './components/advanced/MenuBar';
+export type { MenuBarProps, MenuBarMenu, MenuBarItem } from './components/advanced/MenuBar';
 export { MultiSelect } from './components/advanced/MultiSelect';
 export type { MultiSelectProps } from './components/advanced/MultiSelect';
 export { Checkbox } from './components/advanced/Checkbox';
