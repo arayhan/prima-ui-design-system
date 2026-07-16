@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Button, ButtonGroup, Calendar, Checkbox, Combobox, DatePicker, Input,
-  MultiSelect, PasswordInput, RadioGroup, RichTextEditor, Textarea, useToast,
+  Button, ButtonGroup, Calendar, Checkbox, ColorPicker, Combobox, DatePicker, Dropzone, Input,
+  MultiSelect, OtpInput, PasswordInput, RadioGroup, RichTextEditor, Textarea, useToast,
 } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
@@ -107,6 +107,36 @@ function RichTextEditorDemo() {
     '<h2>Release notes</h2><p>Shipping the <code>RichTextEditor</code> today — <strong>bold</strong>, <em>italic</em>, links, and more.</p><ul><li>Zero editor dependency</li><li>Built on execCommand</li></ul>',
   );
   return <RichTextEditor label="Post body" value={html} onChange={setHtml} helper="Formats to HTML — read it back with onChange." />;
+}
+
+function OtpInputDemo() {
+  const [value, setValue] = React.useState('24');
+  return <OtpInput length={6} value={value} onChange={setValue} label="Verification code" helper="Sent to your email — paste it in." autoFocus />;
+}
+
+function ColorPickerDemo() {
+  const [hex, setHex] = React.useState('#1B44F0');
+  return (
+    <div style={{ width: 220, maxWidth: '100%' }}>
+      <ColorPicker label="Accent color" value={hex} onChange={setHex} helper="Pick a preset or type a hex value." />
+    </div>
+  );
+}
+
+function DropzoneDemo() {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <Dropzone
+      label="Drop images here"
+      helper="PNG or JPG, up to 5MB."
+      accept="image/*"
+      multiple
+      maxSize={5 * 1024 * 1024}
+      files={files}
+      onFilesAdded={(added) => setFiles((f) => [...f, ...added])}
+      onRemove={(index) => setFiles((f) => f.filter((_, i) => i !== index))}
+    />
+  );
 }
 
 interface FormState { name: string; email: string; message: string }
@@ -326,6 +356,74 @@ stripHtmlToText(html); // "Hello world" — plain-text utility`,
       { name: 'label / helper / error', type: 'string', description: 'Prima field language.' },
     ],
     render: () => <RichTextEditorDemo />,
+    block: true,
+  },
+  {
+    id: 'otpinput',
+    name: 'OtpInput',
+    description: 'N mono single-character boxes for OTP/PIN entry — auto-advances on type, walks backward clearing on Backspace, arrow keys move between boxes, and pasting a full code distributes across all boxes at once.',
+    snippet: `import { OtpInput } from 'prima-ui';
+
+const [code, setCode] = useState('');
+
+<OtpInput
+  length={6} value={code} onChange={setCode}
+  label="Verification code"
+  helper="Sent to your email — paste it in."
+  autoFocus
+/>`,
+    props: [
+      { name: 'length', type: 'number', default: '6', description: 'Number of boxes.' },
+      { name: 'value / onChange', type: 'string / (v) => void', description: 'Controlled code, e.g. "123456".' },
+      { name: 'numeric', type: 'boolean', default: 'true', description: 'Restrict input to digits only.' },
+      { name: 'autoFocus', type: 'boolean', default: 'false', description: 'Focus the first empty box on mount.' },
+      { name: 'label / helper / error', type: 'string', description: 'Prima field language.' },
+    ],
+    render: () => <OtpInputDemo />,
+  },
+  {
+    id: 'colorpicker',
+    name: 'ColorPicker',
+    description: 'A swatch trigger that opens a Popover with a preset grid plus a hex text input for custom values. The hex input only commits once its content is a syntactically valid hex color.',
+    snippet: `import { ColorPicker } from 'prima-ui';
+
+const [hex, setHex] = useState('#1B44F0');
+
+<ColorPicker label="Accent color" value={hex} onChange={setHex} />`,
+    props: [
+      { name: 'value', type: 'string', description: 'Hex color, e.g. "#1B44F0".' },
+      { name: 'onChange', type: '(hex: string) => void', description: 'Called with a valid hex color.' },
+      { name: 'presets', type: 'string[]', description: 'Swatch grid values. A sensible default set is provided.' },
+      { name: 'label / helper / error', type: 'string', description: 'Prima field language.' },
+    ],
+    render: () => <ColorPickerDemo />,
+  },
+  {
+    id: 'dropzone',
+    name: 'Dropzone',
+    description: 'A dashed hairline panel that accepts drag-and-drop or click-to-browse file selection, with a controlled file list below showing image previews, names, sizes and remove buttons.',
+    snippet: `import { Dropzone } from 'prima-ui';
+
+const [files, setFiles] = useState<File[]>([]);
+
+<Dropzone
+  label="Drop images here"
+  accept="image/*" multiple maxSize={5 * 1024 * 1024}
+  files={files}
+  onFilesAdded={(added) => setFiles((f) => [...f, ...added])}
+  onRemove={(i) => setFiles((f) => f.filter((_, idx) => idx !== i))}
+/>`,
+    props: [
+      { name: 'onFilesAdded', type: '(files: File[]) => void', description: 'Called with newly accepted files.' },
+      { name: 'files', type: 'File[]', description: 'Controlled list shown below the drop target.' },
+      { name: 'onRemove', type: '(index: number) => void', description: 'Called when a file row\'s remove button is clicked.' },
+      { name: 'accept', type: 'string', description: 'e.g. "image/*" or ".pdf,.docx". Default accepts anything.' },
+      { name: 'multiple', type: 'boolean', default: 'false', description: 'Allow selecting/dropping more than one file.' },
+      { name: 'maxSize', type: 'number', description: 'Max file size in bytes — larger files are rejected.' },
+      { name: 'onReject', type: "(file, reason: 'size' | 'type') => void", description: 'Called for files that fail accept/maxSize checks.' },
+      { name: 'label / helper', type: 'string', description: 'Prima field language.' },
+    ],
+    render: () => <DropzoneDemo />,
     block: true,
   },
   {

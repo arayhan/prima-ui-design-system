@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import {
-  ButtonGroup, Calendar, Checkbox, Combobox, DatePicker, PasswordInput, RadioGroup,
+  ButtonGroup, Calendar, Checkbox, ColorPicker, Combobox, DatePicker, Dropzone, OtpInput, PasswordInput, RadioGroup,
 } from '../src/index';
 
 const meta: Meta = { title: 'Advanced/Form Controls' };
@@ -80,3 +80,32 @@ function DatePickerDemo() {
   );
 }
 export const DatePickerStory: StoryObj = { name: 'DatePicker', render: () => <DatePickerDemo /> };
+
+function OtpInputDemo() {
+  const [v, setV] = React.useState('');
+  return <OtpInput length={6} value={v} onChange={setV} label="Verification code" autoFocus />;
+}
+export const OtpInputStory: StoryObj = { name: 'OtpInput', render: () => <OtpInputDemo /> };
+
+function ColorPickerDemo() {
+  const [hex, setHex] = React.useState('#1B44F0');
+  return (
+    <div style={{ maxWidth: 220 }}>
+      <ColorPicker label="Accent color" value={hex} onChange={setHex} />
+    </div>
+  );
+}
+export const ColorPickerStory: StoryObj = { name: 'ColorPicker', render: () => <ColorPickerDemo /> };
+
+function DropzoneDemo() {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <Dropzone
+      label="Drop images here" accept="image/*" multiple
+      files={files}
+      onFilesAdded={(added) => setFiles((f) => [...f, ...added])}
+      onRemove={(i) => setFiles((f) => f.filter((_, idx) => idx !== i))}
+    />
+  );
+}
+export const DropzoneStory: StoryObj = { name: 'Dropzone', render: () => <DropzoneDemo /> };
