@@ -49,6 +49,18 @@ function buildState(): __UNSTABLE_Project_OnDiskState {
   } as unknown as __UNSTABLE_Project_OnDiskState;
 }
 
+// Built once at module scope: @theatre/core rejects a `sheet.object(key, config)`
+// call whose config is a *different object* than the one already registered for
+// that key, even when the values match — which a fresh object literal built
+// inside an effect would trip on every re-mount (e.g. React StrictMode's
+// dev-mode double-invoke).
+const STATE = buildState();
+const TILE_CONFIGS = TILES.map((tile) => ({
+  x: types.number(tile.from.x),
+  rotate: types.number(tile.from.rotate),
+  opacity: types.number(tile.from.opacity, { range: [0, 1] as [number, number] }),
+}));
+
 export default function TheatreScrubber() {
   const [poses, setPoses] = React.useState<TilePose[]>(() => TILES.map((t) => t.from));
   const [position, setPosition] = React.useState(0);
@@ -57,16 +69,12 @@ export default function TheatreScrubber() {
   const rafRef = React.useRef(0);
 
   React.useEffect(() => {
-    const project = getProject('PrimaPlayground', { state: buildState() });
+    const project = getProject('PrimaPlayground', { state: STATE });
     const sheet = project.sheet(SHEET_ID);
     sequenceRef.current = sheet.sequence;
 
     const unsubs = TILES.map((tile, i) =>
-      sheet.object(tile.key, {
-        x: types.number(tile.from.x),
-        rotate: types.number(tile.from.rotate),
-        opacity: types.number(tile.from.opacity, { range: [0, 1] }),
-      }).onValuesChange((v) => {
+      sheet.object(tile.key, TILE_CONFIGS[i]).onValuesChange((v) => {
         setPoses((prev) => { const next = [...prev]; next[i] = v as TilePose; return next; });
       }),
     );
