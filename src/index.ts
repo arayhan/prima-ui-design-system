@@ -49,6 +49,8 @@ export { ContextMenu } from './components/advanced/ContextMenu';
 export type { ContextMenuProps, ContextMenuItem } from './components/advanced/ContextMenu';
 export { HoverCard } from './components/advanced/HoverCard';
 export type { HoverCardProps } from './components/advanced/HoverCard';
+export { Comparison } from './components/advanced/Comparison';
+export type { ComparisonProps } from './components/advanced/Comparison';
 export { Tooltip } from './components/advanced/Tooltip';
 export type { TooltipProps } from './components/advanced/Tooltip';
 export { MenuBar } from './components/advanced/MenuBar';
