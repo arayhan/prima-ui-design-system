@@ -12,6 +12,8 @@ export { Select } from './components/core/Select';
 export type { SelectProps, SelectOption } from './components/core/Select';
 export { Switch } from './components/core/Switch';
 export type { SwitchProps } from './components/core/Switch';
+export { Rating } from './components/core/Rating';
+export type { RatingProps } from './components/core/Rating';
 export { Progress } from './components/core/Progress';
 export type { ProgressProps } from './components/core/Progress';
 export { Slider } from './components/core/Slider';
