@@ -1,8 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import {
-  Button, ContextMenu, Dialog, DialogForm, Drawer, HoverCard, Input, MenuBar, Popover, Tooltip,
+  Button, ContextMenu, Dialog, DialogForm, DialogStack, Drawer, HoverCard, Input, MenuBar, Popover, Tooltip,
 } from '../src/index';
+import type { DialogStackFrame } from '../src/index';
 
 const meta: Meta = { title: 'Advanced/Overlays' };
 export default meta;
@@ -125,3 +126,32 @@ function DialogFormDemo() {
   );
 }
 export const DialogFormStory: StoryObj = { name: 'DialogForm', render: () => <DialogFormDemo /> };
+
+function DialogStackDemo() {
+  const [frames, setFrames] = React.useState<DialogStackFrame[]>([]);
+  const openStack = () => {
+    setFrames([{
+      id: 'step-1', eyebrow: 'STEP 1', title: 'Create project',
+      content: <Input label="Project name" placeholder="Prima" />,
+      actions: (
+        <Button onClick={() => setFrames((f) => [...f, {
+          id: 'step-2', eyebrow: 'STEP 2', title: 'Add teammates',
+          content: <Input label="Invite by email" placeholder="teammate@company.com" />,
+          actions: (
+            <>
+              <Button variant="secondary" onClick={() => setFrames((f2) => f2.slice(0, -1))}>Back</Button>
+              <Button onClick={() => setFrames([])}>Finish</Button>
+            </>
+          ),
+        }])}>Next</Button>
+      ),
+    }]);
+  };
+  return (
+    <>
+      <Button onClick={openStack}>Create project</Button>
+      <DialogStack open={frames.length > 0} frames={frames} onClose={() => setFrames([])} onBack={() => setFrames((f) => f.slice(0, -1))} />
+    </>
+  );
+}
+export const DialogStackStory: StoryObj = { name: 'DialogStack', render: () => <DialogStackDemo /> };

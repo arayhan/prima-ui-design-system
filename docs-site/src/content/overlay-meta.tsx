@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  Button, ContextMenu, Dialog, DialogForm, Drawer, Dropdown, HoverCard, Input, MenuBar, Popover,
-  Tooltip, useToast,
+  Button, ContextMenu, Dialog, DialogForm, DialogStack, Drawer, Dropdown, HoverCard, Input, MenuBar,
+  Popover, Tooltip, useToast,
 } from 'prima-ui';
+import type { DialogStackFrame } from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function ToastDemo() {
@@ -171,6 +172,67 @@ function DialogFormDemo() {
         <Input label="Project name" placeholder="Prima" value={name} onChange={(e) => setName(e.target.value)} />
         <Input label="Description" placeholder="What are you building?" value={description} onChange={(e) => setDescription(e.target.value)} />
       </DialogForm>
+    </>
+  );
+}
+
+function DialogStackDemo() {
+  const [frames, setFrames] = React.useState<DialogStackFrame[]>([]);
+  const { toast } = useToast();
+
+  const pushTeammates = () => {
+    setFrames((prev) => [
+      ...prev,
+      {
+        id: 'teammates',
+        eyebrow: 'STEP 2',
+        title: 'Add teammates',
+        content: (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+            <Input label="Invite by email" placeholder="teammate@company.com" />
+          </div>
+        ),
+        actions: (
+          <>
+            <Button variant="secondary" onClick={() => setFrames((f) => f.slice(0, -1))}>Back</Button>
+            <Button onClick={finish}>Finish</Button>
+          </>
+        ),
+      },
+    ]);
+  };
+
+  const finish = () => {
+    setFrames([]);
+    toast({ title: 'Project created', description: 'Prima is ready to go.', variant: 'success' });
+  };
+
+  const openStack = () => {
+    setFrames([
+      {
+        id: 'details',
+        eyebrow: 'STEP 1',
+        title: 'Create project',
+        content: (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+            <Input label="Project name" placeholder="Prima" />
+            <Input label="Type" placeholder="Web app" />
+          </div>
+        ),
+        actions: <Button onClick={pushTeammates}>Next</Button>,
+      },
+    ]);
+  };
+
+  return (
+    <>
+      <Button onClick={openStack}>Create project</Button>
+      <DialogStack
+        open={frames.length > 0}
+        frames={frames}
+        onClose={() => setFrames([])}
+        onBack={() => setFrames((f) => f.slice(0, -1))}
+      />
     </>
   );
 }
@@ -404,5 +466,28 @@ const { toast } = useToast();
       { name: 'width', type: 'number', default: '480', description: 'Max panel width in px.' },
     ],
     render: () => <DialogFormDemo />,
+  },
+  {
+    id: 'dialog-stack',
+    name: 'DialogStack',
+    description: 'A multi-frame Dialog — pushing a new frame stacks it visually on top of the previous one, which recedes slightly (translated up, scaled down, faded) behind it. Escape/scrim close the whole stack; a back button pops just the top frame.',
+    snippet: `import { DialogStack } from 'prima-ui';
+
+const [frames, setFrames] = useState<DialogStackFrame[]>([]);
+
+<DialogStack
+  open={frames.length > 0}
+  frames={frames}
+  onClose={() => setFrames([])}
+  onBack={() => setFrames((f) => f.slice(0, -1))}
+/>`,
+    props: [
+      { name: 'open', type: 'boolean', description: 'Controlled visibility.' },
+      { name: 'frames', type: 'DialogStackFrame[]', description: '{ id, eyebrow?, title, content, actions? } — ordered stack, last item is the active/topmost frame.' },
+      { name: 'onClose', type: '() => void', description: 'Closes the entire stack (Escape, scrim click, or an explicit close).' },
+      { name: 'onBack', type: '() => void', description: 'Pops just the top frame — shows a back button in the header when frames.length > 1.' },
+      { name: 'width', type: 'number', default: '480', description: 'Max panel width in px.' },
+    ],
+    render: () => <DialogStackDemo />,
   },
 ];
