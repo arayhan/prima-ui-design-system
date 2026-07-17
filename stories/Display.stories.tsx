@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import {
   Accordion, AnalyticsCard, Avatar, AvatarStack, Bubble, BarChart, Carousel, Chip, CodeSnippet,
-  DataTable, EmptyState, ErrorState, ImageCropper, ImageZoom, LineChart, Pagination,
-  RichText, Thumbnail, VideoPlayer,
+  Comparison, DataTable, Deck, EmptyState, ErrorState, Glimpse, ImageCropper, ImageZoom, LineChart,
+  Pagination, RichText, Thumbnail, Tree, VideoPlayer,
 } from '../src/index';
+import type { TreeNode } from '../src/index';
 
 const meta: Meta = { title: 'Advanced/Display' };
 export default meta;
@@ -192,6 +193,54 @@ export const VideoPlayerStory: StoryObj = {
   render: () => (
     <div style={{ maxWidth: 560 }}>
       <VideoPlayer src={SAMPLE_VIDEO} />
+    </div>
+  ),
+};
+
+export const ComparisonStory: StoryObj = {
+  name: 'Comparison',
+  render: () => (
+    <Comparison
+      style={{ width: 420, aspectRatio: '16/10' }}
+      aspectRatio={16 / 10}
+      after={<img src={PLACEHOLDER_IMG} alt="Color" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+      before={<img src={`${PLACEHOLDER_IMG}?grayscale`} alt="Grayscale" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+    />
+  ),
+};
+
+function DeckStoryDemo() {
+  const cards = ['ONE', 'TWO', 'THREE'].map((label) => (
+    <div key={label} style={{
+      width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'var(--surface)', fontFamily: 'var(--font-display)', fontSize: 24, textTransform: 'uppercase',
+    }}>{label}</div>
+  ));
+  return <Deck>{cards}</Deck>;
+}
+export const DeckStory: StoryObj = { name: 'Deck', render: () => <DeckStoryDemo /> };
+
+export const GlimpseStory: StoryObj = {
+  name: 'Glimpse',
+  render: () => (
+    <Glimpse
+      href="https://github.com/arayhan/prima-ui"
+      data={{ title: 'Prima UI', description: 'Engineered minimalism, cobalt on ice.', image: PLACEHOLDER_IMG, url: 'github.com/arayhan/prima-ui' }}
+    >
+      Prima UI on GitHub
+    </Glimpse>
+  ),
+};
+
+const TREE_DATA: TreeNode[] = [
+  { id: 'src', label: 'src', children: [{ id: 'index', label: 'index.ts' }] },
+  { id: 'readme', label: 'README.md' },
+];
+export const TreeStory: StoryObj = {
+  name: 'Tree',
+  render: () => (
+    <div style={{ width: 240 }}>
+      <Tree data={TREE_DATA} defaultExpanded={['src']} />
     </div>
   ),
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Accordion, Alert, AnalyticsCard, Avatar, AvatarStack, BarChart, Banner, Bubble, Button, Carousel,
-  Chip, CodeSnippet, DataTable, EmptyState, ErrorState, ImageCropper, ImageZoom, LineChart,
-  Pagination, RichText, Thumbnail, VideoPlayer,
+  Chip, CodeSnippet, Comparison, DataTable, Deck, EmptyState, ErrorState, Glimpse, ImageCropper,
+  ImageZoom, LineChart, Pagination, RichText, Thumbnail, Tree, VideoPlayer,
 } from 'prima-ui';
-import type { CropRect } from 'prima-ui';
+import type { CropRect, TreeNode } from 'prima-ui';
 import type { DocMeta } from './forms-meta';
 
 function DismissibleAlertDemo() {
@@ -87,6 +87,104 @@ function VideoPlayerDemo() {
   return (
     <div style={{ width: '100%', maxWidth: 560 }}>
       <VideoPlayer src={SAMPLE_VIDEO} />
+    </div>
+  );
+}
+
+function ComparisonDemo() {
+  return (
+    <Comparison
+      style={{ width: 480, maxWidth: '100%', aspectRatio: '16/10' }}
+      aspectRatio={16 / 10}
+      after={<img src={PLACEHOLDER_IMG} alt="Color" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+      before={<img src={`${PLACEHOLDER_IMG}?grayscale`} alt="Grayscale" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+    />
+  );
+}
+
+const DECK_CARDS = ['ONE', 'TWO', 'THREE', 'FOUR'].map((label, i) => (
+  <div
+    key={label}
+    style={{
+      width: '100%', height: '100%', display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center', gap: 'var(--space-3)',
+      background: i % 2 === 0 ? 'var(--surface)' : 'var(--background)',
+    }}
+  >
+    <span style={{
+      fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', letterSpacing: 'var(--tracking-label)',
+      color: 'var(--primary)',
+    } as React.CSSProperties}>// CARD {i + 1}</span>
+    <span style={{
+      fontFamily: 'var(--font-display)', fontSize: 'var(--text-h2)', textTransform: 'uppercase',
+      color: 'var(--on-surface)',
+    } as React.CSSProperties}>{label}</span>
+    <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--text-secondary)' }}>
+      Drag me left or right
+    </span>
+  </div>
+));
+
+function DeckDemo() {
+  const [swiped, setSwiped] = React.useState(0);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-4)' }}>
+      <Deck onSwipe={() => setSwiped((n) => n + 1)}>{DECK_CARDS}</Deck>
+      <span style={{
+        fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', letterSpacing: 'var(--tracking-label)',
+        textTransform: 'uppercase', color: 'var(--text-secondary)',
+      } as React.CSSProperties}>Swiped {swiped} of {DECK_CARDS.length}</span>
+    </div>
+  );
+}
+
+function GlimpseDemo() {
+  return (
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body)', color: 'var(--on-surface)', margin: 0, maxWidth: 480 }}>
+      Hover a link like{' '}
+      <Glimpse
+        href="https://github.com/arayhan/prima-ui"
+        data={{
+          title: 'Prima UI',
+          description: 'A personal design system — engineered minimalism, cobalt on ice, zero runtime dependencies.',
+          image: PLACEHOLDER_IMG,
+          url: 'github.com/arayhan/prima-ui',
+        }}
+      >
+        Prima UI on GitHub
+      </Glimpse>{' '}
+      to see the preview card.
+    </p>
+  );
+}
+
+const TREE_DATA: TreeNode[] = [
+  {
+    id: 'src', label: 'src', children: [
+      {
+        id: 'components', label: 'components', children: [
+          { id: 'core', label: 'core', children: [
+            { id: 'button', label: 'Button.tsx' },
+            { id: 'card', label: 'Card.tsx' },
+          ] },
+          { id: 'advanced', label: 'advanced', children: [
+            { id: 'dropzone', label: 'Dropzone.tsx' },
+            { id: 'tree', label: 'Tree.tsx' },
+          ] },
+        ],
+      },
+      { id: 'index', label: 'index.ts' },
+    ],
+  },
+  { id: 'package', label: 'package.json' },
+  { id: 'readme', label: 'README.md' },
+];
+
+function TreeDemo() {
+  const [selected, setSelected] = React.useState('button');
+  return (
+    <div style={{ width: 280, maxWidth: '100%' }}>
+      <Tree data={TREE_DATA} defaultExpanded={['src', 'components', 'core']} selected={selected} onSelect={(id) => setSelected(id as string)} />
     </div>
   );
 }
@@ -528,6 +626,93 @@ const [page, setPage] = useState(1);
     ],
     render: () => <VideoPlayerDemo />,
     block: true,
+  },
+  {
+    id: 'comparison',
+    name: 'Comparison',
+    description: 'A before/after slider — two full-size layers with a draggable divider that reveals one and conceals the other, like an image-diff viewer. Drag (default), pointer-follow (hoverMode), or arrow keys on the handle.',
+    snippet: `import { Comparison } from 'prima-ui';
+
+<Comparison
+  aspectRatio={16 / 10}
+  before={<img src="/before.jpg" />}
+  after={<img src="/after.jpg" />}
+/>`,
+    props: [
+      { name: 'before / after', type: 'ReactNode', description: 'The two layers — before is revealed on the left up to the slider position.' },
+      { name: 'value / onChange', type: 'number / (v) => void', description: 'Controlled slider position, 0-100.' },
+      { name: 'defaultValue', type: 'number', default: '50', description: 'Initial position (uncontrolled).' },
+      { name: 'hoverMode', type: 'boolean', default: 'false', description: 'Follow the pointer on hover instead of requiring drag.' },
+      { name: 'aspectRatio', type: 'number', description: 'Fixed width/height ratio, e.g. 16/10.' },
+    ],
+    render: () => <ComparisonDemo />,
+    block: true,
+  },
+  {
+    id: 'deck',
+    name: 'Deck',
+    description: 'A Tinder-like swipeable card stack — drag the front card horizontally; release past the threshold to send it flying off, or let go early to snap back to center. Pure pointer events, no animation library.',
+    snippet: `import { Deck } from 'prima-ui';
+
+<Deck onSwipe={(dir, i) => console.log(dir, i)} onEmpty={() => console.log('done')}>
+  <Card1 />
+  <Card2 />
+  <Card3 />
+</Deck>`,
+    props: [
+      { name: 'children', type: 'ReactNode[]', description: 'Each child is one card, front to back.' },
+      { name: 'onSwipe', type: "(direction: 'left' | 'right', index: number) => void", description: 'Called when the front card is swiped off.' },
+      { name: 'onEmpty', type: '() => void', description: 'Called once, when the deck is exhausted.' },
+      { name: 'threshold', type: 'number', default: '120', description: 'Drag distance in px past which release counts as a swipe.' },
+      { name: 'stackSize', type: 'number', default: '3', description: 'How many cards behind the front one are visible.' },
+    ],
+    render: () => <DeckDemo />,
+    block: true,
+  },
+  {
+    id: 'glimpse',
+    name: 'Glimpse',
+    description: 'A link hover-preview card — like a social-media link unfurl. Since this library has no server layer, pass the preview data directly, or lazily `loadData(href)` the first time a link is hovered.',
+    snippet: `import { Glimpse } from 'prima-ui';
+
+<Glimpse href="/blog/one-accent" data={{
+  title: 'Designing with one accent',
+  description: 'Why constraint beats palette.',
+  image: '/og/one-accent.jpg',
+  url: 'arayhan.com/blog/one-accent',
+}}>
+  Read the post
+</Glimpse>`,
+    props: [
+      { name: 'href', type: 'string', description: 'The link target.' },
+      { name: 'data', type: '{ title?, description?, image?, url }', description: 'Static preview data.' },
+      { name: 'loadData', type: '(href) => Promise<GlimpseData>', description: 'Or lazily fetch it on first hover (debounced against stale responses).' },
+      { name: 'openDelay / closeDelay', type: 'number', default: '400 / 150', description: 'Hover timing, in ms.' },
+    ],
+    render: () => <GlimpseDemo />,
+  },
+  {
+    id: 'tree',
+    name: 'Tree',
+    description: 'A file-explorer-style collapsible nested list — animated expand/collapse (the same grid-rows technique as Accordion), single or multi-select (Ctrl/Cmd-click), and folder/file icons that track state.',
+    snippet: `import { Tree } from 'prima-ui';
+
+<Tree
+  data={[
+    { id: 'src', label: 'src', children: [
+      { id: 'index', label: 'index.ts' },
+    ] },
+  ]}
+  defaultExpanded={['src']}
+/>`,
+    props: [
+      { name: 'data', type: 'TreeNode[]', description: '{ id, label, icon?, children? } — nested tree data.' },
+      { name: 'expanded / onExpandedChange', type: 'string[] / (ids) => void', description: 'Controlled expanded node ids.' },
+      { name: 'selected / onSelect', type: 'string | string[]', description: 'Controlled selection — shape follows multiSelect.' },
+      { name: 'multiSelect', type: 'boolean', default: 'false', description: 'Allow Ctrl/Cmd-click to toggle multiple selected nodes.' },
+      { name: 'showLines', type: 'boolean', default: 'true', description: 'Vertical guide lines connecting parent-child rows.' },
+    ],
+    render: () => <TreeDemo />,
   },
   {
     id: 'richtext',
