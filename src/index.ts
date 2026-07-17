@@ -119,6 +119,8 @@ export { ImageCropper } from './components/advanced/ImageCropper';
 export type { ImageCropperProps, CropRect } from './components/advanced/ImageCropper';
 export { ImageZoom } from './components/advanced/ImageZoom';
 export type { ImageZoomProps } from './components/advanced/ImageZoom';
+export { Deck } from './components/advanced/Deck';
+export type { DeckProps } from './components/advanced/Deck';
 
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
