@@ -62,6 +62,9 @@ importers:
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1(react@18.3.1)
+      animejs:
+        specifier: ^4.5.0
+        version: 4.5.0(@types/three@0.170.0)(three@0.170.0)
       gsap:
         specifier: ^3.12.5
         version: 3.15.0
@@ -1108,6 +1111,17 @@ packages:
     resolution: {integrity: sha512-xRQbDb9BnwDafYNn6Vwl839DYVjqXYb1XVGtWAZ1kcDc6iwAL4hg3B1dZlRiuENFeO2H53gFG3in621AdERVAg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  animejs@4.5.0:
+    resolution: {integrity: sha512-NQimYX+lz8WaXonGS9zVVoviCIAjONeJayxacUditaivYLqyXgGjFKjuyl0aUUhFKm5MriX9ty1TGovNzoJQWA==}
+    peerDependencies:
+      '@types/three': '>=0.150.0'
+      three: '>=0.150.0'
+    peerDependenciesMeta:
+      '@types/three':
+        optional: true
+      three:
+        optional: true
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -2808,6 +2822,11 @@ snapshots:
   '@webgpu/types@0.1.71': {}
 
   acorn@8.17.0: {}
+
+  animejs@4.5.0(@types/three@0.170.0)(three@0.170.0):
+    optionalDependencies:
+      '@types/three': 0.170.0
+      three: 0.170.0
 
   ansi-regex@5.0.1: {}
 
