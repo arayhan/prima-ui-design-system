@@ -1,10 +1,12 @@
 import React from 'react';
 import type { PropMeta } from '../components/PropsTable';
 import { ThreeParticleFieldFallback } from '../playground/ThreeParticleFieldFallback';
+import { PixiTrailFallback } from '../playground/PixiTrailFallback';
 
 const ThreeParticleField = React.lazy(() => import('../playground/ThreeParticleField'));
 const AnimeLikeButton = React.lazy(() => import('../playground/AnimeLikeButton'));
 const TheatreScrubber = React.lazy(() => import('../playground/TheatreScrubber'));
+const PixiTrail = React.lazy(() => import('../playground/PixiTrail'));
 
 function ThreeParticleFieldDemo() {
   return (
@@ -29,6 +31,16 @@ function TheatreScrubberDemo() {
     <React.Suspense fallback={<div style={{ height: 120 }} />}>
       <TheatreScrubber />
     </React.Suspense>
+  );
+}
+
+function PixiTrailDemo() {
+  return (
+    <div style={{ width: '100%', maxWidth: 560 }}>
+      <React.Suspense fallback={<div style={{ height: 260 }}><PixiTrailFallback /></div>}>
+        <PixiTrail />
+      </React.Suspense>
+    </div>
   );
 }
 
@@ -97,5 +109,26 @@ sheet.sequence.position = 0.6;   // scrub
 sheet.sequence.play({ range: [0, 1.2] });`,
     props: [],
     render: () => <TheatreScrubberDemo />,
+  },
+  {
+    id: 'playground-pixi-trail',
+    name: 'Pointer Trail',
+    library: 'pixi.js',
+    description: 'A chain of circles trails the pointer with a cascading delay, shrinking and fading along its length, then eases back to center on pointer leave — pixi.js Graphics on a WebGL renderer, paused off-screen via the shared ticker. Static under reduced motion; SVG fallback without WebGL.',
+    snippet: `import { Application, Graphics } from 'pixi.js';
+
+const app = new Application();
+await app.init({ backgroundAlpha: 0, resizeTo: mount });
+
+const node = new Graphics().circle(0, 0, 7).fill({ color: 0x1B44F0 });
+app.stage.addChild(node);
+
+app.ticker.add(() => {
+  node.x += (target.x - node.x) * 0.32;
+  node.y += (target.y - node.y) * 0.32;
+});`,
+    props: [],
+    render: () => <PixiTrailDemo />,
+    block: true,
   },
 ];
