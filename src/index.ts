@@ -14,6 +14,8 @@ export { Switch } from './components/core/Switch';
 export type { SwitchProps } from './components/core/Switch';
 export { Rating } from './components/core/Rating';
 export type { RatingProps } from './components/core/Rating';
+export { Spinner } from './components/core/Spinner';
+export type { SpinnerProps, SpinnerVariant } from './components/core/Spinner';
 export { Progress } from './components/core/Progress';
 export type { ProgressProps } from './components/core/Progress';
 export { Slider } from './components/core/Slider';
