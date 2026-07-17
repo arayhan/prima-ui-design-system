@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Button, Card, Chip, Input, Textarea, Select, Switch,
   SectionHeader, TimelineItem, Marquee, SocialLinks,
-  Progress, Slider, Tabs, Toggle, ToggleGroup,
+  Progress, Slider, Tabs, Toggle, ToggleGroup, Rating, Spinner,
 } from 'prima-ui';
 import type { PropMeta } from '../components/PropsTable';
 
@@ -84,6 +84,35 @@ function ToggleGroupDemo() {
           { value: 'underline', label: 'Underline', icon: 'ph ph-text-underline' },
         ]}
       />
+    </div>
+  );
+}
+
+function RatingDemo() {
+  const [value, setValue] = React.useState(3);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
+      <Rating value={4.5} label="4.5 (312 reviews)" />
+      <Rating value={value} onChange={setValue} allowHalf label={`${value} — click to rate`} />
+    </div>
+  );
+}
+
+function SpinnerDemo() {
+  const variants: Array<{ variant: 'ring' | 'dots' | 'bars' | 'pulse' | 'orbit' }> = [
+    { variant: 'ring' }, { variant: 'dots' }, { variant: 'bars' }, { variant: 'pulse' }, { variant: 'orbit' },
+  ];
+  return (
+    <div style={{ display: 'flex', gap: 'var(--space-7)' }}>
+      {variants.map(({ variant }) => (
+        <div key={variant} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <Spinner variant={variant} />
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: 'var(--text-label)', fontWeight: 500,
+            letterSpacing: 'var(--tracking-label)', color: 'var(--text-secondary)', textTransform: 'uppercase',
+          } as React.CSSProperties}>{variant}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -464,5 +493,38 @@ export const COMPONENTS: ComponentMeta[] = [
       { name: 'options', type: 'ToggleGroupOption[]', description: '{ value, label, icon? } segments.' },
     ],
     render: () => <ToggleGroupDemo />,
+  },
+  {
+    id: 'rating',
+    name: 'Rating',
+    description: 'A row of stars, gray with a clipped cobalt fill so fractional values render cleanly read-only. Interactive when `onChange` is passed — click to rate, with a hover preview.',
+    snippet: `import { Rating } from 'prima-ui';
+
+<Rating value={4.5} label="4.5 (312 reviews)" />
+<Rating value={rating} onChange={setRating} allowHalf label="Click to rate" />`,
+    props: [
+      { name: 'value', type: 'number', description: 'Current rating, e.g. 3.5 out of max.' },
+      { name: 'onChange', type: '(value: number) => void', description: 'Provide to make it interactive (click to rate).' },
+      { name: 'max', type: 'number', default: '5', description: 'Total stars.' },
+      { name: 'allowHalf', type: 'boolean', default: 'false', description: 'Allow clicking half-stars.' },
+      { name: 'size', type: 'number', default: '22', description: 'Star size in px.' },
+      { name: 'label', type: 'string', description: 'Mono label to the left — e.g. "4.2 (128)".' },
+    ],
+    render: () => <RatingDemo />,
+  },
+  {
+    id: 'spinner',
+    name: 'Spinner',
+    description: 'Five cobalt loading indicators — ring, dots, bars, pulse, orbit — in one component. Keeps animating regardless of reduced motion; it is a live status indicator, not decoration.',
+    snippet: `import { Spinner } from 'prima-ui';
+
+<Spinner variant="ring" />
+<Spinner variant="dots" size={32} label="Loading results" />`,
+    props: [
+      { name: 'variant', type: "'ring' | 'dots' | 'bars' | 'pulse' | 'orbit'", default: "'ring'", description: 'Visual style.' },
+      { name: 'size', type: 'number', default: '24', description: 'Size in px.' },
+      { name: 'label', type: 'string', default: "'Loading'", description: 'Accessible label (role="status").' },
+    ],
+    render: () => <SpinnerDemo />,
   },
 ];
