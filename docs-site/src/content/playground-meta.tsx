@@ -4,6 +4,7 @@ import { ThreeParticleFieldFallback } from '../playground/ThreeParticleFieldFall
 
 const ThreeParticleField = React.lazy(() => import('../playground/ThreeParticleField'));
 const AnimeLikeButton = React.lazy(() => import('../playground/AnimeLikeButton'));
+const TheatreScrubber = React.lazy(() => import('../playground/TheatreScrubber'));
 
 function ThreeParticleFieldDemo() {
   return (
@@ -19,6 +20,14 @@ function AnimeLikeButtonDemo() {
   return (
     <React.Suspense fallback={<div style={{ height: 44, width: 90 }} />}>
       <AnimeLikeButton />
+    </React.Suspense>
+  );
+}
+
+function TheatreScrubberDemo() {
+  return (
+    <React.Suspense fallback={<div style={{ height: 120 }} />}>
+      <TheatreScrubber />
     </React.Suspense>
   );
 }
@@ -68,5 +77,25 @@ animate(particles, {
 });`,
     props: [],
     render: () => <AnimeLikeButtonDemo />,
+  },
+  {
+    id: 'playground-theatre-scrubber',
+    name: 'Assemble Scrubber',
+    library: 'Theatre.js',
+    description: 'Three tiles fly in from scattered, rotated, transparent starting poses and assemble into a row — driven by a hand-authored @theatre/core keyframe sequence. Scrub the timeline directly, or press Play to run it.',
+    snippet: `import { getProject, types } from '@theatre/core';
+
+const project = getProject('Assemble', { state });
+const sheet = project.sheet('Assemble');
+const tile = sheet.object('TileA', {
+  x: types.number(-150), rotate: types.number(-60),
+  opacity: types.number(0, { range: [0, 1] }),
+});
+tile.onValuesChange((v) => { /* apply v.x, v.rotate, v.opacity */ });
+
+sheet.sequence.position = 0.6;   // scrub
+sheet.sequence.play({ range: [0, 1.2] });`,
+    props: [],
+    render: () => <TheatreScrubberDemo />,
   },
 ];

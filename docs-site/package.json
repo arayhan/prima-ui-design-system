@@ -13,6 +13,7 @@
     "@gsap/react": "^2.1.1",
     "@shikijs/langs": "^4.3.1",
     "@shikijs/themes": "^4.3.1",
+    "@theatre/core": "^0.7.2",
     "@vercel/analytics": "^2.0.1",
     "animejs": "^4.5.0",
     "gsap": "^3.12.5",
