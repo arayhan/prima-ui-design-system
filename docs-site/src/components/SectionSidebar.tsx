@@ -19,6 +19,7 @@ const GROUPS: SectionGroup[] = [
     items: [
       { label: 'Sections', to: '/blocks' },
       { label: 'Interactions', to: '/blocks/interactions' },
+      { label: 'Playground', to: '/blocks/playground' },
     ],
   },
 ];
@@ -43,7 +44,7 @@ function Item({ item, active }: { item: SectionItem; active: boolean }) {
 
 /**
  * Persistent left-hand section nav — Components (Core/Forms/Overlays/Display)
- * and Blocks (Sections/Interactions). Shown in place of the mobile CategoryNav
+ * and Blocks (Sections/Interactions/Playground). Shown in place of the mobile CategoryNav
  * tab row on wide viewports (>=1024px, matching DocLayout's own breakpoint).
  */
 export function SectionSidebar() {

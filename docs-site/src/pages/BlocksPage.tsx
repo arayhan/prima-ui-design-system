@@ -12,6 +12,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 const CATEGORY_ITEMS = [
   { label: 'Sections', to: '/blocks' },
   { label: 'Interactions', to: '/blocks/interactions' },
+  { label: 'Playground', to: '/blocks/playground' },
 ];
 
 const GROUPS = [{ title: 'BLOCKS', items: BLOCKS.map((b) => ({ id: b.id, label: b.name })) }];

@@ -11,6 +11,7 @@ import { OverlaysPage } from './pages/OverlaysPage';
 import { DisplayPage } from './pages/DisplayPage';
 import { BlocksPage } from './pages/BlocksPage';
 import { InteractionsPage } from './pages/InteractionsPage';
+import { PlaygroundPage } from './pages/PlaygroundPage';
 import { UsagePage } from './pages/UsagePage';
 import { ContactPage } from './pages/ContactPage';
 import { ScrollTrigger } from './motion/gsap';
@@ -57,6 +58,7 @@ export function App() {
             <Route path="/components/display" element={<DisplayPage />} />
             <Route path="/blocks" element={<BlocksPage />} />
             <Route path="/blocks/interactions" element={<InteractionsPage />} />
+            <Route path="/blocks/playground" element={<PlaygroundPage />} />
             <Route path="/usage" element={<UsagePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<HomePage />} />
