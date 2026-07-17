@@ -125,6 +125,8 @@ export { ImageZoom } from './components/advanced/ImageZoom';
 export type { ImageZoomProps } from './components/advanced/ImageZoom';
 export { Deck } from './components/advanced/Deck';
 export type { DeckProps } from './components/advanced/Deck';
+export { Tree } from './components/advanced/Tree';
+export type { TreeProps, TreeNode } from './components/advanced/Tree';
 
 export { Hero } from './components/blocks/Hero';
 export type { HeroProps, HeroAction } from './components/blocks/Hero';
